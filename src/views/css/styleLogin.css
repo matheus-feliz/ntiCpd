@@ -1,0 +1,126 @@
+section {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 0px;
+}
+
+div .img {
+    margin: 40px 0px 0px 250px;
+    width: 300px;
+    height: 300px;
+}
+
+.login {
+    border: none;
+    display: flex;
+    margin: 40px 0px 0px 250px;
+    width: 300px;
+    height: 250px;
+    box-shadow: 0 0 0.5em black;
+    border-radius: 5px;
+    background-color: white;
+    padding-top: 20px;
+}
+
+.form-control {
+    margin: 0px 25px 10px 25px;
+    width: 250px;
+    height: 40px;
+    white-space: nowrap;
+    border-radius: 5px;
+    border: none;
+    background-color: aliceblue;
+}
+
+.buttonLogin {
+    font-family: sans-serif;
+    display: block;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 0px 25px 10px 25px;
+    width: 250px;
+    height: 40px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.buttonLogin:hover {
+    background-color: rgb(0, 170, 0);
+}
+
+.buttonCadastro {
+    font-family: sans-serif;
+    display: block;
+    background-color: rgb(0, 0, 150);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 0px 25px 10px 25px;
+    width: 250px;
+    height: 40px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.buttonCadastro:hover {
+    background-color: blue;
+}
+
+.traco {
+    width: 250px;
+    margin: 0px 25px 10px 25px;
+    border: 1px solid;
+    opacity: 0.3;
+}
+
+.cadastro {
+    background-color: white;
+    border: none;
+    display: none;
+    margin: 50px 0px 0px 500px;
+    width: 300px;
+    height: 350px;
+    box-shadow: 0 0 0.5em black;
+    border-radius: 5px;
+    background-color: white;
+    padding-top: 0px;
+    align-items: center;
+    position: absolute;
+}
+
+.close {
+    margin-left: 260px;
+    margin-bottom: 30px;
+    line-height: 5px;
+    font-size: 40px;
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.close-cadastro {
+    display: none;
+}
+
+.close-cadastro:checked~.cadastro {
+    display: block;
+    z-index: 2;
+}
+
+.fundo {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    padding: 100px;
+    border: 100px solid;
+    opacity: 0.5;
+    display: none;
+}
+
+.close-cadastro:checked~.fundo {
+    display: block;
+}
