@@ -1,0 +1,114 @@
+<%-include('./include/head')%>
+    <link rel="stylesheet" type="text/css" href="./css/styleListagem.css">
+
+
+    <section>
+        <%-include('./include/navBar')%>
+            <h1 class="text-center "> Tombo do equipamento
+            </h1>
+            <div>
+                <form class="form-busca">
+                    <input type="text" name="busca" id="busca" placeholder="busca pelo tombo">
+                    <button class="button" type="submit"><img class="img-button" src="./include/img/pesquisa.svg"></button>
+                </form>
+            </div>
+            <div class="traco-busca"></div>
+            <div class="ajust">
+                <div class="resultado">
+                    <div class="box">
+                        <p>responsável</p>
+                        <p>data de entrada</p>
+                        <p>data de saida</p>
+                        <button class="edit"><a href="/cadastrodeequipamento"><img class="button-img" src="./include/img/escrever.svg"></a></button>
+                        <button class="cadastra"><img class="button-img" src="./include/img/impressora.svg"  onclick="getElementById('close-cadastro').checked = true;"></button>
+                    </div>
+
+
+                    <div class="box">
+                        <button class="adicionar"> <a href="/cadastrodeequipamento">+Nova ordem</a></button>
+                    </div>
+                </div>
+            </div>
+
+
+            </form>
+            </div>
+            <input id="close-cadastro" class="close-cadastro" type="checkbox" role="button">
+            <div class="impressao">
+                <p class="close" onclick="getElementById('close-cadastro').checked = false">×</p>
+                <div class="img-div">
+                    <img src="./include/img/iconLogo.png" class="img">
+                    <p>Protocolo de saida</p>
+                    <p>numero de serviço:12163452</p>
+
+                </div>
+                <div class="traco"></div>
+
+
+                <div class="pag-impressao">
+                    <div class="form-group  ">
+                        <p class="informacao ">Telefone: </p>
+                        <p class="informacao">(77)9999-9999</p>
+                    </div>
+                    <div class="form-group ">
+                        <p class="informacao">Unidade: </p>
+                        <p class="informacao">sei la</p>
+                    </div>
+                    <div class="form-group ">
+                        <p class="informacao">Responsável: </p>
+                        <p class="informacao ">cladio</p>
+                    </div>
+
+                    <div class="form-group fundo ">
+                        <p class="informacao">Tombo:</p>
+                        <p class="informacao">12163452</p>
+                    </div>
+                    <div class="form-group fundo ">
+                        <p class="informacao">backup: </p>
+                        <p class="informacao">sim</p>
+                    </div>
+                    <div class="form-group fundo ">
+                        <p class="informacao">Tipo de serviço:</p>
+                        <p class="informacao ">serviços</p>
+                    </div>
+                    <div class="form-group ">
+                        <p class="informacao">Solução: </p>
+                        <p class="informacao ">sei la</p>
+                    </div>
+                    <div class="form-group ">
+                        <p class="informacao">data de entrada:</p>
+                        <p class="informacao"> 10/12/2022</p>
+                    </div>
+                    <div class="form-group ">
+                        <p class="informacao"> data de saida:</p>
+                        <p class="informacao "> 15/12/2022</p>
+                    </div>
+                    <div class="form-espaco">
+
+                    </div>
+
+                    <div class="form-group ">
+                        <h3 class="informacao">Observação
+                            <h3>
+                                <textarea class="input-form" id="observacao" disabled name="observacao" cols="30" rows="10"> </textarea>
+                    </div>
+
+
+                    <div class="form-group reponsavel">
+                        <h1 class="titulo"> SAIDA: </h1>
+                        <p class="informacao reponsavel "> responsável do NTI: Paulo Amorim</p>
+                        <p class="informacao  responsavel">assinatura:___________________</p>
+                    </div>
+
+                    <button type="submit" class="button-imprimir" onClick="window.print()">imprimir</button>
+
+                </div>
+
+            </div>
+
+
+
+            <%-include('./include/barraLateral')%>
+    </section>
+
+    <%-include('./include/footer')%>

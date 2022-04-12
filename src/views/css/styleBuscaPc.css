@@ -1,0 +1,186 @@
+:root {
+    --light-gray: #EEEEEE;
+    --azul: rgb(0, 0, 170);
+}
+
+.text-center {
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 50px;
+    font-family: sans-serif;
+    font-size: 30px;
+}
+
+.traco {
+    border: 1px solid;
+    width: 85%;
+    position: absolute;
+    margin-left: 170px;
+    margin-top: 85px;
+    font-family: sans-serif;
+    font-size: 30px;
+    opacity: 0.3;
+}
+
+.form-busca {
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 30px;
+    font-family: sans-serif;
+    font-size: 30px;
+}
+
+.resultado {
+    position: absolute;
+    margin-left: 80%;
+    margin-top: 90px;
+    font-family: sans-serif;
+    font-size: 25px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0px;
+    flex: 1 1 320px;
+    margin: 10px;
+}
+
+.resultado p {
+    margin-right: 20px;
+    border-right: 1px solid black;
+    padding-right: 5px;
+}
+
+.box {
+    width: 100%;
+    display: flex;
+}
+
+.ajust {
+    margin-left: 20%;
+    z-index: 2;
+    position: absolute;
+    padding: 0px;
+    margin-top: 5%;
+    width: 70%;
+}
+
+.resultado:nth-child(4) {
+    grid-column: span 2;
+}
+
+.img-button {
+    width: 30px;
+    height: 30px;
+}
+
+.form-busca input {
+    font-family: sans-serif;
+    border: none;
+    border-radius: 5px 0px 0px 5px;
+    padding: 15px 20px;
+    width: 100%;
+    outline: none;
+    margin-right: 0px;
+    margin-top: 5px;
+}
+
+.form-busca input:focus {
+    box-shadow: 0 0 0.5em green;
+    transition: all 300ms ease-in-out;
+}
+
+.form-input-tombo {
+    width: 320px;
+}
+
+.form-group:nth-child(6) {
+    grid-column: span 2;
+}
+
+.form-busca input::placeholder {
+    font-family: sans-serif;
+}
+
+.button {
+    width: 60px;
+    height: 45px;
+    background-color: green;
+    padding: 0px;
+    border-radius: 0px 5px 5px 0px;
+    border: none;
+    margin-left: 90%;
+    transition: all 300ms ease-in-out;
+    margin-top: -45px;
+}
+
+.edit {
+    width: 45px;
+    height: 40px;
+    background-color: green;
+    padding: 0px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 2%;
+    transition: all 300ms ease-in-out;
+    margin-top: 20px;
+}
+
+.cadastra {
+    width: 45px;
+    height: 40px;
+    background-color: var(--azul);
+    padding-right: 1px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 2%;
+    transition: all 300ms ease-in-out;
+    margin-top: 20px;
+}
+
+.listagem {
+    width: 45px;
+    height: 40px;
+    background-color: green;
+    padding: 0px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 2%;
+    transition: all 300ms ease-in-out;
+    margin-top: 20px;
+}
+
+.adicionar {
+    width: 500px;
+    height: 60px;
+    font-size: 30px;
+    font-family: sans-serif;
+    background-color: var(--azul);
+    padding: 0px;
+    border-radius: 5px;
+    border: none;
+    transition: all 300ms ease-in-out;
+    margin-left: 30%;
+    margin-top: 20%;
+    color: white;
+    z-index: 2;
+}
+
+.button-img {
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+}
+
+.adicionar:hover,
+.cadastra:hover {
+    background-color: blue;
+    transition: all 300ms ease-in-out;
+}
+
+.edit:hover,
+.button:hover,
+.listagem:hover {
+    background-color: rgb(0, 170, 0);
+    transition: all 300ms ease-in-out;
+}

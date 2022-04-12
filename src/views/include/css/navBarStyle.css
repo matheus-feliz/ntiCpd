@@ -26,3 +26,9 @@
 .nav-link:hover {
     color: aliceblue;
 }
+
+@media print {
+    .navBar {
+        display: none;
+    }
+}

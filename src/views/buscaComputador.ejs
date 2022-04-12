@@ -1,0 +1,40 @@
+<%-include('./include/head')%>
+    <link rel="stylesheet" type="text/css" href="./css/styleBuscaPc.css">
+
+
+    <section>
+        <%-include('./include/navBar')%>
+            <h1 class="text-center "> Busca de tombo
+            </h1>
+            <div>
+                <form class="form-busca">
+                    <input type="text" name="busca" id="busca" placeholder="busca pelo tombo">
+                    <button class="button" type="submit"><img class="img-button" src="./include/img/pesquisa.svg"></button>
+                </form>
+            </div>
+            <div class="traco"></div>
+            <div class="ajust">
+                <div class="resultado">
+                    <div class="box">
+                        <p>tombo do equipamento</p>
+                        <p>nome da unidade</p>
+                        <p>responsável</p>
+                        <button class="edit"><a href="/cadastrocomputador"><img class="button-img" src="./include/img/escrever.svg"></a></button>
+                        <button class="cadastra"><a href="/cadastrodeequipamento"><img class="button-img" src="./include/img/registro.svg"></a></button>
+                        <button class="listagem"><a href="/listagemcomputador"><img class="button-img" src="./include/img/lista-de-tarefas.svg"></a></button>
+                    </div>
+
+                    <div class="box">
+                        <a href="/cadastrocomputador"><button class="adicionar">+ Cadastro</button></a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <%-include('./include/barraLateral')%>
+    </section>
+
+    <%-include('./include/footer')%>
