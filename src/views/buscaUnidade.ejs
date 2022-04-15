@@ -1,0 +1,40 @@
+<%-include('./include/head')%>
+    <link rel="stylesheet" type="text/css" href="./css/styleBuscaPc.css">
+
+
+    <section>
+        <%-include('./include/navBar')%>
+            <h1 class="text-center "> Busca de unidade
+            </h1>
+            <div>
+                <form class="form-busca">
+                    <input type="text" name="busca" id="busca" placeholder="busca de unidade">
+                    <button class="button" type="submit"><img class="img-button" src="./include/img/pesquisa.svg"></button>
+                </form>
+            </div>
+            <div class="traco"></div>
+            <div class="ajust">
+                <div class="resultado">
+                    <div class="box">
+                        <p>Telefone</p>
+                        <p>nome da unidade</p>
+                        <p>responsável</p>
+                        <button class="edit"><a href="/cadastrounidade"><img class="button-img" src="./include/img/escrever.svg"></a></button>
+                        <button class="cadastra"><a href="/cadastrounidade"><img class="button-img" src="./include/img/registro.svg"></a></button>
+                        <button class="listagem"><a href="#"><img class="button-img" src="./include/img/lista-de-tarefas.svg"></a></button>
+                    </div>
+
+                    <div class="box">
+                        <a href="/cadastrounidade"><button class="adicionar">+ Cadastro</button></a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <%-include('./include/barraLateral')%>
+    </section>
+
+    <%-include('./include/footer')%>
