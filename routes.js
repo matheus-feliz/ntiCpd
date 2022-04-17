@@ -20,6 +20,7 @@ route.get('/cadastrodeequipamento', computador.cadastroDePc);
 //pagina de Unidade
 route.get('/cadastrounidade', unidade.cadastro);
 route.get('/buscaunidade', unidade.busca);
-
+route.get('/listagemunidade', unidade.listagem);
+route.get('/cadastrodeservico', unidade.cadastroDeServico);
 
 module.exports = route;

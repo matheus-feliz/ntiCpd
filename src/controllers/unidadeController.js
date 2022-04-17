@@ -6,9 +6,9 @@ exports.busca = (req, res) => {
     res.render('buscaUnidade');
 }
 exports.listagem = (req, res) => {
-    res.render('listagemTombo');
+    res.render('listagemUnidade');
 }
 
 exports.cadastroDeServico = (req, res) => {
-    res.render('servicoComputador');
+    res.render('servicoUnidade');
 }

@@ -309,6 +309,13 @@
     background-color: #F0F2F5;
 }
 
+@media(min-width:1366px) {
+    .impressao {
+        width: 70%;
+        height: 95%;
+    }
+}
+
 @media print {
     .cadastra,
     .edit,
@@ -345,7 +352,7 @@
         box-shadow: none;
     }
     .form-group {
-        flex: 1 1 200px;
+        flex: 1 1 250px;
         margin: 2px;
     }
     .informacao {
