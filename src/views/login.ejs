@@ -1,9 +1,23 @@
 <%-include('./include/head')%>
     <link rel="stylesheet" type="text/css" href="css/styleLogin.css">
     <style></style>
+    <input id="closeCadastro" class="closeCadastro" type="checkbox" role="button">
+
+    <div class="fundo">
+        <div class="cadastro">
+            <form class="formCadastro">
+                <p class="close" onclick="getElementById('closeCadastro').checked = false">×</p>
+                <input type="text" class="form-control" placeholder="nome de usuário" id="nome" name="nome">
+                <input type="email" class="form-control" placeholder="Email" id="email" name="email">
+                <input type="password" class="form-control" id="password" placeholder="senha" name="password">
+                <input type="password" class="form-control" id="password2" placeholder="confirma senha" name="password2">
+                <button type="submit" class="buttonCadastro">Cadastro</button>
+            </form>
+        </div>
+    </div>
 
     <section class="sencao">
-        <div class="fundo"></div>
+
         <div>
             <img class="img" title="logo do nti" src="./include/img/paulo.png">
         </div>
@@ -13,21 +27,12 @@
                 <input type="password" class="form-control" id="password" placeholder="senha" name="password">
                 <button type="submit" class="buttonLogin">Login</button>
                 <div class="traco"></div>
-                <input type="button" class="buttonCadastro" onclick="getElementById('close-cadastro').checked = true;" value="Cadastro">
+                <input type="button" class="buttonCadastro" onclick="getElementById('closeCadastro').checked = true;" value="Cadastro">
             </form>
         </div>
-        <input id="close-cadastro" class="close-cadastro" type="checkbox" role="button">
 
-        <div class="cadastro">
-            <form class="formCadastro">
-                <p class="close" onclick="getElementById('close-cadastro').checked = false">×</p>
-                <input type="text" class="form-control" placeholder="nome de usuário" id="nome" name="nome">
-                <input type="email" class="form-control" placeholder="Email" id="email" name="email">
-                <input type="password" class="form-control" id="password" placeholder="senha" name="password">
-                <input type="password" class="form-control" id="password2" placeholder="confirma senha" name="password2">
-                <button type="submit" class="buttonCadastro">Cadastro</button>
-            </form>
-        </div>
+
+
     </section>
 
 

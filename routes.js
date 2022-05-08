@@ -3,6 +3,7 @@ const route = express.Router();
 const loginController = require('./src/controllers/loginController');
 const computador = require('./src/controllers/computadorController');
 const unidade = require('./src/controllers/unidadeController');
+const relatorio = require('./src/controllers/relatorioController');
 
 
 //pagina de home
@@ -23,4 +24,6 @@ route.get('/buscaunidade', unidade.busca);
 route.get('/listagemunidade', unidade.listagem);
 route.get('/cadastrodeservico', unidade.cadastroDeServico);
 
+//pagina de relatorio
+route.get('/relatorio', relatorio.relatorio);
 module.exports = route;

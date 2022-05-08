@@ -1,6 +1,16 @@
 .text-center {
-    z-index: 2;
     position: absolute;
-    margin-left: 550px;
+    z-index: 2;
+    margin-left: 35%;
     margin-top: 50px;
+    font-size: 30px;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+@media(min-width:300px) and (max-width:699px) {
+    .text-center {
+        margin-left: 70%;
+        font-size: 20px;
+    }
 }

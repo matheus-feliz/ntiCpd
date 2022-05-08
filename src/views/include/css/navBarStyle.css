@@ -1,5 +1,6 @@
 .navBar {
     width: 100%;
+    max-width: 200%;
     height: 60px;
     background-color: green;
     margin: 0px;
@@ -25,6 +26,18 @@
 
 .nav-link:hover {
     color: aliceblue;
+}
+
+@media(min-width:300px) and (max-width:699px) {
+    .navBar {
+        width: 300%;
+    }
+}
+
+@media(min-width:800px) and (max-width:899px) {
+    .navBar {
+        width: 110%;
+    }
 }
 
 @media print {

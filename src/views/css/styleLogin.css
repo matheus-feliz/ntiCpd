@@ -7,7 +7,7 @@ section {
     padding: 0px;
 }
 
-div .img {
+.img {
     margin-top: 40px;
     margin-left: 100%;
     width: 300px;
@@ -34,6 +34,13 @@ div .img {
     border-radius: 5px;
     border: none;
     background-color: aliceblue;
+    padding: 5px 10px;
+    transition: all 300ms ease-in-out;
+}
+
+.form-control:focus {
+    border-bottom: 5px solid green;
+    transition: all 300ms ease-in-out;
 }
 
 .buttonLogin {
@@ -84,8 +91,7 @@ div .img {
 .cadastro {
     background-color: white;
     border: none;
-    display: none;
-    margin: 50px 0px 0px 39%;
+    margin: 15% 0px 0px 40%;
     width: 300px;
     height: 350px;
     box-shadow: 0 0 0.5em black;
@@ -94,6 +100,15 @@ div .img {
     padding-top: 0px;
     align-items: center;
     position: absolute;
+}
+
+.fundo {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0.95;
+    position: absolute;
+    display: none;
 }
 
 .close {
@@ -105,22 +120,118 @@ div .img {
     opacity: 0.3;
 }
 
-.close-cadastro {
+.closeCadastro {
     display: none;
 }
 
-.close-cadastro:checked~.cadastro,
-.close-cadastro:checked~.fundo {
+.closeCadastro:checked~.fundo {
     display: block;
-    z-index: 2;
 }
 
-.fundo {
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    padding: 100px;
-    border: 100px solid;
-    opacity: 0.5;
-    display: none;
+@media(min-width:300px) and (max-width:699px) {
+    section {
+        display: block;
+    }
+    .img {
+        margin: 20% 0px 60% 25%;
+        width: 150px;
+        height: 150px;
+    }
+    .login {
+        margin: 0px 0px 0px 25%;
+        width: 170px;
+        height: 150px;
+    }
+    .form-control {
+        margin: 0px 15px 10px 15px;
+        width: 140px;
+        height: 20px;
+    }
+    .cadastro {
+        margin: 65% 0px 0px 25%;
+        width: 170px;
+        height: 200px;
+    }
+    .close {
+        margin-left: 140px;
+        margin-bottom: 15px;
+        font-size: 20px;
+    }
+    .buttonLogin {
+        margin: 0px 15px 10px 15px;
+        width: 140px;
+        height: 20px;
+    }
+    .buttonCadastro {
+        margin: 0px 15px 10px 15px;
+        width: 140px;
+        height: 20px;
+    }
+    .traco {
+        width: 140px;
+        margin: 0px 15px 10px 15px;
+    }
+}
+
+@media(min-width:700px) and (max-width:799px) {
+    .img {
+        margin-left: 30%;
+    }
+    .login {
+        margin-left: 20%;
+    }
+}
+
+@media(min-width:800px) and (max-width:899px) {
+    .img {
+        margin-left: 80%;
+        width: 180px;
+        height: 180px;
+    }
+    .login {
+        margin-left: 40%;
+        width: 170px;
+        height: 150px;
+    }
+    .form-control {
+        margin: 0px 10px 10px 10px;
+        width: 150px;
+        height: 20px;
+    }
+    .cadastro {
+        margin: 12% 0px 0px 40%;
+        width: 170px;
+        height: 200px;
+    }
+    .close {
+        margin-left: 140px;
+        margin-bottom: 15px;
+        font-size: 20px;
+    }
+    .buttonLogin {
+        margin: 0px 15px 10px 15px;
+        width: 140px;
+        height: 20px;
+    }
+    .buttonCadastro {
+        margin: 0px 15px 10px 15px;
+        width: 140px;
+        height: 20px;
+    }
+    .traco {
+        width: 140px;
+        margin: 0px 15px 10px 15px;
+    }
+}
+
+@media(min-width:900px) and (max-width:999px) {
+    .img {
+        margin-left: 40%;
+    }
+    .login {
+        margin-left: 30%;
+    }
+    .cadastro {
+        margin-left: 12.8%;
+    }
 }
