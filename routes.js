@@ -9,6 +9,8 @@ const relatorio = require('./src/controllers/relatorioController');
 //pagina de home
 route.get('/', loginController.index);
 route.post('/cadastro', loginController.register);
+route.post('/login', loginController.login);
+route.get('/logout', loginController.logout);
 
 //pagina de logado
 route.get('/logado', loginController.logado);

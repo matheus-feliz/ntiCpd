@@ -36,20 +36,37 @@ class Login {
         this.user = null;
     }
 
-    async register() {
-        this.validacao();
-        this.userExistem();
+    async login() {
 
-        if (this.errors.length > 0) {
 
+        //se o email for valido compara com o banco
+        this.user = await LoginModel.findOne({ email: this.body.email });
+        if (!this.user) {
+            this.errors.push('usuário não existe')
             return;
         }
 
-        const salt = bcryptjs.genSaltSync();
-        this.body.password = bcryptjs.hashSync(this.body.password, salt);
-        this.body.password2 = bcryptjs.hashSync(this.body.password2, salt);
+        if (!bcryptjs.compareSync(this.body.password, this.user.password)) {
+            this.errors.push('senha invalida');
+            this.user = null;
+            return;
+        }
 
+    }
+    async register() {
+        this.validacao();
+        this.userExistem();
         try {
+            if (this.errors.length > 0) {
+
+                return;
+            }
+
+            const salt = bcryptjs.genSaltSync();
+            this.body.password = bcryptjs.hashSync(this.body.password, salt);
+            this.body.password2 = bcryptjs.hashSync(this.body.password2, salt);
+
+
             if (this.errors.length === 0) this.user = await LoginModel.create(this.body);
         } catch (e) {
             console.log(e);

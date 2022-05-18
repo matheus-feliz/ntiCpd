@@ -4,7 +4,11 @@
     <div class="navBar">
         <a href="/logado"><img class="imgNav" src="./img/iconLogo.png"></a>
         <div>
-            <a class="nav-link" href="/">Sair</a>
+            <%if(user){%>
+                <a class="nav-link" href="/logout">Sair</a>
+                <%}else{%>
+                    <a class="nav-link" href="/">Entrar</a>
+                    <%}%>
         </div>
     </div>
 
