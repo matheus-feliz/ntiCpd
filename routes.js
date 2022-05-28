@@ -11,15 +11,14 @@ route.get('/', loginController.index);
 route.post('/cadastro', loginController.register);
 route.post('/login', loginController.login);
 route.get('/logout', loginController.logout);
-
-//pagina de logado
 route.get('/logado', loginController.logado);
 
 //pagina de equipamento
-route.get('/cadastrocomputador', computador.cadastro);
+route.get('/cadastrocomputador', computador.indexCadastro);
+route.post('/registro', computador.cadastro);
 route.get('/buscacomputador', computador.busca);
 route.get('/listagemcomputador', computador.listagem);
-route.get('/cadastrodeequipamento', computador.cadastroDePc);
+route.get('/cadastrodeequipamento', computador.cadastroDeServico);
 
 //pagina de Unidade
 route.get('/cadastrounidade', unidade.cadastro);

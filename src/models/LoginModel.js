@@ -57,17 +57,22 @@ class Login {
         this.validacao();
         this.userExistem();
         try {
-            if (this.errors.length > 0) {
 
+            if (this.errors.length > 0) {
+                console.log('error 1');
                 return;
             }
+
 
             const salt = bcryptjs.genSaltSync();
             this.body.password = bcryptjs.hashSync(this.body.password, salt);
             this.body.password2 = bcryptjs.hashSync(this.body.password2, salt);
 
 
-            if (this.errors.length === 0) this.user = await LoginModel.create(this.body);
+            this.user = await LoginModel.create(this.body);
+
+
+
         } catch (e) {
             console.log(e);
         }
@@ -84,7 +89,10 @@ class Login {
 
     async userExistem() {
         const user = await LoginModel.findOne({ email: this.body.email });
-        if (user) this.errors.splice(1, 0, 'outro usuario já usa esse email');
+        if (user) {
+            this.errors.splice(1, 0, 'outro usuario já usa esse email');
+            return;
+        }
     }
 
     limpaBody() {

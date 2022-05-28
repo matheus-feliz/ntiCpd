@@ -1,10 +1,9 @@
 .text-center {
     position: absolute;
     z-index: 2;
-    margin-left: 35%;
+    margin-left: 40%;
     margin-top: 50px;
     font-size: 30px;
-    width: 100%;
     font-family: sans-serif;
 }
 
