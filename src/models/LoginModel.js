@@ -54,24 +54,14 @@ class Login {
 
     }
     async register() {
-        this.validacao();
-        this.userExistem();
         try {
+            this.validacao();
+            this.userExistem();
 
             if (this.errors.length > 0) {
-                console.log('error 1');
+
                 return;
             }
-
-
-            const salt = bcryptjs.genSaltSync();
-            this.body.password = bcryptjs.hashSync(this.body.password, salt);
-            this.body.password2 = bcryptjs.hashSync(this.body.password2, salt);
-
-
-            this.user = await LoginModel.create(this.body);
-
-
 
         } catch (e) {
             console.log(e);
@@ -90,11 +80,19 @@ class Login {
     async userExistem() {
         const user = await LoginModel.findOne({ email: this.body.email });
         if (user) {
-            this.errors.splice(1, 0, 'outro usuario já usa esse email');
+
+            this.errors.push('outro usuario já usa esse email');
             return;
         }
+        this.create();
     }
+    async create() {
+        const salt = bcryptjs.genSaltSync();
+        this.body.password = bcryptjs.hashSync(this.body.password, salt);
+        this.body.password2 = bcryptjs.hashSync(this.body.password2, salt);
+        this.user = await LoginModel.create(this.body);
 
+    }
     limpaBody() {
         for (const index in this.body) {
             if (typeof this.body[index] !== 'string') {

@@ -10,21 +10,23 @@ exports.cadastro = async function(req, res) {
         await pc.register();
         const equipamento = pc;
 
-        if (pc.errors.length > 0) {
-            req.flash('errors', pc.errors);
+        setTimeout(() => {
+            if (pc.errors.length > 0) {
+                req.flash('errors', pc.errors);
+                req.session.save(function() {
+                    return res.redirect('/cadastrocomputador');
+                });
+                return;
+            }
+
+            req.flash('success', 'cadastro efetuado com sucesso');
             req.session.save(function() {
-                return res.redirect('/cadastrocomputador');
-            });
-            return;
-        }
+                return res.render('listagemTombo', {
+                    equipamento
 
-        req.flash('success', 'cadastro efetuado com sucesso');
-        req.session.save(function() {
-            return res.render('listagemTombo', {
-                equipamento
-
-            });
-        })
+                });
+            })
+        }, 2500);
     } catch (e) {
         return res.render('404');
     }

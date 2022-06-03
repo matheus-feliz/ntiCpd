@@ -40,22 +40,20 @@ class Pc {
 
     async register() {
         this.tomboExistente();
-
-        if (this.errors.length > 0) {
-            return;
-        }
-
-        this.equipamento = await PcModel.create(this.body);
     }
 
     async tomboExistente() {
-        const tombo = await PcModel.findOne({ tombo: this.body.tombo });
-        if (tombo) {
+        const tombos = await PcModel.findOne({ tombo: this.body.tombo });
+        if (tombos) {
             this.errors.push('tombo já existe');
             return;
-        }
-    }
 
+        }
+        this.create();
+    }
+    async create() {
+        this.equipamento = await PcModel.create(this.body);
+    }
     limpaBody() {
         for (const index in this.body) {
             if (typeof this.body[index] !== 'string') {

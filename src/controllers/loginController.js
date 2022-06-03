@@ -27,6 +27,7 @@ exports.login = async function(req, res) {
                 return res.redirect('/logado');
             });
 
+
         } catch (e) {
 
             return res.render('404');
@@ -47,19 +48,21 @@ exports.register = async function(req, res) {
 
         await login.register();
 
-        if (login.errors.length > 0) {
-            req.flash('errors', login.errors);
+        setTimeout(() => {
+            if (login.errors.length > 0) {
+                req.flash('errors', login.errors);
+                req.session.save(function() {
+                    return res.redirect('/');
+                });
+                return;
+            }
+
+            req.flash('success', 'cadastro realizado')
             req.session.save(function() {
                 return res.redirect('/');
             });
-            return;
-        }
 
-        req.flash('success', 'cadastro realizado')
-        req.session.save(function() {
-            return res.redirect('/');
-        });
-
+        }, 2500);
     } catch (e) {
         console.log(e);
         return res.render('404');
