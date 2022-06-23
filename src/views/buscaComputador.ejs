@@ -1,7 +1,6 @@
 <%-include('./include/head')%>
     <link rel="stylesheet" type="text/css" href="./css/styleBuscaPc.css">
-
-
+     <script src="./javascript/busca.js"></script>
     <section>
         <%-include('./include/navBar')%>
             <h1 class="text-center "> Busca de tombo
@@ -14,26 +13,51 @@
             </div>
             <div class="traco"></div>
             <div class="ajust">
-                <div class="resultado">
+                <%if(equipamentos.length >0){%>
+                <div class="resultado">                    
                     <div class="box">
-                        <p>tombo do equipamento</p>
-                        <p>nome da unidade</p>
-                        <p>responsável</p>
-                        <button class="edit"><a href="/cadastrocomputador"><img class="button-img" src="./include/img/escrever.svg"></a></button>
-                        <button class="cadastra"><a href="/cadastrodeequipamento"><img class="button-img" src="./include/img/registro.svg"></a></button>
-                        <button class="listagem"><a href="/listagemcomputador"><img class="button-img" src="./include/img/lista-de-tarefas.svg"></a></button>
-                    </div>
-
-                    <div class="box">
-                        <a href="/cadastrocomputador"><button class="adicionar">+ Cadastro</button></a>
-                    </div>
+                        <table>
+                            <%equipamentos.forEach(equipamento=>{%>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <p><%=equipamento.tombo%></p>
+                                    </td>
+                                    <td>
+                                        <p><%=equipamento.unidade%></p>
+                                    </td>
+                                    <td>
+                                        <p><%=equipamento.responsavel%></p>
+                                    </td>
+                                    <td>
+                                        <div class="box">
+                                            <button class="cadastra"><a href="/cadastrocomputador/delete/<%=equipamento.id%>"><img class="button-img" src="./include/img/delete.png"></a></button>
+                                            <button class="edit"><a href="/cadastrocomputador/edit/<%=equipamento.id%>"><img class="button-img" src="./include/img/escrever.svg"></a></button>
+                                            <button class="cadastra"><a href="/cadastrodeequipamento"><img class="button-img" src="./include/img/registro.svg"></a></button>
+                                            <button class="listagem"><a href="/listagemcomputador/<%=equipamento.id%>"><img class="button-img" src="./include/img/lista-de-tarefas.svg"></a></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <%})%>
+                            <tfoot>
+                                <%}else{%>
+                                <tr>
+                                    <td>
+                                        <p class="text-center"> Não existe equipamento cadastrado</p>
+                                    </td>
+                                    <%}%>
+                                    <td>
+                                        <div class="box">
+                                            <a href="/cadastrocomputador"><button class="adicionar">+ Cadastro</button></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>                                     
+                    </div>                    
                 </div>
             </div>
-
-
-
-
-
             <%-include('./include/barraLateral')%>
     </section>
 

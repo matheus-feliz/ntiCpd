@@ -37,8 +37,6 @@ class Login {
     }
 
     async login() {
-
-
         //se o email for valido compara com o banco
         this.user = await LoginModel.findOne({ email: this.body.email });
         if (!this.user) {
@@ -56,10 +54,8 @@ class Login {
     async register() {
         try {
             this.validacao();
-            this.userExistem();
-
+            await this.userExistem();
             if (this.errors.length > 0) {
-
                 return;
             }
 
@@ -84,7 +80,7 @@ class Login {
             this.errors.push('outro usuario já usa esse email');
             return;
         }
-        this.create();
+        await this.create();
     }
     async create() {
         const salt = bcryptjs.genSaltSync();

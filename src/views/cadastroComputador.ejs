@@ -1,6 +1,164 @@
 <%-include('./include/head')%>
     <link rel="stylesheet" type="text/css" href="./css/styleCadastroPc.css">
+<style>
+    :root {
+    --light-gray: #EEEEEE;
+}
 
+.text-center {
+    z-index: 2;
+    position: absolute;
+    margin-left: 500px;
+    margin-top: 30px;
+    font-family: sans-serif;
+    font-size: 30px;
+}
+
+.form-espaco {
+    width: 100%;
+    background-color: white;
+}
+
+.grid-form {
+    margin-left: 150px;
+    margin-top: 60px;
+    position: absolute;
+    width: 85%;
+    z-index: 2;
+}
+
+.grid-form .form-contact {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.form-group {
+    flex: 1 1 320px;
+    margin: 10px;
+}
+
+.label-form {
+    display: block;
+    cursor: pointer;
+    margin-bottom: 5px;
+    font-family: sans-serif;
+}
+
+.form-group input,
+.form-group textarea {
+    font-family: sans-serif;
+    border: none;
+    padding: 15px 20px;
+    width: 100%;
+    outline: none;
+    margin-right: 0px;
+}
+
+.input-form:focus {
+    box-shadow: 0 0 0.5em green;
+}
+
+.form-input-tombo {
+    width: 320px;
+}
+
+.form-group:nth-child(6) {
+    grid-column: span 2;
+}
+
+.group-form input::placeholder,
+.group-form textarea::placeholder {
+    font-family: sans-serif;
+    color: var(--light-gray);
+}
+
+.button {
+    width: 60px;
+    height: 40px;
+    background-color: green;
+    padding: 0px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 90%;
+}
+
+.button-img {
+    width: 50px;
+    height: 30px;
+    padding: 0px;
+}
+
+.button:hover {
+    background-color: rgb(0, 170, 0);
+    transition: all 300ms ease-in-out;
+}
+
+@media(min-width:300px) and (max-width:699px) {
+    .text-center {
+        margin-left: 200px;
+        margin-top: 25px;
+        font-family: sans-serif;
+        font-size: 18px;
+    }
+    .form-group {
+        flex: 1 1 220px;
+        margin: 10px;
+    }
+    .label-form {
+        margin-bottom: 2px;
+        font-size: 15px;
+    }
+    .form-group input,
+    .form-group textarea {
+        padding: 7.5px 10px;
+        width: 100%;
+        margin-right: 0px;
+    }
+}
+
+@media(min-width:700px) and (max-width:799px) {
+    .text-center {
+        margin-left: 200px;
+        margin-top: 30px;
+        font-family: sans-serif;
+        font-size: 20px;
+    }
+    .form-group {
+        flex: 1 1 220px;
+        margin: 10px;
+    }
+    .form-group input,
+    .form-group textarea {
+        padding: 7.5px 10px;
+        width: 100%;
+        margin-right: 0px;
+    }
+}
+
+@media(min-width:800px) and (max-width:899px) {
+    .text-center {
+        margin-left: 250px;
+        margin-top: 30px;
+        font-family: sans-serif;
+        font-size: 20px;
+    }
+    .form-group {
+        flex: 1 1 220px;
+        margin: 10px;
+    }
+    .form-group input,
+    .form-group textarea {
+        padding: 7.5px 10px;
+        width: 100%;
+        margin-right: 0px;
+    }
+}
+
+@media(min-width:900px) and (max-width:999px) {}
+</style>
 
     <section>
         <%-include('./include/navBar')%>
@@ -8,39 +166,50 @@
                 <h1 class="text-center "> Cadastro do computador
                 </h1>
                 <div class="grid-form">
-                    <form action="/registro" method="POST">
-                        <fieldset class="form-contact">
-                            <div class="form-group">
-                                <label class="label-form" for="telefone">Telefone</label>
-                                <input class="input-form" id="telefone" name="telefone" type="tel" placeholder="(77) 3333-3333">
-                            </div>
-                            <div class="form-group">
-                                <label class="label-form" for="unidade">Unidade</label>
-                                <input class="input-form" id="unidade" name="unidade" type="text" placeholder="nome da unidade">
-                            </div>
-                            <div class="form-group">
-                                <label class="label-form" for="responsavel">Responsável</label>
-                                <input class="input-form" id="responsavel" name="responsavel" type="text" placeholder="nome do Responsável">
-                            </div>
-                            <div class="form-group">
-                                <label class="label-form" for="tombo">Tombo</label>
-                                <input class="input-form" id="tombo" name="tombo" type="text" placeholder="13545357">
-                            </div>
-                            <div class="form-group">
-                                <label class="label-form" for="tipo">Tipo do equipamento</label>
-                                <input class="input-form" id="tipo" name="tipo" type="text" placeholder="cpu">
-                            </div>
+                    <%if(equipamento._id){%>
+                        <form action="/register/edit/<%=equipamento._id%>" method="POST">
+                        <%}else{%>
+                            <form action="/registro" method="POST">
+                            <%}%>
 
-                            <div class="form-espaco">
+                                <fieldset class="form-contact">
+                                    <div class="form-group">
+                                        <label class="label-form" for="telefone">Telefone</label>
+                                        <input class="input-form" id="telefone" name="telefone" type="tel"
+                                            placeholder="(77) 3333-3333" value="<%=equipamento.telefone%>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="label-form" for="unidade">Unidade</label>
+                                        <input class="input-form" id="unidade" name="unidade" type="text"
+                                            placeholder="nome da unidade" value="<%=equipamento.unidade%>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="label-form" for="responsavel">Responsável</label>
+                                        <input class="input-form" id="responsavel" name="responsavel" type="text"
+                                            placeholder="nome do Responsável" value="<%=equipamento.responsavel%>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="label-form" for="tombo">Tombo</label>
+                                        <input class="input-form" id="tombo" name="tombo" type="text"
+                                            placeholder="13545357" value="<%=equipamento.tombo%>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="label-form" for="tipo">Tipo do equipamento</label>
+                                        <input class="input-form" id="tipo" name="tipo" type="text" placeholder="cpu" value="<%=equipamento.tipo%>">
+                                    </div>
 
-                            </div>
-                            <div class="form-group">
-                                <label class="label-form" for="observacao">Observação</label>
-                                <textarea class="input-form" id="observacao" name="observacao" cols="30" rows="10"> </textarea>
-                            </div>
-                            <button class="button" type="submit"><img class="button-img"  src="./include/img/salvar.svg"></button>
-                        </fieldset>
-                    </form>
+                                    <div class="form-espaco">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="label-form" for="observacao">Observação</label>
+                                        <textarea class="input-form" id="observacao" name="observacao" cols="30"
+                                            rows="10" value="<%=equipamento.observacao%>"> </textarea>
+                                    </div>
+                                    <button class="button" type="submit"><img class="button-img"
+                                            src="./include/img/salvar.svg"></button>
+                                </fieldset>
+                                </form>
 
                 </div>
                 <%-include('./include/barraLateral')%>

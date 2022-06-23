@@ -37,15 +37,17 @@ app.use(sessionOpition);
 app.use(flash());
 //middleware
 app.use(meuMiddleware);
+//static
+app.use(express.static(path.resolve(__dirname, 'src', 'views')));
+app.use(express.static(path.resolve(__dirname, 'src', 'views', 'include')));
+app.use(express.static(path.resolve(__dirname, 'src', 'views', 'include','img')));
+app.set('views', path.resolve(__dirname, 'src', 'views'));
+app.set('view engine', 'ejs');
 //
 app.use(route);
 
 
 
-app.use(express.static(path.resolve(__dirname, 'src', 'views', 'include')));
-app.use(express.static(path.resolve(__dirname, 'src', 'views')));
-app.set('views', path.resolve(__dirname, 'src', 'views'));
-app.set('view engine', 'ejs');
 
 
 

@@ -1,17 +1,584 @@
 <%-include('./include/head')%>
-    <link rel="stylesheet" type="text/css" href="./css/styleListagem.css">
+    <style>
+             /*listagem*/
+        :root {
+            --light-gray: #EEEEEE;
+            --azul: rgb(0, 0, 170);
+        }
 
+        .text-center {
+            position: absolute;
+            margin-left: 200px;
+            margin-top: 50px;
+            font-family: sans-serif;
+            font-size: 30px;
+        }
 
+        .traco-busca {
+            border: 1px solid;
+            width: 85%;
+            position: absolute;
+            margin-left: 170px;
+            margin-top: 85px;
+            font-family: sans-serif;
+            font-size: 30px;
+            opacity: 0.3;
+        }
+
+        .form-busca {
+            position: absolute;
+            margin-left: 70%;
+            margin-top: 30px;
+            font-family: sans-serif;
+            font-size: 30px;
+        }
+
+        .form-busca input {
+            font-family: sans-serif;
+            border: none;
+            border-radius: 5px 0px 0px 5px;
+            padding: 15px 20px;
+            width: 100%;
+            outline: none;
+            margin-right: 0px;
+            margin-top: 5px;
+        }
+
+        .form-busca input:focus {
+            box-shadow: 0 0 0.5em green;
+            transition: all 300ms ease-in-out;
+        }
+
+        .resultado {
+            position: absolute;
+            margin-left: 80%;
+            margin-top: 90px;
+            font-family: sans-serif;
+            font-size: 25px;
+            padding: 20px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0px;
+            flex: 1 1 320px;
+            margin: 10px;
+        }
+
+        .resultado p {
+            margin-right: 20px;
+            border-right: 1px solid black;
+            padding-right: 5px;
+        }
+
+        .box {
+            width: 100%;
+            display: flex;
+        }
+
+        .ajust {
+            margin-left: 30%;
+            z-index: 2;
+            position: absolute;
+            padding: 0px;
+            margin-top: 5%;
+            width: 70%;
+        }
+
+        .resultado:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        .img-button {
+            width: 30px;
+            height: 30px;
+        }
+
+        .button {
+            width: 60px;
+            height: 45px;
+            background-color: green;
+            padding: 0px;
+            border-radius: 0px 5px 5px 0px;
+            border: none;
+            margin-left: 90%;
+            transition: all 300ms ease-in-out;
+            margin-top: -45px;
+        }
+
+        .edit {
+            width: 45px;
+            height: 40px;
+            background-color: green;
+            padding: 0px;
+            border-radius: 5px;
+            border: none;
+            margin-left: 2%;
+            transition: all 300ms ease-in-out;
+            margin-top: 20px;
+        }
+
+        .cadastra {
+            width: 45px;
+            height: 40px;
+            background-color: var(--azul);
+            padding-right: 1px;
+            border-radius: 5px;
+            border: none;
+            margin-left: 2%;
+            transition: all 300ms ease-in-out;
+            margin-top: 20px;
+        }
+
+        .listagem {
+            width: 45px;
+            height: 40px;
+            background-color: green;
+            padding: 0px;
+            border-radius: 5px;
+            border: none;
+            margin-left: 2%;
+            transition: all 300ms ease-in-out;
+            margin-top: 20px;
+        }
+
+        .adicionar {
+            width: 500px;
+            height: 60px;
+            font-size: 30px;
+            font-family: sans-serif;
+            background-color: var(--azul);
+            padding: 0px;
+            border-radius: 5px;
+            border: none;
+            transition: all 300ms ease-in-out;
+            margin-left: 20%;
+            margin-top: 20%;
+            color: white;
+            z-index: 2;
+        }
+
+        .adicionar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .button-img {
+            width: 30px;
+            height: 30px;
+            padding: 0px;
+        }
+
+        .adicionar:hover,
+        .cadastra:hover {
+            background-color: blue;
+            transition: all 300ms ease-in-out;
+        }
+
+        .edit:hover,
+        .button:hover,
+        .listagem:hover {
+            background-color: rgb(0, 170, 0);
+            transition: all 300ms ease-in-out;
+        }
+
+        .pag-impressao {
+            border: none;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1px;
+            justify-content: space-around;
+        }
+
+        .impressao {
+            background-color: white;
+            border: none;
+            box-shadow: 0 0 0.5em black;
+            display: none;
+            margin: 30px 0px 0px 15%;
+            width: 80%;
+            height: 95%;
+            background-color: white;
+            padding-top: 0px;
+            align-items: center;
+            position: absolute;
+            transition: all 300ms ease-in-out;
+        }
+
+        .close {
+            margin-left: 95%;
+            line-height: 5px;
+            font-size: 40px;
+            cursor: pointer;
+            opacity: 0.3;
+            z-index: 2;
+            position: absolute;
+        }
+
+        .close-cadastro {
+            display: none;
+        }
+
+        .close-cadastro:checked~.impressao {
+            display: block;
+            z-index: 2;
+            transition: all 300ms ease-in-out;
+        }
+
+        .informacao {
+            width: 100%;
+            font-family: sans-serif;
+            font-size: 20px;
+            margin: 5px;
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .reponsavel p {
+            margin-top: 2%;
+            margin-bottom: 5%;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+            padding-bottom: 10px;
+            width: 80%;
+        }
+
+        .fundo {
+            background-color: #F0F2F5;
+        }
+
+        .titulo {
+            font-family: sans-serif;
+        }
+
+        .traco {
+            width: 90%;
+            margin: 0px 5% 10px 5%;
+            border: 1px solid;
+            opacity: 0.3;
+        }
+
+        .img-div {
+            padding-bottom: 10px;
+            padding-right: 10px;
+            display: flex;
+        }
+
+        .img-div p {
+            margin-left: 2%;
+            font-family: sans-serif;
+            font-size: 20px;
+        }
+
+        .img {
+            width: 40px;
+            height: 40px;
+            margin-top: 15px;
+            margin-left: 10px;
+        }
+
+        .button-imprimir {
+            background-color: var(--azul);
+            color: white;
+            width: 500px;
+            height: 50px;
+            border: none;
+            margin: 0px;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        .button-imprimir:hover {
+            background-color: blue;
+            transition: all 300ms ease-in-out;
+        }
+
+        .form-group {
+            flex: 1 1 300px;
+        }
+
+        .form-espaco {
+            width: 100%;
+            background-color: white;
+        }
+
+        .form-group textarea {
+            font-family: sans-serif;
+            border: none;
+            padding: 5px 10px;
+            width: 98%;
+            outline: none;
+            margin-left: 2%;
+            background-color: #F0F2F5;
+        }
+
+        @media(min-width:1366px) {
+            .impressao {
+                width: 70%;
+                height: 95%;
+            }
+        }
+
+        @media(min-width:700px) and (max-width:799px) {
+            .form-busca {
+                margin-left: 50%;
+            }
+
+            .text-center {
+                margin-left: 170px;
+                font-size: 22px;
+            }
+
+            .resultado {
+                margin-left: 3%;
+                margin-top: 40px;
+                flex: 1 1 150px;
+                padding: 0;
+            }
+
+            .resultado p {
+                margin-right: 10px;
+            }
+
+            .edit {
+                margin-left: 1%;
+            }
+
+            .cadastra {
+                margin-left: 1%;
+            }
+
+            .listagem {
+                margin-left: 1%;
+            }
+
+            .adicionar {
+                width: 250px;
+                margin-left: 50%;
+            }
+
+            .traco {
+                width: 70%;
+            }
+        }
+
+        @media(min-width:900px) and (max-width:998px) {
+            .form-busca {
+                margin-left: 60%;
+            }
+
+            .text-center {
+                margin-left: 180px;
+                font-size: 25px;
+            }
+
+            .resultado {
+                margin-left: 3%;
+                margin-top: 40px;
+                flex: 1 1 150px;
+                padding: 0;
+            }
+
+            .resultado p {
+                margin-right: 15px;
+            }
+
+            .edit {
+                width: 25px;
+                height: 20px;
+                margin-left: 2%;
+            }
+
+            .cadastra {
+                width: 25px;
+                height: 20px;
+                margin-left: 2%;
+            }
+
+            .listagem {
+                width: 25px;
+                height: 20px;
+                margin-left: 2%;
+            }
+
+            .adicionar {
+                width: 250px;
+                margin-left: 60%;
+            }
+
+            .traco {
+                width: 75%;
+            }
+        }
+
+        @media(min-width:300px) and (max-width:699px) {
+            .form-busca {
+                margin-left: 140%;
+            }
+
+            .form-busca input {
+                margin-top: 12px;
+                height: 10px;
+            }
+
+            .form-busca input::placeholder {
+                font-size: 5px;
+            }
+
+            .text-center {
+                margin-left: 170px;
+                font-size: 18px;
+                width: 150%;
+            }
+
+            .button {
+                width: 30px;
+                height: 30px;
+                margin-left: 100%;
+                margin-top: -30px;
+            }
+
+            .resultado {
+                margin-left: 50%;
+                margin-top: 70px;
+                flex: 1 1 150px;
+                padding: 0;
+            }
+
+            .resultado p {
+                font-size: 20px;
+                margin-right: 10px;
+            }
+
+            .img-button {
+                width: 20px;
+                height: 19px;
+            }
+
+            .edit {
+                margin-left: 1%;
+            }
+
+            .cadastra {
+                margin-left: 1%;
+            }
+
+            .listagem {
+                margin-left: 1%;
+            }
+
+            .adicionar {
+                width: 250px;
+                margin-left: 30%;
+            }
+
+            .traco-busca {
+                width: 130%;
+            }
+
+            .traco {
+                width: 90%;
+            }
+
+            .impressao {
+                background-color: white;
+                border: none;
+                box-shadow: 0 0 0.5em black;
+                display: none;
+                margin: 30px 0px 0px 50%;
+                width: 120%;
+                height: 140%;
+                background-color: white;
+                padding-top: 0px;
+                align-items: center;
+                position: absolute;
+                transition: all 300ms ease-in-out;
+            }
+
+            .button-imprimir {
+                width: 250px;
+                height: 50px;
+            }
+
+            .close {
+                margin-left: 90%;
+                line-height: 5px;
+                font-size: 40px;
+                cursor: pointer;
+                opacity: 0.3;
+                z-index: 2;
+                position: absolute;
+            }
+        }
+
+        @media(min-width:800px) and (max-width:899px) {}
+
+        @media print {
+
+            .cadastra,
+            .edit,
+            .adicionar,
+            .resultado,
+            .text-center,
+            .traco-busca,
+            .button,
+            .form-busca,
+            .close-cadastro,
+            .close,
+            .button-imprimir {
+                width: 0;
+                height: 0;
+                display: none;
+            }
+
+            .pag-impressao {
+                border: none;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 1px;
+                justify-content: space-around;
+            }
+
+            .impressao {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                display: flex;
+                border: none;
+                align-content: space-between;
+                flex-direction: column;
+                flex-wrap: wrap;
+                box-shadow: none;
+            }
+
+            .form-group {
+                flex: 1 1 250px;
+                margin: 2px;
+            }
+
+            .informacao {
+                width: 100%;
+                padding: 5%;
+                font-family: sans-serif;
+                font-size: 20px;
+                margin: 0px;
+                display: flex;
+                justify-content: center;
+            }
+        }
+    </style>
     <section>
         <%-include('./include/navBar')%>
             <%-include('include/messages');%>
                 <h1 class="text-center ">
-                    <%= equipamento.body.tombo%>
+                    Tombo: <%= equipamento.tombo%>
                 </h1>
                 <div>
                     <form class="form-busca">
                         <input type="text" name="busca" id="busca" placeholder="busca pelo tombo">
-                        <button class="button" type="submit"><img class="img-button" src="./include/img/pesquisa.svg"></button>
+                        <button class="button" type="submit"><img class="img-button"
+                                src="./include/img/pesquisa.svg"></button>
                     </form>
                 </div>
                 <div class="traco-busca"></div>
@@ -21,8 +588,10 @@
                             <p>responsável</p>
                             <p>data de entrada</p>
                             <p>data de saida</p>
-                            <button class="edit"><a href="/cadastrodeequipamento"><img class="button-img" src="./include/img/escrever.svg"></a></button>
-                            <button class="cadastra"><img class="button-img" src="./include/img/impressora.svg"  onclick="getElementById('close-cadastro').checked = true;"></button>
+                            <button class="edit"><a href="/cadastrodeequipamento"><img class="button-img"
+                                        src="./include/img/escrever.svg"></a></button>
+                            <button class="cadastra"><img class="button-img" src="./include/img/impressora.svg"
+                                    onclick="getElementById('close-cadastro').checked = true;"></button>
                         </div>
 
 
@@ -92,7 +661,8 @@
                         <div class="form-group ">
                             <h3 class="informacao">Observação
                                 <h3>
-                                    <textarea class="input-form" id="observacao" disabled name="observacao" cols="30" rows="10"> </textarea>
+                                    <textarea class="input-form" id="observacao" disabled name="observacao" cols="30"
+                                        rows="10"> </textarea>
                         </div>
 
 

@@ -16,8 +16,11 @@ route.get('/logado', loginController.logado);
 //pagina de equipamento
 route.get('/cadastrocomputador', computador.indexCadastro);
 route.post('/registro', computador.cadastro);
+route.get('/cadastrocomputador/edit/:id', computador.indexEdit);
+route.post('/register/edit/:id', computador.edit);
+route.get('/cadastrocomputador/delete/:id', computador.delete);
 route.get('/buscacomputador', computador.busca);
-route.get('/listagemcomputador', computador.listagem);
+route.get('/listagemcomputador/:id', computador.listagem);
 route.get('/cadastrodeequipamento', computador.cadastroDeServico);
 
 //pagina de Unidade
