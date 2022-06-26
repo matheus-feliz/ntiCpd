@@ -39,7 +39,7 @@ class Pc {
     async register() {
         this.limpaBody();
         this.validacao();
-       await this.tomboExistente();
+        await this.tomboExistente();
     }
     async tomboExistente() {
         const tombos = await PcModel.findOne({ tombo: this.body.tombo });
@@ -47,25 +47,26 @@ class Pc {
             this.errors.push('tombo já existe');
             return;
         }
-         await this.create();
+        await this.create();
     }
     async create() {
-        if(this.errors.length > 0){
+        if (this.errors.length > 0) {
             return;
         }
         this.equipamento = await PcModel.create(this.body);
     }
     validacao() {
-        if (!this.body.telefone) {this.errors.push('telefone é obrigatorio')};
-        if (!this.body.unidade) {this.errors.push('unidade é obrigatorio')};
-        if (!this.body.responsavel) {this.errors.push('responsavel é obrigatorio')};
-        if (!this.body.tombo) {this.errors.push('tombo é obrigatorio')};
-        if (!this.body.tipo) {this.errors.push('tipo é obrigatorio')};
+        if (!this.body.telefone) { this.errors.push('telefone é obrigatorio') };
+        if (!this.body.unidade) { this.errors.push('unidade é obrigatorio') };
+        if (!this.body.responsavel) { this.errors.push('responsavel é obrigatorio') };
+        if (!this.body.tombo) { this.errors.push('tombo é obrigatorio') };
+        if (!this.body.tipo) { this.errors.push('tipo é obrigatorio') };
     }
     async edit(id) {
         if (typeof id !== "string") return;
         this.validacao();
-        if (this.errors.length > 0) return;
+        if (this.errors.length > 0) {
+            return};
         this.equipamento = await PcModel.findByIdAndUpdate(id, this.body, { new: true });
     }
     static async buscaEquipamentos() {
@@ -77,6 +78,13 @@ class Pc {
     static async buscaPorId(id) {
         if (typeof id !== "string") return;
         const equipamento = await PcModel.findById(id);
+        return equipamento;
+    }
+    static async buscaListagem(tombo) {
+        if(typeof tombo !== "string") return;
+            const equipamento = await PcModel.findOne({
+            tombo: tombo
+        });
         return equipamento;
     }
     static async delete(id) {

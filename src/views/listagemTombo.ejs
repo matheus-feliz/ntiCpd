@@ -1,6 +1,6 @@
 <%-include('./include/head')%>
     <style>
-             /*listagem*/
+        /*listagem*/
         :root {
             --light-gray: #EEEEEE;
             --azul: rgb(0, 0, 170);
@@ -51,7 +51,7 @@
 
         .resultado {
             position: absolute;
-            margin-left: 80%;
+            margin-left: 70%;
             margin-top: 90px;
             font-family: sans-serif;
             font-size: 25px;
@@ -91,6 +91,10 @@
         .img-button {
             width: 30px;
             height: 30px;
+        }
+
+        table {
+            margin-bottom: 50px;
         }
 
         .button {
@@ -181,60 +185,6 @@
             transition: all 300ms ease-in-out;
         }
 
-        .pag-impressao {
-            border: none;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 1px;
-            justify-content: space-around;
-        }
-
-        .impressao {
-            background-color: white;
-            border: none;
-            box-shadow: 0 0 0.5em black;
-            display: none;
-            margin: 30px 0px 0px 15%;
-            width: 80%;
-            height: 95%;
-            background-color: white;
-            padding-top: 0px;
-            align-items: center;
-            position: absolute;
-            transition: all 300ms ease-in-out;
-        }
-
-        .close {
-            margin-left: 95%;
-            line-height: 5px;
-            font-size: 40px;
-            cursor: pointer;
-            opacity: 0.3;
-            z-index: 2;
-            position: absolute;
-        }
-
-        .close-cadastro {
-            display: none;
-        }
-
-        .close-cadastro:checked~.impressao {
-            display: block;
-            z-index: 2;
-            transition: all 300ms ease-in-out;
-        }
-
-        .informacao {
-            width: 100%;
-            font-family: sans-serif;
-            font-size: 20px;
-            margin: 5px;
-            padding: 0px;
-            display: flex;
-            justify-content: center;
-        }
-
         .reponsavel p {
             margin-top: 2%;
             margin-bottom: 5%;
@@ -243,10 +193,7 @@
             width: 80%;
         }
 
-        .fundo {
-            background-color: #F0F2F5;
-        }
-
+     
         .titulo {
             font-family: sans-serif;
         }
@@ -277,40 +224,6 @@
             margin-left: 10px;
         }
 
-        .button-imprimir {
-            background-color: var(--azul);
-            color: white;
-            width: 500px;
-            height: 50px;
-            border: none;
-            margin: 0px;
-            border-radius: 5px;
-            font-size: 20px;
-        }
-
-        .button-imprimir:hover {
-            background-color: blue;
-            transition: all 300ms ease-in-out;
-        }
-
-        .form-group {
-            flex: 1 1 300px;
-        }
-
-        .form-espaco {
-            width: 100%;
-            background-color: white;
-        }
-
-        .form-group textarea {
-            font-family: sans-serif;
-            border: none;
-            padding: 5px 10px;
-            width: 98%;
-            outline: none;
-            margin-left: 2%;
-            background-color: #F0F2F5;
-        }
 
         @media(min-width:1366px) {
             .impressao {
@@ -513,174 +426,88 @@
 
         @media(min-width:800px) and (max-width:899px) {}
 
-        @media print {
-
-            .cadastra,
-            .edit,
-            .adicionar,
-            .resultado,
-            .text-center,
-            .traco-busca,
-            .button,
-            .form-busca,
-            .close-cadastro,
-            .close,
-            .button-imprimir {
-                width: 0;
-                height: 0;
-                display: none;
-            }
-
-            .pag-impressao {
-                border: none;
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 1px;
-                justify-content: space-around;
-            }
-
-            .impressao {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                display: flex;
-                border: none;
-                align-content: space-between;
-                flex-direction: column;
-                flex-wrap: wrap;
-                box-shadow: none;
-            }
-
-            .form-group {
-                flex: 1 1 250px;
-                margin: 2px;
-            }
-
-            .informacao {
-                width: 100%;
-                padding: 5%;
-                font-family: sans-serif;
-                font-size: 20px;
-                margin: 0px;
-                display: flex;
-                justify-content: center;
-            }
-        }
     </style>
     <section>
         <%-include('./include/navBar')%>
-            <%-include('include/messages');%>
                 <h1 class="text-center ">
-                    Tombo: <%= equipamento.tombo%>
+                    Tombo: <%=equipamento.tombo%>       
                 </h1>
                 <div>
                     <form class="form-busca">
                         <input type="text" name="busca" id="busca" placeholder="busca pelo tombo">
                         <button class="button" type="submit"><img class="img-button"
-                                src="./include/img/pesquisa.svg"></button>
+                                src="./img/pesquisa.svg"></button>
                     </form>
                 </div>
                 <div class="traco-busca"></div>
                 <div class="ajust">
-                    <div class="resultado">
-                        <div class="box">
-                            <p>responsável</p>
-                            <p>data de entrada</p>
-                            <p>data de saida</p>
-                            <button class="edit"><a href="/cadastrodeequipamento"><img class="button-img"
-                                        src="./include/img/escrever.svg"></a></button>
-                            <button class="cadastra"><img class="button-img" src="./include/img/impressora.svg"
-                                    onclick="getElementById('close-cadastro').checked = true;"></button>
-                        </div>
+                    <%-include('include/messages');%>
+                    <%if(servicos.length>0){%>
+                        <div class="resultado">
+                            <div class="box">
+                                <table>
+                                    
+                                        <tbody>
+                                            <%servicos.forEach(servico=>{%>
+                                            <tr>
+                                                <td>
+                                                    <p>
+                                                        <%=servico.tombo%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <%=servico.dataInicial%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <%=servico.dataFinal%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <div class="box">
+                                                        <button class="cadastra"><a href="/listagemcomputador/delete/<%=servico.id%>"><img class="button-img"
+                                                            src="./img/delete.png"></a></button>
+                                                        <button class="edit"><a
+                                                                href="/cadastrodeequipamento/edit/<%=servico.id%>"><img class="button-img"
+                                                                    src="./img/escrever.svg"></a></button>
+                                                        <button class="cadastra"><a href="/impressao/<%=servico.id%>"><img class="button-img"
+                                                            src="./img/impressora.svg"></a></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <%})%>
+                                        </tbody>                                        
+                                            <tfoot>
+                                                <tr>
+                                                    <%}else{%>
+                                                <tr>
+                                                    <td>
+                                                        <p class="text-center"> Não existe equipamento cadastrado</p>
+                                                    </td>
+                                                <tr>
+                                                    <%}%>
 
+                                                        <td>
+                                                            <div class="box">
+                                                                      <a href="/cadastrodeequipamento/<%=equipamento.id%>"><button
+                                                                        class="adicionar"> +Nova
+                                                                        ordem</button></a>
+                                                                                                                                       
+                                                            </div>
+                                                        </td>
+                                                </tr>
+                                            </tfoot>
+                                </table>
 
-                        <div class="box">
-                            <a href="/cadastrodeequipamento"><button class="adicionar"> +Nova ordem</button></a>
+                            </div>
+
                         </div>
-                    </div>
                 </div>
 
-
-                </form>
                 </div>
-                <input id="close-cadastro" class="close-cadastro" type="checkbox" role="button">
-                <div class="impressao">
-                    <p class="close" onclick="getElementById('close-cadastro').checked = false">×</p>
-                    <div class="img-div">
-                        <img src="./include/img/iconLogo.png" class="img">
-                        <p>Protocolo de saida</p>
-                        <p>numero de serviço:12163452</p>
-
-                    </div>
-                    <div class="traco"></div>
-
-
-                    <div class="pag-impressao">
-                        <div class="form-group  ">
-                            <p class="informacao ">Telefone: </p>
-                            <p class="informacao">(77)9999-9999</p>
-                        </div>
-                        <div class="form-group ">
-                            <p class="informacao">Unidade: </p>
-                            <p class="informacao">sei la</p>
-                        </div>
-                        <div class="form-group ">
-                            <p class="informacao">Responsável: </p>
-                            <p class="informacao ">cladio</p>
-                        </div>
-
-                        <div class="form-group fundo ">
-                            <p class="informacao">Tombo:</p>
-                            <p class="informacao">12163452</p>
-                        </div>
-                        <div class="form-group fundo ">
-                            <p class="informacao">backup: </p>
-                            <p class="informacao">sim</p>
-                        </div>
-                        <div class="form-group fundo ">
-                            <p class="informacao">Tipo de serviço:</p>
-                            <p class="informacao ">serviços</p>
-                        </div>
-                        <div class="form-group ">
-                            <p class="informacao">Solução: </p>
-                            <p class="informacao ">sei la</p>
-                        </div>
-                        <div class="form-group ">
-                            <p class="informacao">data de entrada:</p>
-                            <p class="informacao"> 10/12/2022</p>
-                        </div>
-                        <div class="form-group ">
-                            <p class="informacao"> data de saida:</p>
-                            <p class="informacao "> 15/12/2022</p>
-                        </div>
-                        <div class="form-espaco">
-
-                        </div>
-
-                        <div class="form-group ">
-                            <h3 class="informacao">Observação
-                                <h3>
-                                    <textarea class="input-form" id="observacao" disabled name="observacao" cols="30"
-                                        rows="10"> </textarea>
-                        </div>
-
-
-                        <div class="form-group reponsavel">
-                            <h1 class="titulo"> SAIDA: </h1>
-                            <p class="informacao reponsavel "> responsável do NTI: Paulo Amorim</p>
-                            <p class="informacao  responsavel">assinatura:___________________</p>
-                        </div>
-
-                        <button class="button-imprimir" onClick="window.print()">imprimir</button>
-
-                    </div>
-
-                </div>
-
-
-
-                <%-include('./include/barraLateral')%>
     </section>
+    <%-include('./include/barraLateral')%>
 
-    <%-include('./include/footer')%>
+        <%-include('./include/footer')%>

@@ -21,7 +21,16 @@ route.post('/register/edit/:id', computador.edit);
 route.get('/cadastrocomputador/delete/:id', computador.delete);
 route.get('/buscacomputador', computador.busca);
 route.get('/listagemcomputador/:id', computador.listagem);
-route.get('/cadastrodeequipamento', computador.cadastroDeServico);
+route.get('/cadastrodeequipamento/:id', computador.cadastroDeServico);
+route.post('/registro/servico', computador.cadastroDeServicoPost);
+route.get('/cadastrodeequipamento/edit/:id', computador.editServico);
+route.post('/registro/edit/servico/:id', computador.editServicoCadastro);
+route.get('/listagemcomputador/delete/:id', computador.deleteServicoUm);
+
+
+
+//impressao
+route.get('/impressao/:id', computador.impressao);
 
 //pagina de Unidade
 route.get('/cadastrounidade', unidade.cadastro);
