@@ -1,5 +1,4 @@
 
-const { async } = require('regenerator-runtime');
 const Pc = require('../models/PcModel');
 const Servico = require('../models/ServicoComEquipamentoModel');
 
@@ -8,6 +7,30 @@ exports.indexCadastro = (req, res) => {
         equipamento: {}
     });
 }
+exports.cadastro = async function (req, res) {
+    try {
+        const pc = new Pc(req.body);
+        await pc.register();
+
+        if (pc.errors.length > 0) {
+            req.flash('errors', pc.errors);
+            req.session.save(function () {
+                return res.redirect('/cadastrocomputador');
+            });
+            return;
+        }
+
+        req.flash('success', 'cadastro efetuado com sucesso');
+        req.session.save(function () {
+            res.redirect(`/listagemcomputador/${pc.equipamento._id}`);
+            return;
+        })
+
+    } catch (e) {
+        return res.render('404');
+    }
+}
+
 exports.indexEdit = async function (req, res) {
     try {
         if (!req.params.id) return res.render('404');
@@ -42,30 +65,6 @@ exports.edit = async function (req, res) {
 
     } catch (e) {
         console.log(e);
-        return res.render('404');
-    }
-}
-
-exports.cadastro = async function (req, res) {
-    try {
-        const pc = new Pc(req.body);
-        await pc.register();
-
-        if (pc.errors.length > 0) {
-            req.flash('errors', pc.errors);
-            req.session.save(function () {
-                return res.redirect('/cadastrocomputador');
-            });
-            return;
-        }
-
-        req.flash('success', 'cadastro efetuado com sucesso');
-        req.session.save(function () {
-            res.redirect(`/listagemcomputador/${pc.equipamento._id}`);
-            return;
-        })
-
-    } catch (e) {
         return res.render('404');
     }
 }
@@ -203,7 +202,6 @@ exports.impressao = async function (req, res) {
     try {
         if (!req.params.id) return res.render('404');
         const servico = await Servico.buscaPorId(req.params.id);
-        console.log(servico,'delete')
         if (!servico) res.render('404');
         res.render('impressao', { servico });
 

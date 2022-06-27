@@ -1,7 +1,5 @@
 <%-include('./include/head')%>
     <link rel="stylesheet" type="text/css" href="./css/styleBuscaPc.css">
-
-
     <section>
         <%-include('./include/navBar')%>
             <h1 class="text-center "> Busca de unidade
@@ -9,32 +7,72 @@
             <div>
                 <form class="form-busca">
                     <input type="text" name="busca" id="busca" placeholder="busca de unidade">
-                    <button class="button" type="submit"><img class="img-button" src="./include/img/pesquisa.svg"></button>
+                    <button class="button" type="submit"><img class="img-button"
+                            src="./include/img/pesquisa.svg"></button>
                 </form>
             </div>
             <div class="traco"></div>
-            <div class="ajust">
-                <div class="resultado">
-                    <div class="box">
-                        <p>Telefone</p>
-                        <p>nome da unidade</p>
-                        <p>responsável</p>
-                        <button class="edit"><a href="/cadastrounidade"><img class="button-img" src="./include/img/escrever.svg"></a></button>
-                        <button class="cadastra"><a href="/cadastrodeservico"><img class="button-img" src="./include/img/registro.svg"></a></button>
-                        <button class="listagem"><a href="/listagemunidade"><img class="button-img" src="./include/img/lista-de-tarefas.svg"></a></button>
-                    </div>
-
-                    <div class="box">
-                        <a href="/cadastrounidade"><button class="adicionar">+ Cadastro</button></a>
+                <div class="ajust">
+                    <%if(unidades.length>0){%>
+                    <div class="resultado">
+                        <%-include('include/messages');%>
+                            <div class="box">
+                                <table>
+                                    <tbody>
+                                        <%unidades.forEach(unidade=>{%>
+                                            <tr>
+                                                <td>
+                                                    <p>
+                                                        <%=unidade.telefone%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <%=unidade.unidade%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <%=unidade.responsavel%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <div class="box">
+                                                        <button class="cadastra"><a href="/cadastrounidade/delete/<%=unidade._id%>"><img class="button-img"
+                                                                    src="./include/img/delete.png"></a></button>
+                                                        <button class="edit"><a href="/cadastrounidade/edit/<%=unidade._id%>"><img class="button-img"
+                                                                    src="./include/img/escrever.svg"></a></button>
+                                                        <button class="cadastra"><a href="/cadastrodeservico/<%=unidade.id%>"><img
+                                                                    class="button-img"
+                                                                    src="./include/img/registro.svg"></a></button>
+                                                        <button class="listagem"><a href="/listagemunidade/<%=unidade.id%>"><img
+                                                                    class="button-img"
+                                                                    src="./include/img/lista-de-tarefas.svg"></a></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <%})%>
+                                    </tbody>
+                                    <tfoot>
+                                        <%}else{%>
+                                            <tr>
+                                                <td>
+                                                    <p class="text-nao-existe"> Não existe unidade cadastrada</p>
+                                                </td>
+                                                <%}%>
+                                                    <td>
+                                                        <div class="box">
+                                                            <a href="/cadastrounidade"><button class="adicionar">+
+                                                                    Cadastro</button></a>
+                                                        </div>
+                                                    </td>
+                                            </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                     </div>
                 </div>
-            </div>
-
-
-
-
-
-            <%-include('./include/barraLateral')%>
+                <%-include('./include/barraLateral')%>
     </section>
 
     <%-include('./include/footer')%>

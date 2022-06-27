@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const EquipamentoSchema = new mongoose.Schema({
+const ServicoSchema = new mongoose.Schema({
     telefone: {
         type: String,
         required: true
@@ -13,29 +13,13 @@ const EquipamentoSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    tombo: {
-        type: String,
-        required: true
-    },
     tipo: {
         type: String,
         required: true
     },
-    backup: {
-        type: String,
-        required: true
-    },
-    dataInicial: {
+    dataDeServico: {
         type: Date, default: Date.now,
         required: true
-    },
-    dataFinal: {
-        type: Date, default: Date.now,
-        required: true
-    },
-    solucao: {
-        type: String,
-        required: false
     },
     observacao: {
         type: String,
@@ -44,9 +28,9 @@ const EquipamentoSchema = new mongoose.Schema({
     criadoEm: { type: Date, default: Date.now }
 });
 
-const EquipamentoMOdel = mongoose.model('servicoComEquipamento', EquipamentoSchema);
+const ServicoMOdel = mongoose.model('servicoSemEquipamento', ServicoSchema);
 
-class servicoComEquipamento {
+class servicoSemEquipamento {
     constructor(body) {
         this.body = body;
         this.errors = [];
@@ -63,7 +47,7 @@ class servicoComEquipamento {
         if (this.errors.length > 0) {
             return;
         }
-        this.servico = await EquipamentoMOdel.create(this.body);
+        this.servico = await ServicoMOdel.create(this.body);
     }
 
     limpaBody() {
@@ -76,12 +60,8 @@ class servicoComEquipamento {
             telefone: this.body.telefone,
             unidade: this.body.unidade,
             responsavel: this.body.responsavel,
-            tombo: this.body.tombo,
             tipo: this.body.tipo,
-            backup: this.body.backup,
-            dataInicial: this.body.dataInicial,
-            dataFinal: this.body.dataFinal,
-            solucao: this.body.solucao,
+            dataDeServico: this.body.dataDeServico,
             observacao: this.body.observacao
         }
 
@@ -93,18 +73,14 @@ class servicoComEquipamento {
         if (!this.body.telefone) { this.errors.push('telefone é obrigatorio') };
         if (!this.body.unidade) { this.errors.push('unidade é obrigatorio') };
         if (!this.body.responsavel) { this.errors.push('responsavel é obrigatorio') };
-        if (!this.body.tombo) { this.errors.push('tombo é obrigatorio') };
-        if (!this.body.tipo) { this.errors.push('tipo é obrigatorio') };
-        if (!this.body.backup) { this.errors.push('backup é obrigatorio') };
-        if (!this.body.dataInicial) { this.errors.push('data inicial é obrigatorio') };
-        if (!this.body.dataFinal) { this.errors.push('data final é obrigatorio') };
-        if (this.body.dataInicial > this.body.dataFinal) { this.errors.push('data inicial maior que a final') };
+        if (!this.body.tipo) { this.errors.push('tipo de servico é obrigatorio') };
+        if (!this.body.dataDeServico) { this.errors.push('data de serviço é obrigatorio') };
     }
 
-    static async buscaListagem(tombo) {
-        if (typeof tombo !== "string") return;
-        const servicos = await EquipamentoMOdel.find({
-            tombo: tombo
+    static async buscaListagem(unidade) {
+        if (typeof unidade !== "string") return;
+        const servicos = await ServicoMOdel.find({
+            unidade: unidade
         }).sort({
             criadoEm: -1,
         });
@@ -113,7 +89,7 @@ class servicoComEquipamento {
 
     static async buscaPorId(id) {
         if (typeof id !== "string") return;
-        const servico = await EquipamentoMOdel.findById(id);
+        const servico = await ServicoMOdel.findById(id);
         return servico;
     }
 
@@ -121,14 +97,14 @@ class servicoComEquipamento {
         if (typeof id !== "string") return;
         this.validacao();
         if (this.errors.length > 0) return;
-        this.servico = await EquipamentoMOdel.findByIdAndUpdate(id, this.body, { new: true });
+        this.servico = await ServicoMOdel.findByIdAndUpdate(id, this.body, { new: true });
     }
 
     static async deleteOne(id) {
         if (typeof id !== "string") return;
-        const servico = await EquipamentoMOdel.findByIdAndDelete(id);
+        const servico = await ServicoMOdel.findByIdAndDelete(id);
         return servico;
     }
 }
 
-module.exports = servicoComEquipamento;
+module.exports = servicoSemEquipamento;

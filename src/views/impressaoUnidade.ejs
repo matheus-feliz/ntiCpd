@@ -1,0 +1,220 @@
+<%-include('./include/head')%>
+<style>
+     :root {
+            --light-gray: #EEEEEE;
+            --azul: rgb(0, 0, 170);
+        }
+        .img-div {
+            padding-bottom: 10px;
+            padding-right: 10px;
+            display: flex;
+        }
+
+        .img-div p {
+            margin-left: 2%;
+            font-family: sans-serif;
+            font-size: 20px;
+        }
+        .img {
+            width: 40px;
+            height: 40px;
+            margin-top: 15px;
+            margin-left: 10px;
+        }
+        .titulo {
+            font-family: sans-serif;
+        }
+
+        .traco {
+            width: 90%;
+            margin: 0px 5% 10px 5%;
+            border: 1px solid;
+            opacity: 0.3;
+        }
+        .pag-impressao {
+            border: none;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1px;
+            justify-content: space-around;
+        }
+
+        .impressao {
+            background-color: white;
+            border: none;
+            box-shadow: 0 0 0.5em black;
+            margin: 30px 0px 0px 15%;
+            width: 80%;
+            height: 95%;
+            background-color: white;
+            padding-top: 0px;
+            align-items: center;
+            position: absolute;
+            transition: all 300ms ease-in-out;
+        }
+        .fundo {
+            background-color: #F0F2F5;
+        }
+
+        .informacao {
+            width: 100%;
+            font-family: sans-serif;
+            font-size: 20px;
+            margin: 5px;
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+        }
+        .button-imprimir {
+            background-color: var(--azul);
+            color: white;
+            width: 500px;
+            height: 50px;
+            border: none;
+            margin: 0px;
+            border-radius: 5px;
+            font-size: 20px;
+            z-index: 2;
+        }
+
+
+        .button-imprimir:hover {
+            background-color: blue;
+            transition: all 300ms ease-in-out;
+        }
+
+        .form-group {
+            flex: 1 1 300px;
+        }
+
+        .form-espaco {
+            width: 100%;
+            background-color: white;
+        }
+
+        .form-group textarea {
+            font-family: sans-serif;
+            border: none;
+            padding: 5px 10px;
+            width: 98%;
+            outline: none;
+            margin-left: 2%;
+            background-color: #F0F2F5;
+        }
+        @media print {
+
+.cadastra,
+.edit,
+.adicionar,
+.resultado,
+.text-center,
+.traco-busca,
+.button,
+.form-busca,
+.close-cadastro,
+.close,
+.button-imprimir {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+.pag-impressao {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1px;
+    justify-content: space-around;
+}
+
+.impressao {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    border: none;
+    align-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    box-shadow: none;
+}
+
+.form-group {
+    flex: 1 1 250px;
+    margin: 2px;
+}
+
+.informacao {
+    width: 100%;
+    padding: 5%;
+    font-family: sans-serif;
+    font-size: 20px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+}
+}
+</style>
+<%-include('./include/navBar')%>
+<div class="impressao">
+    <div class="img-div">
+        <img src="./include/img/iconLogo.png" class="img">
+        <p>Protocolo de saida</p>
+        <p>numero de serviço:12163452</p>
+
+    </div>
+    <div class="traco"></div>
+
+
+    <div class="pag-impressao">
+        <div class="form-group  ">
+            <p class="informacao ">Telefone: </p>
+            <p class="informacao"><%=servico.telefone%></p>
+        </div>
+        <div class="form-group ">
+            <p class="informacao">Unidade: </p>
+            <p class="informacao"><%=servico.unidade%></p>
+        </div>
+        <div class="form-group ">
+            <p class="informacao">Responsável: </p>
+            <p class="informacao "><%=servico.responsavel%></p>
+        </div>
+
+
+        <div class="form-group fundo ">
+            <p class="informacao">Tipo de serviço:</p>
+            <p class="informacao "><%=servico.tipo%></p>
+        </div>
+
+
+        <div class="form-group fundo ">
+            <p class="informacao"> data de serviço:</p>
+            <p class="informacao "> <%=servico.dataDeServico%></p>
+        </div>
+        <div class="form-espaco">
+
+        </div>
+
+        <div class="form-group ">
+            <h3 class="informacao">Observação
+                <h3>
+                    <textarea class="input-form" id="observacao" disabled name="observacao" cols="30" rows="10" value="<%=servico.observacao%>"> </textarea>
+        </div>
+
+
+        <div class="form-group reponsavel">
+            <h1 class="titulo"> SAIDA: </h1>
+            <p class="informacao reponsavel "> responsável do NTI: Paulo Amorim</p>
+            <p class="informacao  responsavel">assinatura:___________________</p>
+        </div>
+
+        <button class="button-imprimir" onClick="window.print()">imprimir</button>
+
+    </div>
+
+</div>
+<%-include('./include/barraLateral')%>
+
+<%-include('./include/footer')%>

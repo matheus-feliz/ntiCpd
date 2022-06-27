@@ -1,35 +1,41 @@
 <%-include('./include/head')%>
     <link rel="stylesheet" type="text/css" href="./css/styleCadastroPc.css">
-
-
-
     <section>
         <%-include('./include/navBar')%>
             <h1 class="text-center "> Cadastro de unidade
             </h1>
-            <div class="grid-form">
-                <form action="/buscaunidade">
-                    <fieldset class="form-contact">
-                        <div class="form-group">
-                            <label class="label-form" for="telefone">Telefone</label>
-                            <input class="input-form" id="telefone" name="telefone" type="tel" placeholder="(77) 3333-3333">
-                        </div>
-                        <div class="form-group">
-                            <label class="label-form" for="unidade">Unidade</label>
-                            <input class="input-form" id="unidade" name="unidade" type="text" placeholder="nome da unidade">
-                        </div>
+            <%-include('include/messages');%>
+                <div class="grid-form">
+                    <%if(unidade._id){%>
+                        <form action="/registrounidade/edit/<%=unidade._id%>" method="POST">
+                            <%}%>
+                                <form action="/registrounidade" method="POST">
+                                    <fieldset class="form-contact">
+                                        <div class="form-group">
+                                            <label class="label-form" for="telefone">Telefone</label>
+                                            <input class="input-form" id="telefone" name="telefone"
+                                                value="<%=unidade.telefone%>" type="tel" placeholder="(77) 3333-3333">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="label-form" for="unidade">Unidade</label>
+                                            <input class="input-form" id="unidade" name="unidade"
+                                                value="<%=unidade.unidade%>" type="text" placeholder="nome da unidade">
+                                        </div>
 
-                        <div class="form-group">
-                            <label class="label-form" for="responsavel">Responsável</label>
-                            <input class="input-form" id="responsavel" name="responsavel" type="text" placeholder="nome do Responsável">
-                        </div>
+                                        <div class="form-group">
+                                            <label class="label-form" for="responsavel">Responsável</label>
+                                            <input class="input-form" id="responsavel" name="responsavel"
+                                                value="<%=unidade.responsavel%>" type="text"
+                                                placeholder="nome do Responsável">
+                                        </div>
 
-                        <button class="button" type="submit"><img class="button-img"  src="./include/img/salvar.svg"></button>
-                    </fieldset>
-                </form>
+                                        <button class="button" type="submit"><img class="button-img"
+                                                src="./include/img/salvar.svg"></button>
+                                    </fieldset>
+                                </form>
 
-            </div>
-            <%-include('./include/barraLateral')%>
+                </div>
+                <%-include('./include/barraLateral')%>
     </section>
 
     <%-include('./include/footer')%>

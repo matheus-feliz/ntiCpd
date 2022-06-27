@@ -20,6 +20,7 @@ route.get('/cadastrocomputador/edit/:id', computador.indexEdit);
 route.post('/register/edit/:id', computador.edit);
 route.get('/cadastrocomputador/delete/:id', computador.delete);
 route.get('/buscacomputador', computador.busca);
+//pagina de servico com equipamento
 route.get('/listagemcomputador/:id', computador.listagem);
 route.get('/cadastrodeequipamento/:id', computador.cadastroDeServico);
 route.post('/registro/servico', computador.cadastroDeServicoPost);
@@ -27,16 +28,26 @@ route.get('/cadastrodeequipamento/edit/:id', computador.editServico);
 route.post('/registro/edit/servico/:id', computador.editServicoCadastro);
 route.get('/listagemcomputador/delete/:id', computador.deleteServicoUm);
 
-
-
 //impressao
 route.get('/impressao/:id', computador.impressao);
+route.get('/impressaoUnidade/:id', unidade.impressao);
 
 //pagina de Unidade
-route.get('/cadastrounidade', unidade.cadastro);
+route.get('/cadastrounidade', unidade.indexCadastro);
+route.post('/registrounidade', unidade.cadastro);
+route.get('/cadastrounidade/edit/:id', unidade.indexEdit);
+route.post('/registrounidade/edit/:id', unidade.edit);
+route.get('/cadastrounidade/delete/:id', unidade.delete);
 route.get('/buscaunidade', unidade.busca);
-route.get('/listagemunidade', unidade.listagem);
-route.get('/cadastrodeservico', unidade.cadastroDeServico);
+//pagina de servico sem equipamento
+route.get('/listagemunidade/:id', unidade.listagem);
+route.get('/cadastrodeservico/:id', unidade.cadastroDeServico);
+route.post('/registro/servicoUnidade', unidade.cadastroDeServicoPost);
+route.get('/cadastrodeservico/edit/:id', unidade.editServico);
+route.post('/registro/edit/servicoUnidade/:id', unidade.editServicoCadastro);
+route.get('/listagemunidade/delete/:id', unidade.deleteServicoUm);
+
+
 
 //pagina de relatorio
 route.get('/relatorio', relatorio.relatorio);

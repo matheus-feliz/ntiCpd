@@ -17,8 +17,7 @@
                 <div class="resultado">  
                     <%-include('include/messages');%>                  
                     <div class="box">
-                        <table>
-                            
+                        <table>                            
                             <tbody>
                                 <%equipamentos.forEach(equipamento=>{%>
                                 <tr>
@@ -46,7 +45,7 @@
                                 <%}else{%>
                                 <tr>
                                     <td>
-                                        <p class="text-center"> Não existe equipamento cadastrado</p>
+                                        <p class="text-nao-existe"> Não existe equipamento cadastrado</p>
                                     </td>
                                     <%}%>
                                     <td>

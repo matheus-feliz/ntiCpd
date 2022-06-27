@@ -1,6 +1,7 @@
 <%-include('./include/head')%>
     <link rel="stylesheet" type="text/css" href="./css/styleServicoPc.css">
 
+
     <section>
         <%-include('./include/navBar')%>
         <%-include('include/messages');%>
@@ -8,29 +9,30 @@
                 <h1 class="text-center "> Cadastro de serviços
                 </h1>
                 <div class="grid-form">
-                    <form action="/registro/servicoUnidade" method="POST">
+                    <form action="/registro/edit/servicoUnidade/<%=servico._id%>" method="POST">
                         <fieldset class="form-contact">
                             <div class="form-group">
                                 <label class="label-form" for="telefone">Telefone</label>
-                                <input class="input-form" id="telefone" name="telefone" type="tel" placeholder="(77) 3333-3333" value="<%=unidade.telefone%>">
+                                <input class="input-form" id="telefone" name="telefone" type="tel" placeholder="(77) 3333-3333" value="<%=servico.telefone%>">
                             </div>
                             <div class="form-group">
                                 <label class="label-form" for="unidade">Unidade</label>
-                                <input class="input-form" id="unidade" name="unidade" type="text" placeholder="nome da unidade" value="<%=unidade.unidade%>">
+                                <input class="input-form" id="unidade" name="unidade" type="text" placeholder="nome da unidade" value="<%=servico.unidade%>">
                             </div>
                             <div class="form-group">
                                 <label class="label-form" for="responsavel">Responsável</label>
-                                <input class="input-form" id="responsavel" name="responsavel" type="text" placeholder="nome do Responsável" value="<%=unidade.responsavel%>">
+                                <input class="input-form" id="responsavel" name="responsavel" type="text" placeholder="nome do Responsável" value="<%=servico.responsavel%>">
                             </div>
 
                             <div class="form-group">
                                 <label class="label-form" for="tipo">Tipo de serviço</label>
-                                <input class="input-form" id="tipo" name="tipo" type="text" placeholder="serviço no equipamento">
+                                <input class="input-form" id="tipo" name="tipo" type="text" placeholder="serviço no equipamento" value="<%=servico.tipo%>">
                             </div>
+
 
                             <div class="form-group">
                                 <label class="label-form" for="dataDeServico">data de serviços</label>
-                                <input class="input-form" id="dataDeServico" name="dataDeServico" type="date">
+                                <input class="input-form" id="dataDeServico" name="dataDeServico" type="date" value="<%=servico.dataDeServico%>">
                             </div>
 
 
@@ -40,7 +42,7 @@
 
                             <div class="form-group">
                                 <label class="label-form" for="observacao">Observação</label>
-                                <textarea class="input-form" id="observacao" name="observacao" cols="30" rows="10"> </textarea>
+                                <textarea class="input-form" id="observacao" name="observacao" cols="30" rows="10" value="<%=servico.observacao%>"> </textarea>
                             </div>
 
 

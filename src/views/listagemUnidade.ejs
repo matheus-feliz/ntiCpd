@@ -4,7 +4,7 @@
 
     <section>
         <%-include('./include/navBar')%>
-            <h1 class="text-center "> serviços nome da unidade
+            <h1 class="text-center "> <%=unidade.unidade%>
             </h1>
             <div>
                 <form class="form-busca">
@@ -14,85 +14,71 @@
             </div>
             <div class="traco-busca"></div>
             <div class="ajust">
-                <div class="resultado">
-                    <div class="box">
-                        <p>responsável</p>
-                        <p>unidade</p>
-                        <p>data de serviços</p>
-                        <button class="edit"><a href="/cadastrodeservico"><img class="button-img" src="./include/img/escrever.svg"></a></button>
-                        <button class="cadastra"><img class="button-img" src="./include/img/impressora.svg"  onclick="getElementById('close-cadastro').checked = true;"></button>
-                    </div>
+                <%-include('include/messages');%>
+                <%if(servicos.length>0){%>
+                    <div class="resultado">
+                        <div class="box">
+                            <table>
+                                
+                                    <tbody>
+                                        <%servicos.forEach(servico=>{%>
+                                        <tr>
+                                            <td>
+                                                <p>
+                                                    <%=servico.telefone%>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    <%=servico.responsavel%>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    <%=servico.dataDeServico%>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <div class="box">
+                                                    <button class="cadastra"><a href="/listagemunidade/delete/<%=servico.id%>"><img class="button-img"
+                                                        src="./img/delete.png"></a></button>
+                                                    <button class="edit"><a
+                                                            href="/cadastrodeservico/edit/<%=servico.id%>"><img class="button-img"
+                                                                src="./img/escrever.svg"></a></button>
+                                                    <button class="cadastra"><a href="/impressaoUnidade/<%=servico.id%>"><img class="button-img"
+                                                        src="./img/impressora.svg"></a></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <%})%>
+                                    </tbody>                                        
+                                        <tfoot>
+                                            <tr>
+                                                <%}else{%>
+                                            <tr>
+                                                <td>
+                                                    <p class="text-center"> Não existe equipamento cadastrado</p>
+                                                </td>
+                                            <tr>
+                                                <%}%>
 
+                                                    <td>
+                                                        <div class="box">
+                                                                  <a href="/cadastrodeservico/<%=unidade.id%>"><button
+                                                                    class="adicionar"> +Nova
+                                                                    ordem</button></a>
+                                                                                                                                   
+                                                        </div>
+                                                    </td>
+                                            </tr>
+                                        </tfoot>
+                            </table>
 
-                    <div class="box">
-                        <a href="/cadastrodeservico"><button class="adicionar"> +Nova ordem</button></a>
+                        </div>
+
                     </div>
-                </div>
             </div>
-
-
-            </form>
-            </div>
-            <input id="close-cadastro" class="close-cadastro" type="checkbox" role="button">
-            <div class="impressao">
-                <p class="close" onclick="getElementById('close-cadastro').checked = false">×</p>
-                <div class="img-div">
-                    <img src="./include/img/iconLogo.png" class="img">
-                    <p>Protocolo de saida</p>
-                    <p>numero de serviço:12163452</p>
-
-                </div>
-                <div class="traco"></div>
-
-
-                <div class="pag-impressao">
-                    <div class="form-group  ">
-                        <p class="informacao ">Telefone: </p>
-                        <p class="informacao">(77)9999-9999</p>
-                    </div>
-                    <div class="form-group ">
-                        <p class="informacao">Unidade: </p>
-                        <p class="informacao">sei la</p>
-                    </div>
-                    <div class="form-group ">
-                        <p class="informacao">Responsável: </p>
-                        <p class="informacao ">cladio</p>
-                    </div>
-
-
-                    <div class="form-group fundo ">
-                        <p class="informacao">Tipo de serviço:</p>
-                        <p class="informacao ">serviços</p>
-                    </div>
-
-
-                    <div class="form-group fundo ">
-                        <p class="informacao"> data de serviço:</p>
-                        <p class="informacao "> 15/12/2022</p>
-                    </div>
-                    <div class="form-espaco">
-
-                    </div>
-
-                    <div class="form-group ">
-                        <h3 class="informacao">Observação
-                            <h3>
-                                <textarea class="input-form" id="observacao" disabled name="observacao" cols="30" rows="10"> </textarea>
-                    </div>
-
-
-                    <div class="form-group reponsavel">
-                        <h1 class="titulo"> SAIDA: </h1>
-                        <p class="informacao reponsavel "> responsável do NTI: Paulo Amorim</p>
-                        <p class="informacao  responsavel">assinatura:___________________</p>
-                    </div>
-
-                    <button class="button-imprimir" onClick="window.print()">imprimir</button>
-
-                </div>
-
-            </div>
-
+            </div>       
 
 
             <%-include('./include/barraLateral')%>
