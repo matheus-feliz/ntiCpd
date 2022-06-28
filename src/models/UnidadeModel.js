@@ -44,6 +44,15 @@ class Unidade {
         const unidades = await UnidadeModel.find().sort({criadoEm: -1});
         return unidades;
     }
+    static async busca(unidade) {
+        if (typeof unidade !== "string") return;
+        const unidades = await UnidadeModel.find({
+            unidade: unidade
+        }).sort({
+            criadoEm: -1
+        });
+        return unidades;
+    }
 
     static async buscaId(id){
         if(typeof id !== "string") return;

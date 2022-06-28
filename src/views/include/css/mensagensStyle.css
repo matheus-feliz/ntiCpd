@@ -1,0 +1,16 @@
+.danger{
+    color: red;
+    background: rgba(255, 0,0, 0.3);
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+}
+
+.success{
+    margin-top: 10px;
+    color: green;
+    background: rgba(0, 255,0, 0.3);
+    padding: 5px; 
+    position: absolute;
+    z-index: 1; 
+}

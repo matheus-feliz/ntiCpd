@@ -75,6 +75,17 @@ class Pc {
         });
         return equipamentos;
     }
+
+    static async busca(tombo) {
+        if (typeof tombo !== "string") return;
+        const equipamentos = await PcModel.find({
+            tombo: tombo
+        }).sort({
+            criadoEm: -1
+        });
+        return equipamentos;
+    }
+
     static async buscaPorId(id) {
         if (typeof id !== "string") return;
         const equipamento = await PcModel.findById(id);

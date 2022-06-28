@@ -9,6 +9,7 @@
                 </h1>
                 <div class="grid-form">
                     <form action="/registro/servicoUnidade" method="POST">
+                        <input type="hidden" name="_csrf" value=<%=csrfToken%>>
                         <fieldset class="form-contact">
                             <div class="form-group">
                                 <label class="label-form" for="telefone">Telefone</label>
@@ -44,7 +45,7 @@
                             </div>
 
 
-                            <button class="button" type="submit"><img class="button-img"  src="./include/img/salvar.svg"></button>
+                            <button class="button" type="submit"><img class="button-img"  src="./img/salvar.svg"></button>
                         </fieldset>
                     </form>
 

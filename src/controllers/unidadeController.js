@@ -1,6 +1,7 @@
 
 const Unidade = require('../models/UnidadeModel');
 const Servico = require('../models/ServicoSemEquipamentoModel');
+const { async } = require('regenerator-runtime');
 
 exports.indexCadastro = function (req, res) {
     res.render('cadastroUnidade', {
@@ -32,9 +33,15 @@ exports.cadastro = async function (req, res) {
 }
 
 exports.busca = async function (req, res) {
-    const unidades = await Unidade.buscaUnidades();
-    res.render('buscaUnidade', { unidades });
+    //const unidades = await Unidade.buscaUnidades();
+    res.render('buscaUnidade', { unidades:{} });
 }
+exports.buscaRetorno = async function(req, res){
+    const unidades = await Unidade.busca(req.body.busca);
+     if(!unidades) res.render('404');
+     res.render('buscaUnidade', { unidades });
+ 
+ }
 exports.indexEdit = async function (req, res) {
     try {
         if (!req.params.id) return res.render('404');
@@ -162,10 +169,10 @@ exports.editServicoCadastro = async function (req, res) {
         const servico = new Servico(req.body);
         await servico.edit(req.params.id);
         if (servico.errors.length > 0) {
-            console.log(servico.errors.length)
             req.flash('errors', servico.errors);
-            req.session.save(function () {
-                return res.redirect(`/cadastrodeservico/edit/${servico.servico._id}`);
+            req.session.save( async function () {
+                const editServico = await Servico.buscaPorId(req.params.id);
+                return res.redirect(`/cadastrodeservico/edit/${editServico._id}`);
             });
             return;
         }

@@ -39,7 +39,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0px;
-    flex: 1 1 320px;
 }
 
 .resultado p {
@@ -114,7 +113,7 @@
     border: none;
     margin-left: 2%;
     transition: all 300ms ease-in-out;
-    margin-top: 20px;
+   
 }
 
 .cadastra {
@@ -126,7 +125,6 @@
     border: none;
     margin-left: 2%;
     transition: all 300ms ease-in-out;
-    margin-top: 20px;
 }
 
 .listagem {
@@ -138,7 +136,7 @@
     border: none;
     margin-left: 2%;
     transition: all 300ms ease-in-out;
-    margin-top: 20px;
+  
 }
 
 .adicionar {

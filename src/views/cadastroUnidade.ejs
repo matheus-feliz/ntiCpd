@@ -8,8 +8,10 @@
                 <div class="grid-form">
                     <%if(unidade._id){%>
                         <form action="/registrounidade/edit/<%=unidade._id%>" method="POST">
-                            <%}%>
+                            <%}else{%>
                                 <form action="/registrounidade" method="POST">
+                                    <%}%>
+                                    <input type="hidden" name="_csrf" value=<%=csrfToken%>>
                                     <fieldset class="form-contact">
                                         <div class="form-group">
                                             <label class="label-form" for="telefone">Telefone</label>
@@ -30,7 +32,7 @@
                                         </div>
 
                                         <button class="button" type="submit"><img class="button-img"
-                                                src="./include/img/salvar.svg"></button>
+                                                src="./img/salvar.svg"></button>
                                     </fieldset>
                                 </form>
 

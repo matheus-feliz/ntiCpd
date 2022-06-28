@@ -1,0 +1,103 @@
+section {
+    margin: 0px;
+}
+
+.barra-lateral {
+    width: 80px;
+    height: 100%;
+    background-color: green;
+    margin: 0px;
+    transition: all 300ms ease-in-out;
+}
+
+.barra-lateral:hover {
+    width: 160px;
+    height: 100%;
+    transition: all 300ms ease-in-out;
+}
+
+.logo {
+    border-top: white 1px solid;
+    padding: 10px 0px 10px 10px;
+    display: flex;
+    align-items: center;
+    transition: all 300ms ease-in-out;
+}
+
+.logoImg {
+    width: 40px;
+    height: 40px;
+    transition: all 300ms ease-in-out;
+}
+
+.barra-lateral:hover .logoImg {
+    width: 60px;
+    height: 50px;
+    transition: all 300ms ease-in-out;
+}
+
+.lista {
+    margin: 0px 0px 10px 30px;
+    padding: 0px;
+}
+
+.menu {
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+    list-style-type: none;
+    transition: all 300ms ease-in-out;
+}
+
+a {
+    font-size: 13px;
+    color: #F0F2F5;
+    text-decoration: none;
+    transition: all 300ms ease-in-out;
+}
+
+.logo .lista .menu a::after {
+    content: '';
+    position: absolute;
+    left: 64px;
+    width: 0;
+    height: 22px;
+    background: rgba(152, 214, 152, 0.237);
+    transition: all 300ms ease-in-out;
+}
+
+.logo .lista .menu a:hover::after {
+    width: 96px;
+}
+
+.barra-lateral:hover .menu {
+    display: block;
+    transition: all 300ms ease-in-out;
+}
+
+@media(min-width:300px) and (max-width:699px) {
+    .barra-lateral {
+        height: 220%;
+    }
+    .barra-lateral:hover {
+        height: 220%;
+    }
+}
+
+@media(min-width:800px) and (max-width:899px) {
+    .barra-lateral {
+        height: 150%;
+    }
+    .barra-lateral:hover {
+        height: 150%;
+    }
+}
+
+@media print {
+    .barra-lateral {
+        display: none;
+        width: 0px;
+        height: 0px;
+    }
+}

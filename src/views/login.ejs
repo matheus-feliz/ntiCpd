@@ -7,7 +7,7 @@
             <form action="/cadastro" class="formCadastro" method="POST">
 
                 <p class="close" onclick="getElementById('closeCadastro').checked = false">×</p>
-
+                <input type="hidden" name="_csrf" value=<%=csrfToken%>>
                 <input type="text" class="form-control" placeholder="nome de usuário" id="nome" name="nome">
                 <input type="email" class="form-control" placeholder="Email" id="email" name="email">
                 <input type="password" class="form-control" id="password" placeholder="senha" name="password">
@@ -25,7 +25,7 @@
             <div class="login">
 
                 <form action="/login" class="formCadastro" method="POST">
-
+                    <input type="hidden" name="_csrf" value=<%=csrfToken%>>
                     <input type="email" class="form-control" placeholder="Email" id="email" name="email">
                     <input type="password" class="form-control" id="password" placeholder="senha" name="password">
                     <button type="submit" class="buttonLogin">Login</button>
@@ -33,9 +33,6 @@
                     <input type="button" class="buttonCadastro" onclick="getElementById('closeCadastro').checked = true;" value="Cadastro">
                 </form>
             </div>
-
-
-
         </section>
 
 

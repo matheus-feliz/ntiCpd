@@ -20,6 +20,7 @@ route.get('/cadastrocomputador/edit/:id', computador.indexEdit);
 route.post('/register/edit/:id', computador.edit);
 route.get('/cadastrocomputador/delete/:id', computador.delete);
 route.get('/buscacomputador', computador.busca);
+route.post('/buscacomputadorBanco', computador.buscaRetorno);
 //pagina de servico com equipamento
 route.get('/listagemcomputador/:id', computador.listagem);
 route.get('/cadastrodeequipamento/:id', computador.cadastroDeServico);
@@ -39,6 +40,8 @@ route.get('/cadastrounidade/edit/:id', unidade.indexEdit);
 route.post('/registrounidade/edit/:id', unidade.edit);
 route.get('/cadastrounidade/delete/:id', unidade.delete);
 route.get('/buscaunidade', unidade.busca);
+route.post('/buscaunidadeBanco', unidade.buscaRetorno);
+
 //pagina de servico sem equipamento
 route.get('/listagemunidade/:id', unidade.listagem);
 route.get('/cadastrodeservico/:id', unidade.cadastroDeServico);

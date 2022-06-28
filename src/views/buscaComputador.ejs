@@ -6,16 +6,17 @@
             <h1 class="text-center "> Busca de tombo
             </h1>
             <div>
-                <form class="form-busca">
+                <form class="form-busca" action="/buscacomputadorBanco" method="post">
+                    <input type="hidden" name="_csrf" value=<%=csrfToken%>>
                     <input type="text" name="busca" id="busca" placeholder="busca pelo tombo">
                     <button class="button" type="submit"><img class="img-button" src="./include/img/pesquisa.svg"></button>
                 </form>
             </div>
             <div class="traco"></div>
-            <div class="ajust">                
+            <div class="ajust">   
+                <%-include('include/messages');%>              
                 <%if(equipamentos.length >0){%>
-                <div class="resultado">  
-                    <%-include('include/messages');%>                  
+                <div class="resultado">                   
                     <div class="box">
                         <table>                            
                             <tbody>

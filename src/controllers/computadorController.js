@@ -1,4 +1,5 @@
 
+const { async } = require('regenerator-runtime');
 const Pc = require('../models/PcModel');
 const Servico = require('../models/ServicoComEquipamentoModel');
 
@@ -70,10 +71,18 @@ exports.edit = async function (req, res) {
 }
 
 exports.busca = async function (req, res) {
-    const equipamentos = await Pc.buscaEquipamentos();
+    //const equipamentos = await Pc.buscaEquipamentos();
+    res.render('buscaComputador', {
+        equipamentos:{}
+    });
+}
+exports.buscaRetorno = async function(req, res){
+   const equipamentos = await Pc.busca(req.body.busca);
+    if(!equipamentos) res.render('404');
     res.render('buscaComputador', {
         equipamentos
-    });
+    }); 
+
 }
 exports.listagem = async function (req, res) {
     try {        
@@ -167,8 +176,9 @@ exports.editServicoCadastro = async function (req, res) {
         await servico.edit(req.params.id);
         if (servico.errors.length > 0) {
             req.flash('errors', servico.errors);
-            req.session.save(function () {
-                return res.redirect(`/cadastrodeequipamento/edit/${servico.servico._id}`);
+            req.session.save(async function () {
+                const editServico = await Servico.buscaPorId(req.params.id);
+                return res.redirect(`/cadastrodeequipamento/edit/${editServico._id}`);
             });
             return;
         }
