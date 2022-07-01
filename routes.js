@@ -5,6 +5,8 @@ const computador = require('./src/controllers/computadorController');
 const unidade = require('./src/controllers/unidadeController');
 const relatorio = require('./src/controllers/relatorioController');
 
+const { loginReq } = require('./src/middleware/middleware');
+
 
 //pagina de home
 route.get('/', loginController.index);
@@ -14,44 +16,44 @@ route.get('/logout', loginController.logout);
 route.get('/logado', loginController.logado);
 
 //pagina de equipamento
-route.get('/cadastrocomputador', computador.indexCadastro);
-route.post('/registro', computador.cadastro);
-route.get('/cadastrocomputador/edit/:id', computador.indexEdit);
-route.post('/register/edit/:id', computador.edit);
-route.get('/cadastrocomputador/delete/:id', computador.delete);
-route.get('/buscacomputador', computador.busca);
-route.post('/buscacomputadorBanco', computador.buscaRetorno);
+route.get('/cadastrocomputador', loginReq, computador.indexCadastro);
+route.post('/registro', loginReq, computador.cadastro);
+route.get('/cadastrocomputador/edit/:id', loginReq, computador.indexEdit);
+route.post('/register/edit/:id', loginReq, computador.edit);
+route.get('/cadastrocomputador/delete/:id', loginReq, computador.delete);
+route.get('/buscacomputador', loginReq, computador.busca);
+route.post('/buscacomputadorBanco', loginReq, computador.buscaRetorno);
 //pagina de servico com equipamento
-route.get('/listagemcomputador/:id', computador.listagem);
-route.get('/cadastrodeequipamento/:id', computador.cadastroDeServico);
-route.post('/registro/servico', computador.cadastroDeServicoPost);
-route.get('/cadastrodeequipamento/edit/:id', computador.editServico);
-route.post('/registro/edit/servico/:id', computador.editServicoCadastro);
-route.get('/listagemcomputador/delete/:id', computador.deleteServicoUm);
+route.get('/listagemcomputador/:id', loginReq, computador.listagem);
+route.get('/cadastrodeequipamento/:id', loginReq, computador.cadastroDeServico);
+route.post('/registro/servico', loginReq, computador.cadastroDeServicoPost);
+route.get('/cadastrodeequipamento/edit/:id', loginReq, computador.editServico);
+route.post('/registro/edit/servico/:id', loginReq, computador.editServicoCadastro);
+route.get('/listagemcomputador/delete/:id', loginReq, computador.deleteServicoUm);
 
 //impressao
-route.get('/impressao/:id', computador.impressao);
-route.get('/impressaoUnidade/:id', unidade.impressao);
+route.get('/impressao/:id', loginReq, computador.impressao);
+route.get('/impressaoUnidade/:id', loginReq, unidade.impressao);
 
 //pagina de Unidade
-route.get('/cadastrounidade', unidade.indexCadastro);
-route.post('/registrounidade', unidade.cadastro);
-route.get('/cadastrounidade/edit/:id', unidade.indexEdit);
-route.post('/registrounidade/edit/:id', unidade.edit);
-route.get('/cadastrounidade/delete/:id', unidade.delete);
-route.get('/buscaunidade', unidade.busca);
-route.post('/buscaunidadeBanco', unidade.buscaRetorno);
+route.get('/cadastrounidade', loginReq, unidade.indexCadastro);
+route.post('/registrounidade', loginReq, unidade.cadastro);
+route.get('/cadastrounidade/edit/:id', loginReq, unidade.indexEdit);
+route.post('/registrounidade/edit/:id', loginReq, unidade.edit);
+route.get('/cadastrounidade/delete/:id', loginReq, unidade.delete);
+route.get('/buscaunidade', loginReq, unidade.busca);
+route.post('/buscaunidadeBanco', loginReq, unidade.buscaRetorno);
 
 //pagina de servico sem equipamento
-route.get('/listagemunidade/:id', unidade.listagem);
-route.get('/cadastrodeservico/:id', unidade.cadastroDeServico);
-route.post('/registro/servicoUnidade', unidade.cadastroDeServicoPost);
-route.get('/cadastrodeservico/edit/:id', unidade.editServico);
-route.post('/registro/edit/servicoUnidade/:id', unidade.editServicoCadastro);
-route.get('/listagemunidade/delete/:id', unidade.deleteServicoUm);
+route.get('/listagemunidade/:id', loginReq, unidade.listagem);
+route.get('/cadastrodeservico/:id', loginReq, unidade.cadastroDeServico);
+route.post('/registro/servicoUnidade', loginReq, unidade.cadastroDeServicoPost);
+route.get('/cadastrodeservico/edit/:id', loginReq, unidade.editServico);
+route.post('/registro/edit/servicoUnidade/:id', loginReq, unidade.editServicoCadastro);
+route.get('/listagemunidade/delete/:id', loginReq, unidade.deleteServicoUm);
 
 
 
 //pagina de relatorio
-route.get('/relatorio', relatorio.relatorio);
+route.get('/relatorio', loginReq, relatorio.relatorio);
 module.exports = route;

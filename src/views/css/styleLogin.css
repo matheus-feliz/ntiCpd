@@ -19,15 +19,18 @@ section {
     display: flex;
     margin: 40px 0px 0px 40%;
     width: 300px;
-    height: 250px;
+    height: 260px;
     box-shadow: 0 0 0.5em black;
     border-radius: 5px;
     background-color: white;
     padding-top: 20px;
 }
+.margin{
+margin-top: 30px;
+}
 
 .form-control {
-    margin: 0px 25px 10px 25px;
+    margin: 5px 25px 10px 25px;
     width: 250px;
     height: 40px;
     white-space: nowrap;

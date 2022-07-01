@@ -26,11 +26,15 @@ const EquipamentoSchema = new mongoose.Schema({
         required: true
     },
     dataInicial: {
-        type: Date, default: Date.now,
+        type: String,
         required: true
     },
     dataFinal: {
-        type: Date, default: Date.now,
+        type: String,
+        required: true
+    },
+    numero: {
+        type: String,
         required: true
     },
     solucao: {
@@ -47,14 +51,16 @@ const EquipamentoSchema = new mongoose.Schema({
 const EquipamentoMOdel = mongoose.model('servicoComEquipamento', EquipamentoSchema);
 
 class servicoComEquipamento {
-    constructor(body) {
+    constructor(body, numero) {
         this.body = body;
+        this.body.numero = numero;
         this.errors = [];
         this.servico = null;
     }
 
     async register() {
         this.limpaBody();
+        this.dateFormatacao();
         this.validacao();
         await this.create();
     }
@@ -81,13 +87,23 @@ class servicoComEquipamento {
             backup: this.body.backup,
             dataInicial: this.body.dataInicial,
             dataFinal: this.body.dataFinal,
+            numero: this.body.numero,
             solucao: this.body.solucao,
             observacao: this.body.observacao
         }
 
     }
     dateFormatacao() {
-
+        let dataInicialAno = this.body.dataInicial.slice(0, 4);
+        let dataInicialMes = this.body.dataInicial.slice(5, 7);
+        let dataInicialDia = this.body.dataInicial.slice(8, 10);
+        let dataInicial = [dataInicialDia, "/", dataInicialMes, "/", dataInicialAno].join('');
+        let dataFinalAno = this.body.dataFinal.slice(0, 4);
+        let dataFinalMes = this.body.dataFinal.slice(5, 7);
+        let dataFinalDia = this.body.dataFinal.slice(8, 10);
+        let dataFinal = [dataFinalDia, "/", dataFinalMes, "/", dataFinalAno].join('');
+        this.body.dataInicial = dataInicial;
+        this.body.dataFinal = dataFinal;
     }
     validacao() {
         if (!this.body.telefone) { this.errors.push('telefone é obrigatorio') };
@@ -98,9 +114,24 @@ class servicoComEquipamento {
         if (!this.body.backup) { this.errors.push('backup é obrigatorio') };
         if (!this.body.dataInicial) { this.errors.push('data inicial é obrigatorio') };
         if (!this.body.dataFinal) { this.errors.push('data final é obrigatorio') };
-        if (this.body.dataInicial > this.body.dataFinal) { this.errors.push('data inicial maior que a final') };
+        if (this.body.dataInicial > this.body.dataFinal) {
+            let dataInicialAno = this.body.dataInicial.slice(0, 4);
+            let dataInicialMes = this.body.dataInicial.slice(5, 7);
+            let dataInicialDia = this.body.dataInicial.slice(8, 10);
+            let dataFinalAno = this.body.dataFinal.slice(0, 4);
+            let dataFinalMes = this.body.dataFinal.slice(5, 7);
+            let dataFinalDia = this.body.dataFinal.slice(8, 10);
+            if(dataInicialDia > dataFinalDia && dataInicialMes > dataFinalMes && dataInicialAno > dataFinalAno){
+                this.errors.push('data inicial maior que a final');
+            }
+           
+        };
     }
 
+    static async busca() {
+        const servicos = await EquipamentoMOdel.find();
+        return servicos;
+    }
     static async buscaListagem(tombo) {
         if (typeof tombo !== "string") return;
         const servicos = await EquipamentoMOdel.find({
@@ -119,6 +150,7 @@ class servicoComEquipamento {
 
     async edit(id) {
         if (typeof id !== "string") return;
+        this.dateFormatacao();
         this.validacao();
         if (this.errors.length > 0) return;
         this.servico = await EquipamentoMOdel.findByIdAndUpdate(id, this.body, { new: true });

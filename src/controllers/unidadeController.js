@@ -1,15 +1,16 @@
 
 const Unidade = require('../models/UnidadeModel');
 const Servico = require('../models/ServicoSemEquipamentoModel');
+const ServicoEquipamento = require('../models/ServicoComEquipamentoModel');
 const { async } = require('regenerator-runtime');
 
-exports.indexCadastro = function (req, res) {
+exports.indexCadastro = function (req, res) {// get cadastro de unidade
     res.render('cadastroUnidade', {
         unidade: {}
     });
 }
 
-exports.cadastro = async function (req, res) {
+exports.cadastro = async function (req, res) { // post cadastro de unidade
     try {
         const unidade = new Unidade(req.body);
         await unidade.register();
@@ -32,17 +33,23 @@ exports.cadastro = async function (req, res) {
     }
 }
 
-exports.busca = async function (req, res) {
-    //const unidades = await Unidade.buscaUnidades();
-    res.render('buscaUnidade', { unidades:{} });
+exports.busca = async function (req, res) { // busca de unidade(vazio)
+    res.render('buscaUnidade', { unidades: {} });
 }
-exports.buscaRetorno = async function(req, res){
+exports.buscaRetorno = async function (req, res) { // busca de unidade com retorno do banco
     const unidades = await Unidade.busca(req.body.busca);
-     if(!unidades) res.render('404');
-     res.render('buscaUnidade', { unidades });
- 
- }
-exports.indexEdit = async function (req, res) {
+    if ( unidades.length === 0) {
+        req.session.save(async function () {
+            req.flash('errors', 'unidade não encontrado');
+            res.render('buscaUnidade', { unidades });
+            return;
+        });
+        return;
+    };
+    res.render('buscaUnidade', { unidades });
+
+}
+exports.indexEdit = async function (req, res) { // get edit de unidade
     try {
         if (!req.params.id) return res.render('404');
         const unidade = await Unidade.buscaId(req.params.id);
@@ -52,7 +59,7 @@ exports.indexEdit = async function (req, res) {
         res.render('404');
     }
 }
-exports.edit = async function (req, res) {
+exports.edit = async function (req, res) { // post edit de unidade
     try {
         const unidade = new Unidade(req.body);
         await unidade.edit(req.params.id);
@@ -77,7 +84,7 @@ exports.edit = async function (req, res) {
         res.render('404')
     }
 }
-exports.delete = async function (req, res) {
+exports.delete = async function (req, res) { // delete de unidade
     try {
         if (!req.params.id) res.render('404');
         const unidade = await Unidade.delete(req.params.id);
@@ -92,8 +99,8 @@ exports.delete = async function (req, res) {
     }
 
 }
-//serviço de unidade
-exports.listagem = async function (req, res) {
+//serviço de unidade daqui para baixo
+exports.listagem = async function (req, res) { // listagem de unidade
     try {
         if (!req.params.id) return res.render('404');
         let unidade = await Unidade.buscaId(req.params.id)
@@ -111,7 +118,7 @@ exports.listagem = async function (req, res) {
     }
 }
 
-exports.cadastroDeServico = async function (req, res) {
+exports.cadastroDeServico = async function (req, res) { // get cadstro de servico  de unidade
     try {
         if (!req.params.id) return res.render('404');
         console.log(req.params.id)
@@ -128,9 +135,12 @@ exports.cadastroDeServico = async function (req, res) {
     }
 }
 
-exports.cadastroDeServicoPost = async function (req, res) {
+exports.cadastroDeServicoPost = async function (req, res) { // post cadstro de servico  de unidade
     try {
-        const servico = new Servico(req.body);
+        const servicoUnidade = await Servico.busca();
+        const servicoEquipamento = await ServicoEquipamento.busca();
+        let numeroDeServico = servicoUnidade.length + servicoEquipamento.length + 1;
+        const servico = new Servico(req.body, numeroDeServico.toString());
         await servico.register();
         if (servico.errors.length > 0) {
             req.flash('errors', servico.errors);
@@ -153,7 +163,7 @@ exports.cadastroDeServicoPost = async function (req, res) {
     }
 }
 
-exports.editServico = async function (req, res) {
+exports.editServico = async function (req, res) { // get edit de servico  de unidade
     try {
         if (!req.params.id) return res.render('404');
         const servico = await Servico.buscaPorId(req.params.id);
@@ -164,13 +174,13 @@ exports.editServico = async function (req, res) {
     }
 }
 
-exports.editServicoCadastro = async function (req, res) {
+exports.editServicoCadastro = async function (req, res) { // post edit de servico  de unidade
     try {
         const servico = new Servico(req.body);
         await servico.edit(req.params.id);
         if (servico.errors.length > 0) {
             req.flash('errors', servico.errors);
-            req.session.save( async function () {
+            req.session.save(async function () {
                 const editServico = await Servico.buscaPorId(req.params.id);
                 return res.redirect(`/cadastrodeservico/edit/${editServico._id}`);
             });
@@ -187,15 +197,16 @@ exports.editServicoCadastro = async function (req, res) {
     }
 }
 
-exports.deleteServicoUm = async function (req, res) {
+exports.deleteServicoUm = async function (req, res) { // delete de servico  de unidade
     try {
-        console.log('id', req.params.id)
         if (!req.params.id) return res.render('404');
+        const unidadeServico = await Servico.buscaPorId(req.params.id);
+        const unidade = await Unidade.buscaListagem(unidadeServico.unidade);
         const servico = await Servico.deleteOne(req.params.id);
         if (!servico) return res.render('404');
         req.flash('success', 'servico deletato com sucesso');
         req.session.save(function () {
-            res.redirect(`/buscaunidade`);
+            res.redirect(`/listagemunidade/${unidade._id}`);
             return;
         });
     } catch (e) {
@@ -203,7 +214,7 @@ exports.deleteServicoUm = async function (req, res) {
     }
 }
 
-exports.impressao = async function (req, res) {
+exports.impressao = async function (req, res) { // impressão de servico  de unidade
     try {
         if (!req.params.id) return res.render('404');
         const servico = await Servico.buscaPorId(req.params.id);
