@@ -13,11 +13,8 @@ section {
     width: 300px;
     height: 300px;
 }
-.senha{
-    margin-left: 150px;
-}
 
-.login {
+.esqueceu {
     border: none;
     display: flex;
     margin: 40px 0px 0px 40%;
@@ -68,69 +65,11 @@ margin-top: 30px;
     transition: all 300ms ease-in-out;
 }
 
-.buttonCadastro {
-    font-family: sans-serif;
-    display: block;
-    background-color: rgb(0, 0, 150);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin: 0px 25px 10px 25px;
-    width: 250px;
-    height: 40px;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.buttonCadastro:hover {
-    background-color: blue;
-    transition: all 300ms ease-in-out;
-}
-
 .traco {
     width: 250px;
     margin: 0px 25px 10px 25px;
     border: 1px solid;
     opacity: 0.3;
-}
-
-.cadastro {
-    background-color: white;
-    border: none;
-    margin: 15% 0px 0px 40%;
-    width: 300px;
-    height: 350px;
-    box-shadow: 0 0 0.5em black;
-    border-radius: 5px;
-    background-color: white;
-    padding-top: 0px;
-    align-items: center;
-    position: absolute;
-}
-
-.fundo {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    display: none;
-}
-
-.close {
-    margin-left: 260px;
-    margin-bottom: 30px;
-    line-height: 5px;
-    font-size: 40px;
-    cursor: pointer;
-    opacity: 0.3;
-}
-
-.closeCadastro {
-    display: none;
-}
-
-.closeCadastro:checked~.fundo {
-    display: block;
 }
 
 @media(min-width:300px) and (max-width:699px) {
@@ -142,7 +81,7 @@ margin-top: 30px;
         width: 150px;
         height: 150px;
     }
-    .login {
+    .esqueceu {
         margin: 0px 0px 0px 25%;
         width: 170px;
         height: 150px;
@@ -178,10 +117,6 @@ margin-top: 30px;
     }
     .fundo {
         height: 309%;
-    }
-    .senha{
-        margin-left: 80px;
-        font-size: 10px;
     }
 }
 

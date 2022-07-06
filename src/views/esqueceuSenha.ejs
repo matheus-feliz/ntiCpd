@@ -1,0 +1,30 @@
+<%-include('./include/head')%>
+    <link rel="stylesheet" type="text/css" href="css/styleEsqueceuSenha.css">    
+        <section class="sencao">
+
+            <div>
+                <img class="img" title="logo do nti" src="./include/img/paulo.png">
+            </div>
+            <div class="esqueceu">
+                <%if(senha._id){%>
+                    <form action="/register/edit/<%=senha._id%>" class="formCadastro" method="POST">
+                        <%}else{%>
+                          <form action="/esqueceu" class="formCadastro" method="POST">
+                            <%}%>
+                    <input type="hidden" name="_csrf" value=<%=csrfToken%>>
+                    <%if(!senha._id){%>
+                    <input type="email" class="form-control margin" placeholder="Email" id="email" name="email">
+                    <%}if(senha._id){%>
+                    <input type="email" class="form-control margin" placeholder="Email" id="email" name="email" value="<%=senha.email%>">
+                    <input type="password" class="form-control" id="password" placeholder="senha" name="password">
+                    <input type="password" class="form-control" id="password2" placeholder="confirma senha" name="password2">
+                    <%}%>
+                    <button type="submit" class="buttonLogin">mudar Senha</button>
+                    <div class="traco"></div>
+                    <%-include('include/messages');%>
+                </form>
+            </div>
+        </section>
+
+
+        <%-include('./include/footer')%>

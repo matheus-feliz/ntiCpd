@@ -4,16 +4,17 @@ const loginController = require('./src/controllers/loginController');
 const computador = require('./src/controllers/computadorController');
 const unidade = require('./src/controllers/unidadeController');
 const relatorio = require('./src/controllers/relatorioController');
-
 const { loginReq } = require('./src/middleware/middleware');
 
-
-//pagina de home
+//pagina de login
 route.get('/', loginController.index);
 route.post('/cadastro', loginController.register);
 route.post('/login', loginController.login);
 route.get('/logout', loginController.logout);
 route.get('/logado', loginController.logado);
+route.get('/esqueceusenha', loginController.esqueceuSenha);
+route.post('/esqueceu', loginController.esqueceu);
+route.post('/register/edit/:id',loginController.senhaEdit);
 
 //pagina de equipamento
 route.get('/cadastrocomputador', loginReq, computador.indexCadastro);
@@ -23,6 +24,7 @@ route.post('/register/edit/:id', loginReq, computador.edit);
 route.get('/cadastrocomputador/delete/:id', loginReq, computador.delete);
 route.get('/buscacomputador', loginReq, computador.busca);
 route.post('/buscacomputadorBanco', loginReq, computador.buscaRetorno);
+
 //pagina de servico com equipamento
 route.get('/listagemcomputador/:id', loginReq, computador.listagem);
 route.get('/cadastrodeequipamento/:id', loginReq, computador.cadastroDeServico);

@@ -1,3 +1,0 @@
-//busca 
-
-//paginação

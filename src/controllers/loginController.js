@@ -1,3 +1,4 @@
+const { async } = require('regenerator-runtime');
 const Login = require('../models/LoginModel');
 
 
@@ -7,71 +8,100 @@ exports.index = (req, res) => {
 }
 
 
-exports.login = async function(req, res) {
+exports.login = async function (req, res) {
+    try {
+        const login = new Login(req.body);
+        await login.login();
 
-
-        try {
-            const login = new Login(req.body);
-            await login.login();
-
-            if (login.errors.length > 0) {
-                req.flash('errors', login.errors);
-                req.session.save(function() {
-                    return res.redirect('/');
-                });
-                return;
-            }
-            req.flash('success', 'login efetuado com sucesso');
-            req.session.user = login.user;
-            req.session.save(function() {
-                return res.redirect('/logado');
+        if (login.errors.length > 0) {
+            req.flash('errors', login.errors);
+            req.session.save(function () {
+                return res.redirect('/');
             });
-
-
-        } catch (e) {
-
-            return res.render('404');
+            return;
         }
+        req.flash('success', 'login efetuado com sucesso');
+        req.session.user = login.user;
+        req.session.save(function () {
+            return res.redirect('/logado');
+        });
 
+
+    } catch (e) {
+
+        return res.render('404');
     }
-    //sair do login
-exports.logout = function(req, res) {
+
+}
+//sair do login
+exports.logout = function (req, res) {
     req.session.destroy();
     res.redirect('/');
 
 }
 
 //falta implementar o cadastro aqui
-exports.register = async function(req, res) {
+exports.register = async function (req, res) {
     try {
         const login = new Login(req.body);
 
         await login.register();
-
-        setTimeout(() => {
-            if (login.errors.length > 0) {
-                req.flash('errors', login.errors);
-                req.session.save(function() {
-                    return res.redirect('/');
-                });
-                return;
-            }
-
-            req.flash('success', 'cadastro realizado')
-            req.session.save(function() {
+        if (login.errors.length > 0) {
+            req.flash('errors', login.errors);
+            req.session.save(function () {
                 return res.redirect('/');
             });
+            return;
+        }
 
-        }, 2500);
+        req.flash('success', 'cadastro realizado')
+        req.session.save(function () {
+            return res.redirect('/');
+        });
+
     } catch (e) {
         console.log(e);
         return res.render('404');
     }
-
-
-
-
 }
 exports.logado = (req, res) => {
     res.render('logado');
+}
+
+exports.esqueceuSenha = (req, res) => {
+    res.render('esqueceuSenha', { senha: {} });
+}
+
+exports.esqueceu = async function (req, res) {
+    if (typeof req.body.email !== 'string') return;
+    const user = new Login(req.body);
+    const senha = await user.esqueceuSenha();
+
+    if (user.errors.length > 0) {
+        req.flash('errors', user.errors);
+        req.session.save(function () {
+            return res.redirect('/esqueceusenha');
+        });
+        return;
+    }
+    res.render('esqueceuSenha', { senha });
+}
+exports.senhaEdit = async function (req, res) {
+    if (!req.params.id) res.render('404');
+    const user = new Login(req.body);
+   await user.edit(req.params.id);
+    if (user.errors.length > 0) {
+        req.flash('errors', user.errors);
+        req.session.save(async function () {
+            const senha = await Login.buscaPorId(req.params.id);
+            res.redirect(`/cadastrocomputador/edit/${senha._id}`);
+            return;
+        });
+        return;
+    }
+    req.flash('success', 'edição efetuado com sucesso');
+    req.session.save(function () {
+        res.redirect(`/`);
+        return;
+    })
 }

@@ -54,7 +54,7 @@ class Login {
             if (this.errors.length > 0) {
                 return;
             }
-
+            await this.create();
         } catch (e) {
             console.log(e);
         }
@@ -72,11 +72,9 @@ class Login {
     async userExistem() {
         const user = await LoginModel.findOne({ email: this.body.email });
         if (user) {
-
             this.errors.push('outro usuario já usa esse email');
             return;
         }
-        await this.create();
     }
     async create() {
         const salt = bcryptjs.genSaltSync();
@@ -84,6 +82,30 @@ class Login {
         this.body.password2 = bcryptjs.hashSync(this.body.password2, salt);
         this.user = await LoginModel.create(this.body);
 
+    }
+     async esqueceuSenha() {
+        const user = await LoginModel.findOne({ email: this.body.email });
+        if (!user) {
+            this.errors.push('email Não existe no banco de dados');
+            return;
+        }
+        return user;
+    }
+    async edit(id){
+        if (typeof id !== "string") return;
+        this.validacao();
+        if (this.errors.length > 0) {
+            return
+        };
+        const salt = bcryptjs.genSaltSync();
+        this.body.password = bcryptjs.hashSync(this.body.password, salt);
+        this.body.password2 = bcryptjs.hashSync(this.body.password2, salt);
+        this.user = await LoginModel.findByIdAndUpdate(id, this.body, { new: true });
+    }
+    static async buscaPorId(id) {
+        if (typeof id !== "string") return;
+        const user = await LoginModel.findById(id);
+        return user;
     }
     limpaBody() {
         for (const index in this.body) {
