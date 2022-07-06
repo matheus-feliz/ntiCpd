@@ -73,12 +73,22 @@ class servicoSemEquipamento {
         }
 
     }
+    static FormataData(data) {
+        let dataAno = data.slice(0, 4);
+        let dataMes = data.slice(5, 7);
+        let dataDia = data.slice(8, 10);
+        let dataCompleta = [dataDia, "/", dataMes, "/", dataAno].join('');
+        return dataCompleta;
+    }
+    FormataDataNoStatic(data) {
+        let dataAno = data.slice(0, 4);
+        let dataMes = data.slice(5, 7);
+        let dataDia = data.slice(8, 10);
+        let dataCompleta = [dataDia, "/", dataMes, "/", dataAno].join('');
+        return dataCompleta;
+    }
     dateFormatacao() {
-        let dataDeServicoAno = this.body.dataDeServico.slice(0, 4);
-        let dataDeServicoMes = this.body.dataDeServico.slice(5,7);
-        let dataDeServicoDia = this.body.dataDeServico.slice(8,10);
-        let dataDeServico = [dataDeServicoDia,"/", dataDeServicoMes, "/", dataDeServicoAno].join('');
-        this.body.dataDeServico = dataDeServico;
+        this.body.dataDeServico = this.FormataDataNoStatic(this.body.dataDeServico);
     }
     validacao() {
         if (!this.body.telefone) { this.errors.push('telefone é obrigatorio') };
@@ -88,9 +98,19 @@ class servicoSemEquipamento {
         if (!this.body.dataDeServico) { this.errors.push('data de serviço é obrigatorio') };
     }
 
-    static async busca(){
+    static async busca() {
         const servicos = await ServicoMOdel.find();
         return servicos;
+    }
+    static async buscaPorData(dataInicial, dataFinal) {
+        if (typeof dataInicial !== "string" && typeof dataFinal !== 'string') return;
+        const servicos = await ServicoMOdel.find({
+            dataDeServico: { "$gte": dataInicial, "$lte": dataFinal }
+        }).sort({
+            criadoEm: -1,
+        });
+        return servicos;
+
     }
     static async buscaListagem(unidade) {
         if (typeof unidade !== "string") return;

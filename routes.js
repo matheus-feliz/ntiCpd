@@ -56,4 +56,5 @@ route.get('/listagemunidade/delete/:id', loginReq, unidade.deleteServicoUm);
 
 //pagina de relatorio
 route.get('/relatorio', loginReq, relatorio.relatorio);
+route.post('/relatorioBanco', loginReq, relatorio.relatorioBanco);
 module.exports = route;

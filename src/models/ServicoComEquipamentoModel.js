@@ -93,17 +93,23 @@ class servicoComEquipamento {
         }
 
     }
+   static FormataData(data) {
+        let dataAno = data.slice(0, 4);
+        let dataMes = data.slice(5, 7);
+        let dataDia = data.slice(8, 10);
+        let dataCompleta = [dataDia, "/", dataMes, "/", dataAno].join('');
+        return dataCompleta;
+    }
+    FormataDataNoStatic(data) {
+        let dataAno = data.slice(0, 4);
+        let dataMes = data.slice(5, 7);
+        let dataDia = data.slice(8, 10);
+        let dataCompleta = [dataDia, "/", dataMes, "/", dataAno].join('');
+        return dataCompleta;
+    }
     dateFormatacao() {
-        let dataInicialAno = this.body.dataInicial.slice(0, 4);
-        let dataInicialMes = this.body.dataInicial.slice(5, 7);
-        let dataInicialDia = this.body.dataInicial.slice(8, 10);
-        let dataInicial = [dataInicialDia, "/", dataInicialMes, "/", dataInicialAno].join('');
-        let dataFinalAno = this.body.dataFinal.slice(0, 4);
-        let dataFinalMes = this.body.dataFinal.slice(5, 7);
-        let dataFinalDia = this.body.dataFinal.slice(8, 10);
-        let dataFinal = [dataFinalDia, "/", dataFinalMes, "/", dataFinalAno].join('');
-        this.body.dataInicial = dataInicial;
-        this.body.dataFinal = dataFinal;
+        this.body.dataInicial = this.FormataDataNoStatic(this.body.dataInicial);
+        this.body.dataFinal = this.FormataDataNoStatic(this.body.dataFinal);
     }
     validacao() {
         if (!this.body.telefone) { this.errors.push('telefone é obrigatorio') };
@@ -121,16 +127,27 @@ class servicoComEquipamento {
             let dataFinalAno = this.body.dataFinal.slice(0, 4);
             let dataFinalMes = this.body.dataFinal.slice(5, 7);
             let dataFinalDia = this.body.dataFinal.slice(8, 10);
-            if(dataInicialDia > dataFinalDia && dataInicialMes > dataFinalMes && dataInicialAno > dataFinalAno){
+            if (dataInicialDia > dataFinalDia && dataInicialMes > dataFinalMes && dataInicialAno > dataFinalAno) {
                 this.errors.push('data inicial maior que a final');
             }
-           
+
         };
     }
 
     static async busca() {
         const servicos = await EquipamentoMOdel.find();
         return servicos;
+    }
+    static async buscaPorData(dataInicial, dataFinal) {
+        if (typeof dataInicial !== "string" && typeof dataFinal !== 'string') return;
+        const servicos = await EquipamentoMOdel.find({
+            dataInicial: { "$gte": dataInicial },
+            dataFinal: { "$lte": dataFinal }
+        }).sort({
+            criadoEm: -1,
+        });
+        return servicos;
+
     }
     static async buscaListagem(tombo) {
         if (typeof tombo !== "string") return;

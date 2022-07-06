@@ -111,6 +111,12 @@ table th {
     text-align: center;
     font-family: sans-serif;
 }
+table th {
+    padding: 10px;
+    text-align: center;
+    font-family: sans-serif;
+    width: 100%;
+}
 
 .data-footer p {
     margin-right: 5px;

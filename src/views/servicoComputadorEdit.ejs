@@ -28,12 +28,21 @@
                             </div>
                             <div class="form-group">
                                 <label class="label-form" for="tipo">Tipo de serviço</label>
-                                <input class="input-form" id="tipo" name="tipo" type="text" value="<%=servico.tipo%>" placeholder="serviço no equipamento">
+                                <select  class="input-form" name="tipo" id="tipo">
+                                    <option value="">serviço no equipamento</option>
+                                    <option value="Formatação">Formatação</option>
+                                    <option value="Ponto De Rede">Ponto de Rede</option>
+                                    <option value="Reparos\Configuração">Reparos/ Configuração</option>
+                                  </select>
                             </div>
 
                             <div class="form-group">
                                 <label class="label-form" for="backup">Backup</label>
-                                <input class="input-form" id="backup" name="backup" type="text"  value="<%=servico.backup%>" placeholder="backup feito sim ou não">
+                                <select  class="input-form" name="backup" id="backup">
+                                    <option value="">backup feito sim ou não</option>
+                                    <option value="sim">sim</option>
+                                    <option value="não">não</option>
+                                  </select>
                             </div>
                             <div class="form-group">
                                 <label class="label-form" for="data-inicial">data de entrada</label>
@@ -53,7 +62,7 @@
 
                             <div class="form-group">
                                 <label class="label-form" for="observacao">Observação</label>
-                                <textarea class="input-form" id="observacao" name="observacao" value="<%=servico.observacao%>" cols="30" rows="10"> </textarea>
+                                <textarea class="input-form" id="observacao" name="observacao" cols="30" rows="10"><%=servico.observacao%> </textarea>
                             </div>
 
 

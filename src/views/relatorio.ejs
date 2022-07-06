@@ -3,25 +3,27 @@
 
     <section>
         <%-include('./include/navBar')%>
-            <h1 class="text-center "> Busca de unidade
+            <h1 class="text-center "> Busca de relatorio
             </h1>
             <div>
-                <form class="form-busca">
+                <form class="form-busca" action="/relatorioBanco" method="post">
+                    <input type="hidden" name="_csrf" value=<%=csrfToken%>>
                     <label for="data-inicial">data inicial</label>
-                    <input type="date" name="busca" id="data-inicial">
+                    <input type="date" name="busca" id="dataInicial">
                     <label for="data-final">data final</label>
-                    <input type="date" name="busca" id="data-final">
+                    <input type="date" name="busca" id="dataFinal">
                     <button class="button" type="submit"><img class="img-button" src="./include/img/pesquisa.svg"></button>
                 </form>
             </div>
             <div class="traco"></div>
             <div class="response">
+                <%if(total.length > 0){%>
                 <table class="tabela">
                     <caption>relatorio geral</caption>
 
                     <thead>
                         <tr>
-                            <th colspan="5">Relatorio de manutenção</th>
+                            <th colspan="6">Relatorio de manutenção</th>
 
                         </tr>
                     </thead>
@@ -29,43 +31,42 @@
                     <tbody>
                         <tr>
                             <td>Setor</td>
-                            <td>formatação</td>
-                            <td>pontos de rede</td>
-                            <td>reparos/configuração</td>
-                            <td>visitas/reparos/configuração</td>
+                            <td>Formatação</td>
+                            <td>Pontos de rede</td>
+                            <td>Reparos/configuração</td>
+                            <td>Visitas/reparos/configuração</td>
+                            <td>Total</td>
+
 
                         </tr>
+                        <%total.forEach(totalServico=>{%>
                         <tr>
-                            <td>unidade</td>
-                            <td>4</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>9</td>
+                            <td><%=totalServico.nomeDaUnidade%></td>
+                            <td><%=totalServico.formatacao%></td>
+                            <td><%=totalServico.pontoDeRede%></td>
+                            <td><%=totalServico.reparos%></td>
+                            <td><%=totalServico.visitas%></td>
+                            <td><%=totalServico.total%></td>
                         </tr>
-                        <tr>
-                            <td>total</td>
-                            <td>4</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>9</td>
-                        </tr>
-
+                     <%})%>
 
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="2">Total de serviços:</td>
-                            <td colspan="3">26</td>
+                            <td colspan="4"><%=totalDeServico%></td>
 
                         </tr>
                     </tfoot>
                 </table>
 
                 <div class="data-footer">
-                    <p>data inicial: data </p>
-                    <p>data final: data</p>
+                    <p>data inicial: <%=dataInicial%></p>
+                    <p>data final: <%=dataFinal%></p>
                 </div>
+                <%}%>
             </div>
+            
 
             <%-include('./include/barraLateral')%>
 

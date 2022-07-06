@@ -26,9 +26,14 @@
 
                             <div class="form-group">
                                 <label class="label-form" for="tipo">Tipo de serviço</label>
-                                <input class="input-form" id="tipo" name="tipo" type="text" placeholder="serviço no equipamento">
+                                <select  class="input-form" name="tipo" id="tipo">
+                                    <option value="">serviço no equipamento</option>
+                                    <option value="Ponto De Rede">Ponto de Rede</option>
+                                    <option value="Reparos\Configuração">Reparos/ Configuração</option>
+                                    <option value="VisitaTecnica\Reparos\Configuração">Visita Técnica/ Reparos/ Configuração</option>
+                                  </select>
+                                  
                             </div>
-
                             <div class="form-group">
                                 <label class="label-form" for="dataDeServico">data de serviços</label>
                                 <input class="input-form" id="dataDeServico" name="dataDeServico" type="date">
