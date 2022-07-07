@@ -12,7 +12,6 @@ exports.cadastro = async function (req, res) { // post cadastro de equipamento
     try {
         const pc = new Pc(req.body);
         await pc.register();
-
         if (pc.errors.length > 0) {
             req.flash('errors', pc.errors);
             req.session.save(function () {
@@ -78,7 +77,7 @@ exports.busca = async function (req, res) {// busca sem ir no banco(vazio)
 }
 exports.buscaRetorno = async function (req, res) {//busca com redorno do banco
     const equipamentos = await Pc.busca(req.body.busca);
-    if (equipamentos.length === 0) {
+    if (!equipamentos) {
         req.session.save(async function () {
             req.flash('errors', 'equipamento não encontrado');
             res.render('buscaComputador', {
@@ -143,7 +142,7 @@ exports.cadastroDeServico = async function (req, res) { // get cadastro de servi
 exports.cadastroDeServicoPost = async function (req, res) { // post cadastro de servico com equipamento
     try {
         const servicoUnidade = await ServicoUnidade.busca();
-        const servicoEquipamento =  await Servico.busca();
+        const servicoEquipamento = await Servico.busca();
         let numeroDeServico = servicoUnidade.length + servicoEquipamento.length + 1;
         const servico = new Servico(req.body, numeroDeServico.toString());
         await servico.register();

@@ -1,14 +1,13 @@
-const { async } = require('regenerator-runtime');
+
 const Login = require('../models/LoginModel');
 
-
-exports.index = (req, res) => {
+exports.index = (req, res) => {//incio da tela de login
     if (req.session.user) return res.render('logado');
     return res.render('login');
 }
 
 
-exports.login = async function (req, res) {
+exports.login = async function (req, res) {//faz login
     try {
         const login = new Login(req.body);
         await login.login();
@@ -25,10 +24,7 @@ exports.login = async function (req, res) {
         req.session.save(function () {
             return res.redirect('/logado');
         });
-
-
     } catch (e) {
-
         return res.render('404');
     }
 
@@ -64,15 +60,15 @@ exports.register = async function (req, res) {
         return res.render('404');
     }
 }
-exports.logado = (req, res) => {
+exports.logado = (req, res) => {//pagina de inicio pós login
     res.render('logado');
 }
 
-exports.esqueceuSenha = (req, res) => {
+exports.esqueceuSenha = (req, res) => {//esqueceu senha
     res.render('esqueceuSenha', { senha: {} });
 }
 
-exports.esqueceu = async function (req, res) {
+exports.esqueceu = async function (req, res) {//busca pelo id
     if (typeof req.body.email !== 'string') return;
     const user = new Login(req.body);
     const senha = await user.esqueceuSenha();
@@ -86,15 +82,14 @@ exports.esqueceu = async function (req, res) {
     }
     res.render('esqueceuSenha', { senha });
 }
-exports.senhaEdit = async function (req, res) {
+exports.senhaEdit = async function (req, res) {//update da senha
     if (!req.params.id) res.render('404');
     const user = new Login(req.body);
    await user.edit(req.params.id);
     if (user.errors.length > 0) {
         req.flash('errors', user.errors);
         req.session.save(async function () {
-            const senha = await Login.buscaPorId(req.params.id);
-            res.redirect(`/cadastrocomputador/edit/${senha._id}`);
+           res.redirect(`/esqueceusenha`)
             return;
         });
         return;

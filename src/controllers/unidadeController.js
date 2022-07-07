@@ -38,7 +38,7 @@ exports.busca = async function (req, res) { // busca de unidade(vazio)
 }
 exports.buscaRetorno = async function (req, res) { // busca de unidade com retorno do banco
     const unidades = await Unidade.busca(req.body.busca);
-    if ( unidades.length === 0) {
+    if (!unidades) {
         req.session.save(async function () {
             req.flash('errors', 'unidade não encontrado');
             res.render('buscaUnidade', { unidades });

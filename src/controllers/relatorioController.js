@@ -3,11 +3,11 @@ const { async } = require('regenerator-runtime');
 const ServicoComEquipamento = require('../models/ServicoComEquipamentoModel');
 const ServicoSemEquipamento = require('../models/ServicoSemEquipamentoModel');
 
-exports.relatorio =(req, res) => {
+exports.relatorio =(req, res) => {// inicio do relatorio
     res.render('relatorio',{total:{}, totalDeServico:0, dataInicial:'', dataFinal:''});
 }
 
-exports.relatorioBanco = async (req, res) => {
+exports.relatorioBanco = async (req, res) => {//faz o relatorio
     try {
         let dataInicial = ServicoSemEquipamento.FormataData(req.body.busca[0]);
         let dataFinal = ServicoSemEquipamento.FormataData(req.body.busca[1]);

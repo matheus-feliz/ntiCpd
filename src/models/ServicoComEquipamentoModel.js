@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const EquipamentoSchema = new mongoose.Schema({
+const EquipamentoSchema = new mongoose.Schema({//dados
     telefone: {
         type: String,
         required: true
@@ -48,7 +48,7 @@ const EquipamentoSchema = new mongoose.Schema({
     criadoEm: { type: Date, default: Date.now }
 });
 
-const EquipamentoMOdel = mongoose.model('servicoComEquipamento', EquipamentoSchema);
+const EquipamentoMOdel = mongoose.model('servicoComEquipamento', EquipamentoSchema);//conexão com o banco
 
 class servicoComEquipamento {
     constructor(body, numero) {
@@ -58,21 +58,21 @@ class servicoComEquipamento {
         this.servico = null;
     }
 
-    async register() {
+    async register() {//cadastro
         this.limpaBody();
         this.dateFormatacao();
         this.validacao();
         await this.create();
     }
 
-    async create() {
+    async create() {//registra no banco de dados
         if (this.errors.length > 0) {
             return;
         }
         this.servico = await EquipamentoMOdel.create(this.body);
     }
 
-    limpaBody() {
+    limpaBody() {// garante que é uma string
         for (const index in this.body) {
             if (typeof this.body[index] !== 'string') {
                 this.body[index] = '';
@@ -93,25 +93,25 @@ class servicoComEquipamento {
         }
 
     }
-   static FormataData(data) {
+   static FormataData(data) {//formata data
         let dataAno = data.slice(0, 4);
         let dataMes = data.slice(5, 7);
         let dataDia = data.slice(8, 10);
         let dataCompleta = [dataDia, "/", dataMes, "/", dataAno].join('');
         return dataCompleta;
     }
-    FormataDataNoStatic(data) {
+    FormataDataNoStatic(data) {//formata data static
         let dataAno = data.slice(0, 4);
         let dataMes = data.slice(5, 7);
         let dataDia = data.slice(8, 10);
         let dataCompleta = [dataDia, "/", dataMes, "/", dataAno].join('');
         return dataCompleta;
     }
-    dateFormatacao() {
+    dateFormatacao() {//implementa a formata data 
         this.body.dataInicial = this.FormataDataNoStatic(this.body.dataInicial);
         this.body.dataFinal = this.FormataDataNoStatic(this.body.dataFinal);
     }
-    validacao() {
+    validacao() {//valida os dados
         if (!this.body.telefone) { this.errors.push('telefone é obrigatorio') };
         if (!this.body.unidade) { this.errors.push('unidade é obrigatorio') };
         if (!this.body.responsavel) { this.errors.push('responsavel é obrigatorio') };
@@ -134,11 +134,11 @@ class servicoComEquipamento {
         };
     }
 
-    static async busca() {
+    static async busca() {// busca
         const servicos = await EquipamentoMOdel.find();
         return servicos;
     }
-    static async buscaPorData(dataInicial, dataFinal) {
+    static async buscaPorData(dataInicial, dataFinal) {//busca relatorio
         if (typeof dataInicial !== "string" && typeof dataFinal !== 'string') return;
         const servicos = await EquipamentoMOdel.find({
             dataInicial: { "$gte": dataInicial },
@@ -149,7 +149,7 @@ class servicoComEquipamento {
         return servicos;
 
     }
-    static async buscaListagem(tombo) {
+    static async buscaListagem(tombo) {// busca listagem
         if (typeof tombo !== "string") return;
         const servicos = await EquipamentoMOdel.find({
             tombo: tombo
@@ -159,13 +159,13 @@ class servicoComEquipamento {
         return servicos;
     }
 
-    static async buscaPorId(id) {
+    static async buscaPorId(id) {// busca por id
         if (typeof id !== "string") return;
         const servico = await EquipamentoMOdel.findById(id);
         return servico;
     }
 
-    async edit(id) {
+    async edit(id) {//edit de dados
         if (typeof id !== "string") return;
         this.dateFormatacao();
         this.validacao();
@@ -173,7 +173,7 @@ class servicoComEquipamento {
         this.servico = await EquipamentoMOdel.findByIdAndUpdate(id, this.body, { new: true });
     }
 
-    static async deleteOne(id) {
+    static async deleteOne(id) {//deleta um dado
         if (typeof id !== "string") return;
         const servico = await EquipamentoMOdel.findByIdAndDelete(id);
         return servico;

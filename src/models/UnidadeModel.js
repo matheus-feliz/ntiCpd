@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UnidadeSchema = new mongoose.Schema({
+const UnidadeSchema = new mongoose.Schema({//dados
     telefone: {
         type: String,
         required: true
@@ -16,7 +16,7 @@ const UnidadeSchema = new mongoose.Schema({
     criadoEm: { type: Date, default: Date.now }
 });
 
-const UnidadeModel = mongoose.model('unidade', UnidadeSchema);
+const UnidadeModel = mongoose.model('unidade', UnidadeSchema);//conexão com o banco
 
 class Unidade {
     constructor(body) {
@@ -25,7 +25,7 @@ class Unidade {
         this.unidade = null;
     }
 
-    async register() {
+    async register() {//cadastro
         this.limpaBody();
         this.validacao();
         await this.unidadeExistente();
@@ -34,17 +34,17 @@ class Unidade {
         }       
         await this.create();
     }
-    async unidadeExistente() {
+    async unidadeExistente() {//checa se existe uma unidade
         const unidade = await UnidadeModel.findOne({ unidade: this.body.unidade });
         if (unidade) {
             this.errors.push('unidade já existe');
         }
     }
-    static async buscaUnidades(){
+    static async buscaUnidades(){//busca de todas unidade
         const unidades = await UnidadeModel.find().sort({criadoEm: -1});
         return unidades;
     }
-    static async busca(unidade) {
+    static async busca(unidade) {//busca
         if (typeof unidade !== "string") return;
         const unidades = await UnidadeModel.find({
             unidade: unidade
@@ -54,13 +54,13 @@ class Unidade {
         return unidades;
     }
 
-    static async buscaId(id){
+    static async buscaId(id){// busca por id
         if(typeof id !== "string") return;
         const unidade = await UnidadeModel.findById(id);
         return unidade;
     }
 
-    static async buscaListagem(unidade) {
+    static async buscaListagem(unidade) {// busca listagem
         if(typeof unidade !== "string") return;
             const unidadeID = await UnidadeModel.findOne({
             unidade: unidade
@@ -68,7 +68,7 @@ class Unidade {
         return unidadeID;
     }
 
-    async edit(id){
+    async edit(id){//edit de dados
         if(typeof id !== "string") return;
         this.validacao();
         if(this.errors.length>0){
@@ -76,18 +76,18 @@ class Unidade {
         }
         this.unidade = await UnidadeModel.findByIdAndUpdate(id, this.body, { new: true })
     }
-    static async delete(id) {
+    static async delete(id) {//deleta um dado
         if (typeof id !== "string") return;
         const unidade = UnidadeModel.findByIdAndDelete(id);
         return unidade;
     }
-    validacao() {
+    validacao() {//valida os dados
         if (!this.body.telefone) { this.errors.push('telefone é obrigatorio') };
         if (!this.body.unidade) { this.errors.push('unidade é obrigatorio') };
         if (!this.body.responsavel) { this.errors.push('responsavel é obrigatorio') };
     }
 
-    limpaBody() {
+    limpaBody() {// garante que é uma string
         for (const index in this.body) {
             if (typeof this.body[index] !== 'string') {
                 this.body[index] = '';
@@ -101,7 +101,7 @@ class Unidade {
 
     }
 
-    async create() {
+    async create() {//registra no banco de dados
         this.unidade = await UnidadeModel.create(this.body);
     }
 

@@ -5,7 +5,7 @@
 
     <section>
         <%-include('./include/navBar')%>
-            <%-include('./include/messages');%>
+        <%-include('./include/messages')%>
                 <h1 class="text-center "> Cadastro do computador
                 </h1>
                 <div class="grid-form">
@@ -15,6 +15,7 @@
                             <form action="/registro" method="POST">
                             <%}%>
                             <input type="hidden" name="_csrf" value=<%=csrfToken%>>
+                            
                                 <fieldset class="form-contact">
                                     <div class="form-group">
                                         <label class="label-form" for="telefone">Telefone</label>
