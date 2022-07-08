@@ -76,7 +76,7 @@ exports.edit = async function (req, res) { // post edit de unidade
 
         req.flash('success', 'edição efetuado com sucesso');
         req.session.save(function () {
-            res.redirect(`/listagemunidade`);
+            res.redirect(`/listagemunidade/${unidade.unidade._id}`);
             return;
         })
     }
