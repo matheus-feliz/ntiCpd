@@ -101,7 +101,6 @@ class Login {
         if (this.errors.length > 0) {
             return
         };
-        console.log(this.body.email,'valor antes')
         const user = await this.buscaPorIdNoStatic(id);
         this.body.email = user.email;
         const salt = bcryptjs.genSaltSync();

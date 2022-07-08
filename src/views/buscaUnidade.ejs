@@ -18,26 +18,21 @@
                     <%if(unidades.length>0){%>
                     <div class="resultado">                        
                             <div class="box">
-                                <table>
-                                    <tbody>
+                
                                         <%unidades.forEach(unidade=>{%>
-                                            <tr>
-                                                <td>
+                                           
                                                     <p>
                                                         <%=unidade.telefone%>
                                                     </p>
-                                                </td>
-                                                <td>
+                                                
                                                     <p>
                                                         <%=unidade.unidade%>
                                                     </p>
-                                                </td>
-                                                <td>
+                                                
                                                     <p>
                                                         <%=unidade.responsavel%>
                                                     </p>
-                                                </td>
-                                                <td>
+                                                
                                                     <div class="box">
                                                         <button class="cadastra"><a href="/cadastrounidade/delete/<%=unidade._id%>"><img class="button-img"
                                                                     src="./include/img/delete.png"></a></button>
@@ -50,23 +45,16 @@
                                                                     class="button-img"
                                                                     src="./include/img/lista-de-tarefas.svg"></a></button>
                                                     </div>
-                                                </td>
-                                            </tr>
+                                              
                                             <%})%>
-                                    </tbody>
-                                    <tfoot>
-                                        <%}%>
-                                            <tr>                                              
-                                                    <td>
-                                                        <div class="box">
-                                                            <a href="/cadastrounidade"><button class="adicionar">+
-                                                                    Cadastro</button></a>
-                                                        </div>
-                                                    </td>
-                                            </tr>
-                                    </tfoot>
-                                </table>
+                                    
+                                        <%}%>                                                      
+                                   
                             </div>
+                            <div class="box">
+                                <button class="adicionar"> <a href="/cadastrounidade">+
+                                 Cadastro</a></button>
+                             </div>
                     </div>
                 </div>
                 <%-include('./include/barraLateral')%>
