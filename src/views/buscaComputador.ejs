@@ -18,33 +18,45 @@
                 <%-include('include/messages');%>              
                 <%if(equipamentos.length >0){%>
                 <div class="resultado">                   
-                    <div class="box">                            
+                    <div class="box">  
+                        <table class="tabela">                            
+                            <tbody>
                                 <%equipamentos.forEach(equipamento=>{%>
-                                
+                                <tr>
+                                    <td>
                                         <p><%=equipamento.tombo%></p>
-                                    
+                                    </td>
+                                    <td>
                                         <p><%=equipamento.unidade%></p>
-                                    
+                                    </td>
+                                    <td>
                                         <p><%=equipamento.responsavel%></p>
-                                   
+                                    </td>
+                                    <td>
                                         <div class="box">
                                             <button class="cadastra"><a href="/cadastrocomputador/delete/<%=equipamento.id%>"><img class="button-img" src="./include/img/delete.png"></a></button>
                                             <button class="edit"><a href="/cadastrocomputador/edit/<%=equipamento.id%>"><img class="button-img" src="./include/img/escrever.svg"></a></button>
                                             <button class="cadastra"><a href="/cadastrodeequipamento/<%=equipamento.id%>"><img class="button-img" src="./include/img/registro.svg"></a></button>
                                             <button class="listagem"><a href="/listagemcomputador/<%=equipamento.id%>"><img class="button-img" src="./include/img/lista-de-tarefas.svg"></a></button>
                                         </div>
-                                
+                                    </td>
+                                </tr>
                                 <%})%>
                                 <%}%>
-                           
-                                        
-                                                                
-                    </div>    
-                    <div class="box">
-                        <button class="adicionar"><a href="/cadastrocomputador">+ Cadastro</a></button>
-                    </div>                
+                            </tbody>                       
+                            <tfoot>
+                                <tr>
+                                   <td>
+                                        <div class="box">
+                                            <button class="adicionar"><a href="/cadastrocomputador">+ Cadastro</a></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>                                     
                 </div>
             </div>
+        </div> 
             <%-include('./include/barraLateral')%> 
             
     </section>
