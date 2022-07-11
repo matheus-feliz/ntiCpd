@@ -35,7 +35,7 @@ route.get('/listagemcomputador/delete/:id', loginReq, computador.deleteServicoUm
 
 //impressao
 route.get('/impressao/:id', loginReq, computador.impressao);
-route.get('/impressaoUnidade/:id', loginReq, unidade.impressao);
+route.get('/impressaounidade/:id', loginReq, unidade.impressao);
 
 //pagina de Unidade
 route.get('/cadastrounidade', loginReq, unidade.indexCadastro);
