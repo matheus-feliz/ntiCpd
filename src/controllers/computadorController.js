@@ -72,19 +72,23 @@ exports.edit = async function (req, res) { // post edit de equipamento
 
 exports.busca = async function (req, res) {// busca sem ir no banco(vazio)
     res.render('buscaComputador', {
-        equipamentos: {}
+        equipamentos: {},
+        
     });
 }
 exports.buscaRetorno = async function (req, res) {//busca com redorno do banco
     const equipamentos = await Pc.busca(req.body.busca);
-    if (!equipamentos) {
+    if (equipamentos.length === 0) {
         req.session.save(async function () {
+            naoEncontrado = false;
+            console.log('false')
             req.flash('errors', 'equipamento não encontrado');
             res.render('buscaComputador', {
                 equipamentos
             });
             return;
         });
+        return;
     };
     res.render('buscaComputador', {
         equipamentos

@@ -53,20 +53,26 @@
                                                 </td>
                                             </tr>
                                             <%})%>
-                                    </tbody>
-                                    <tfoot>
-                                        <%}%>
-                                            <tr>                                              
+                                            <%}else if(unidades.length === 0){%>
+                                                <tr>
                                                     <td>
-                                                        <div class="box">
-                                                            <button class="adicionar"><a href="/cadastrounidade">+ Cadastro</a></button>
-                                                        </div>
+                                                        <p class="p">Unidade não encontrado</p>
                                                     </td>
-                                            </tr>
-                                    </tfoot>
+                                                </tr>
+                                            <%}else{%>
+                                                <tr>
+                                                    <td>
+                                                        <p class="p">Digite a unidade que deseja procurar</p>
+                                                    </td>
+                                                </tr>
+                                                <%}%>
+                                    </tbody>
                                 </table>
                           </div>
                      </div>
+                     <div class="box">
+                        <button class="adicionar"><a href="/cadastrounidade">+ Cadastro</a></button>
+                    </div>
                 </div>  
                 <%-include('./include/barraLateral')%>
     </section>

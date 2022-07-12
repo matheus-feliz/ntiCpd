@@ -15,7 +15,21 @@
             <div class="traco"></div>
             
             <div class="ajust">                  
-                <%-include('include/messages');%>              
+                <link rel="stylesheet" type="text/css" href="./css/mensagensStyle.css">
+                <%if (errors.length>0){ %>
+                    <div class="danger">
+                        <% errors.forEach(erro=>{%>
+                            <%= erro%><br>
+                                <%});%>
+                    </div>
+                    <%}%>
+                        <%if (success.length>0){ %>
+                            <div class="success">
+                                <% success.forEach(success=>{%>
+                                    <%= success%><br>
+                                        <%});%>
+                            </div>
+                            <%}%>            
                 <%if(equipamentos.length >0){%>
                 <div class="resultado">                   
                     <div class="box">  
@@ -42,19 +56,28 @@
                                     </td>
                                 </tr>
                                 <%})%>
-                                <%}%>
+                                <%}else if(equipamentos.length === 0){%>
+                                    <tr>
+                                        <td>
+                                            <p class="p">Tombo não encontrado</p>
+                                        </td>
+                                    </tr>
+                                <%}else{%>
+                                    <tr>
+                                        <td>
+                                            <p class="p">Digite o tombo que deseja procurar</p>
+                                        </td>
+                                    </tr>
+                                    <%}%>
+                                 
                             </tbody>                       
-                            <tfoot>
-                                <tr>
-                                   <td>
-                                        <div class="box">
-                                            <button class="adicionar"><a href="/cadastrocomputador">+ Cadastro</a></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>                                     
+                        </table>  
+                                                                                
                 </div>
+               
+            </div>
+            <div class="box">
+                <button class="adicionar"><a href="/cadastrocomputador">+ Cadastro</a></button>
             </div>
         </div> 
             <%-include('./include/barraLateral')%> 
