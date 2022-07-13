@@ -64,10 +64,14 @@
     border-right: 1px solid black;
     padding-right: 5px;
     font-family: sans-serif;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .box {
+    width: 100%;
+    display: flex;
+}
+.box2 {
     width: 100%;
     display: flex;
 }
@@ -78,10 +82,10 @@
     position: absolute;
     padding: 0px;
     margin-top: 5%;
-    width: 60%;
+    width: 40%;
 }
 .tabela {
-    width: 50%;
+    width: 100%;
     border-collapse: collapse;
 }
 
