@@ -129,11 +129,11 @@ class Pc {
         }
         this.body = {
             telefone: this.body.telefone,
-            unidade: this.body.unidade,
-            responsavel: this.body.responsavel,
+            unidade: this.body.unidade.toUpperCase(),
+            responsavel: this.body.responsavel.toUpperCase(),
             tombo: this.body.tombo,
             tipo: this.body.tipo,
-            observacao: this.body.observacao
+            observacao: this.body.observacao.toUpperCase()
         }
 
     }

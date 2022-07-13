@@ -84,12 +84,12 @@ class servicoComEquipamento {
             responsavel: this.body.responsavel,
             tombo: this.body.tombo,
             tipo: this.body.tipo,
-            backup: this.body.backup,
+            backup: this.body.backup.toUpperCase(),
             dataInicial: this.body.dataInicial,
             dataFinal: this.body.dataFinal,
             numero: this.body.numero,
-            solucao: this.body.solucao,
-            observacao: this.body.observacao
+            solucao: this.body.solucao.toUpperCase(),
+            observacao: this.body.observacao.toUpperCase()
         }
 
     }

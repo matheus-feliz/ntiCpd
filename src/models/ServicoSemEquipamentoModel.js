@@ -69,7 +69,7 @@ class servicoSemEquipamento {
             tipo: this.body.tipo,
             dataDeServico: this.body.dataDeServico,
             numero: this.body.numero,
-            observacao: this.body.observacao
+            observacao: this.body.observacao.toUpperCase()
         }
 
     }

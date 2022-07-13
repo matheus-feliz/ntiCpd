@@ -46,8 +46,7 @@ class Unidade {
     }
     static async busca(unidade) {//busca
         if (typeof unidade !== "string") return;
-        let unidade1 = unidade.toLocaleUpperCase();
-        console.log(unidade1)
+        let unidade1 = unidade.toUpperCase();
         const unidades = await UnidadeModel.find({
             unidade: { $regex: unidade1 }
         }).sort({
@@ -97,8 +96,8 @@ class Unidade {
         }
         this.body = {
             telefone: this.body.telefone,
-            unidade: this.body.unidade.toLocaleUpperCase(),
-            responsavel: this.body.responsavel.toLocaleUpperCase()
+            unidade: this.body.unidade.toUpperCase(),
+            responsavel: this.body.responsavel.toUpperCase()
         }
 
     }
