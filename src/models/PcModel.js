@@ -81,6 +81,7 @@ class Pc {
     }
     async edit(id) {// edit o equipamento
         if (typeof id !== "string") return;
+        this.limpaBody();
         this.validacao();
         if (this.errors.length > 0) {
             return
