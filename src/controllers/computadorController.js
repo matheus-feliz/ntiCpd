@@ -65,7 +65,6 @@ exports.edit = async function (req, res) { // post edit de equipamento
         })
 
     } catch (e) {
-        console.log(e);
         return res.render('404');
     }
 }
