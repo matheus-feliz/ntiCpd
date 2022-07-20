@@ -14,13 +14,13 @@ route.get('/logout', loginController.logout);
 route.get('/logado', loginController.logado);
 route.get('/esqueceusenha', loginController.esqueceuSenha);
 route.post('/esqueceu', loginController.esqueceu);
-route.post('/register/edit/:id',loginController.senhaEdit);
+route.post('/registersenha/edit/:id', loginController.senhaEdit);
 
 //pagina de equipamento
 route.get('/cadastrocomputador', loginReq, computador.indexCadastro);
 route.post('/registro', loginReq, computador.cadastro);
-route.get('/cadastrocomputador/edit/:id', loginReq, computador.indexEdit);
-route.post('/register/edit/:id', loginReq, computador.edit);
+route.get('/cadastrocomputador/edit/:id', computador.indexEdit);
+route.post('/register/edit/:id', loginReq, computador.editEquipamentoPost);
 route.get('/cadastrocomputador/delete/:id', loginReq, computador.delete);
 route.get('/buscacomputador', loginReq, computador.busca);
 route.post('/buscacomputadorBanco', loginReq, computador.buscaRetorno);

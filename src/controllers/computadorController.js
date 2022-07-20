@@ -1,4 +1,3 @@
-
 const Pc = require('../models/PcModel');
 const Servico = require('../models/ServicoComEquipamentoModel');
 const ServicoUnidade = require('../models/ServicoSemEquipamentoModel')
@@ -8,20 +7,20 @@ exports.indexCadastro = (req, res) => { // get cadastro de equipamento
         equipamento: {}
     });
 }
-exports.cadastro = async function (req, res) { // post cadastro de equipamento
+exports.cadastro = async function(req, res) { // post cadastro de equipamento
     try {
         const pc = new Pc(req.body);
         await pc.register();
         if (pc.errors.length > 0) {
             req.flash('errors', pc.errors);
-            req.session.save(function () {
+            req.session.save(function() {
                 return res.redirect('/cadastrocomputador');
             });
             return;
         }
 
         req.flash('success', 'cadastro efetuado com sucesso');
-        req.session.save(function () {
+        req.session.save(function() {
             res.redirect(`/listagemcomputador/${pc.equipamento._id}`);
             return;
         })
@@ -32,55 +31,54 @@ exports.cadastro = async function (req, res) { // post cadastro de equipamento
     }
 }
 
-exports.indexEdit = async function (req, res) { // get edit de equipamento
+exports.indexEdit = async function(req, res) { // get edit de equipamento
     try {
+        console.log('entrou no model edit')
+        console.log(typeof req.params.id)
         if (!req.params.id) return res.render('404');
+        console.log('entrou busca')
         const equipamento = await Pc.buscaPorId(req.params.id);
+        console.log(equipamento, 'equipamento')
         if (!equipamento) return res.render('404');
         res.render('cadastroComputador', { equipamento });
     } catch (e) {
         res.render('404');
     }
 }
-
-exports.edit = async function (req, res) { // post edit de equipamento
+exports.editEquipamentoPost = async function(req, res) { // post edit de servico 
     try {
         const pc = new Pc(req.body);
         await pc.edit(req.params.id);
-
         if (pc.errors.length > 0) {
             req.flash('errors', pc.errors);
-            req.session.save(async function () {
-                const equipamento = await Pc.buscaPorId(req.params.id);
-                res.redirect(`/cadastrocomputador/edit/${equipamento._id}`);
-                return;
+            req.session.save(async function() {
+                const editPc = await Pc.buscaPorId(req.params.id);
+                return res.redirect(`/cadastrodeequipamento/edit/${editPc._id}`);
             });
             return;
         }
-
         req.flash('success', 'edição efetuado com sucesso');
-        req.session.save(function () {
+        req.session.save(function() {
             res.redirect(`/listagemcomputador/${pc.equipamento._id}`);
             return;
-        })
-
+        });
     } catch (e) {
-        return res.render('404');
+        console.log(e)
+        res.render('404')
     }
 }
 
-exports.busca = async function (req, res) {// busca sem ir no banco(vazio)
+
+exports.busca = async function(req, res) { // busca sem ir no banco(vazio)
     res.render('buscaComputador', {
         equipamentos: {},
-        
+
     });
 }
-exports.buscaRetorno = async function (req, res) {//busca com redorno do banco
+exports.buscaRetorno = async function(req, res) { //busca com redorno do banco
     const equipamentos = await Pc.busca(req.body.busca);
     if (equipamentos.length === 0) {
-        req.session.save(async function () {
-            naoEncontrado = false;
-            console.log('false')
+        req.session.save(async function() {
             req.flash('errors', 'equipamento não encontrado');
             res.render('buscaComputador', {
                 equipamentos
@@ -94,22 +92,22 @@ exports.buscaRetorno = async function (req, res) {//busca com redorno do banco
     });
 
 }
-exports.delete = async function (req, res) { // delete de equipamento
-    try {
-        if (!req.params.id) return res.render('404');
-        const equipamento = await Pc.delete(req.params.id);
-        if (!equipamento) return res.render('404');
-        req.flash('success', 'cadastro deletato com sucesso');
-        req.session.save(function () {
-            res.redirect(`/buscacomputador`);
-            return;
-        });
-    } catch (e) {
-        res.render('404');
+exports.delete = async function(req, res) { // delete de equipamento
+        try {
+            if (!req.params.id) return res.render('404');
+            const equipamento = await Pc.delete(req.params.id);
+            if (!equipamento) return res.render('404');
+            req.flash('success', 'cadastro deletato com sucesso');
+            req.session.save(function() {
+                res.redirect(`/buscacomputador`);
+                return;
+            });
+        } catch (e) {
+            res.render('404');
+        }
     }
-}
-//servico com equipamento daqui para baixo
-exports.listagem = async function (req, res) { // listagem de servico
+    //servico com equipamento daqui para baixo
+exports.listagem = async function(req, res) { // listagem de servico
     try {
         if (!req.params.id) return res.render('404');
         let equipamento = await Pc.buscaPorId(req.params.id);
@@ -122,12 +120,11 @@ exports.listagem = async function (req, res) { // listagem de servico
         res.render('listagemTombo', { equipamento, servicos });
 
     } catch (e) {
-        console.log(e)
         res.render('404');
     }
 }
 
-exports.cadastroDeServico = async function (req, res) { // get cadastro de servico com equipamento
+exports.cadastroDeServico = async function(req, res) { // get cadastro de servico com equipamento
     try {
         if (!req.params.id) return res.render('404');
         let equipamento = await Pc.buscaPorId(req.params.id);
@@ -142,7 +139,7 @@ exports.cadastroDeServico = async function (req, res) { // get cadastro de servi
     }
 }
 
-exports.cadastroDeServicoPost = async function (req, res) { // post cadastro de servico com equipamento
+exports.cadastroDeServicoPost = async function(req, res) { // post cadastro de servico com equipamento
     try {
         const servicoUnidade = await ServicoUnidade.busca();
         const servicoEquipamento = await Servico.busca();
@@ -151,7 +148,7 @@ exports.cadastroDeServicoPost = async function (req, res) { // post cadastro de 
         await servico.register();
         if (servico.errors.length > 0) {
             req.flash('errors', servico.errors);
-            req.session.save(async function () {
+            req.session.save(async function() {
                 const equipamento = await Pc.buscaListagem(req.body.tombo);
                 if (!equipamento) return res.render('404');
                 res.redirect(`/cadastrodeequipamento/${equipamento._id}`);
@@ -161,7 +158,7 @@ exports.cadastroDeServicoPost = async function (req, res) { // post cadastro de 
         }
 
         req.flash('success', 'cadastro efetuado com sucesso');
-        req.session.save(function () {
+        req.session.save(function() {
 
             res.redirect(`/listagemcomputador/${servico.servico._id}`);
             return;
@@ -172,7 +169,7 @@ exports.cadastroDeServicoPost = async function (req, res) { // post cadastro de 
     }
 }
 
-exports.editServico = async function (req, res) {// get edit de servico 
+exports.editServico = async function(req, res) { // get edit de servico 
     try {
         if (!req.params.id) return res.render('404');
         const servico = await Servico.buscaPorId(req.params.id);
@@ -183,20 +180,20 @@ exports.editServico = async function (req, res) {// get edit de servico
         res.render('404');
     }
 }
-exports.editServicoCadastro = async function (req, res) { // post edit de servico 
+exports.editServicoCadastro = async function(req, res) { // post edit de servico 
     try {
         const servico = new Servico(req.body);
         await servico.edit(req.params.id);
         if (servico.errors.length > 0) {
             req.flash('errors', servico.errors);
-            req.session.save(async function () {
+            req.session.save(async function() {
                 const editServico = await Servico.buscaPorId(req.params.id);
                 return res.redirect(`/cadastrodeequipamento/edit/${editServico._id}`);
             });
             return;
         }
         req.flash('success', 'edição efetuado com sucesso');
-        req.session.save(function () {
+        req.session.save(function() {
             res.redirect(`/listagemcomputador/${servico.servico._id}`);
             return;
         });
@@ -206,7 +203,7 @@ exports.editServicoCadastro = async function (req, res) { // post edit de servic
     }
 }
 
-exports.deleteServicoUm = async function (req, res) {// delete de servico 
+exports.deleteServicoUm = async function(req, res) { // delete de servico 
     try {
         if (!req.params.id) return res.render('404');
         const equipamentoServico = await Servico.buscaPorId(req.params.id);
@@ -214,7 +211,7 @@ exports.deleteServicoUm = async function (req, res) {// delete de servico
         const servico = await Servico.deleteOne(req.params.id);
         if (!servico) return res.render('404');
         req.flash('success', 'servico deletato com sucesso');
-        req.session.save(function () {
+        req.session.save(function() {
             res.redirect(`/listagemcomputador/${equipamento._id}`);
             return;
         });
@@ -223,7 +220,7 @@ exports.deleteServicoUm = async function (req, res) {// delete de servico
     }
 }
 
-exports.impressao = async function (req, res) {// impressão de servico com equipamento
+exports.impressao = async function(req, res) { // impressão de servico com equipamento
     try {
         if (!req.params.id) return res.render('404');
         const servico = await Servico.buscaPorId(req.params.id);

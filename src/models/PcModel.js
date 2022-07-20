@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const PcSchema = new mongoose.Schema({//dados
+const PcSchema = new mongoose.Schema({ //dados
     telefone: {
         type: String,
         required: true
@@ -28,7 +28,7 @@ const PcSchema = new mongoose.Schema({//dados
     criadoEm: { type: Date, default: Date.now }
 });
 
-const PcModel = mongoose.model('equipamento', PcSchema);//conexão no banco
+const PcModel = mongoose.model('equipamento', PcSchema); //conexão no banco
 
 class Pc {
     constructor(body) {
@@ -36,51 +36,53 @@ class Pc {
         this.errors = [];
         this.equipamento = null;
     }
-    async register() {// cadastro
+    async register() { // cadastro
         await this.tomboAutomatico();
         this.limpaBody();
         this.validacao();
         await this.tomboExistente();
         await this.create();
     }
-    async tomboAutomatico() {//cria tombo 
+    async tomboAutomatico() { //cria tombo 
         let para = false;
-        while (para === false) {           
+        while (para === false) {
             if (!this.body.tombo) {
                 let tombo = (Math.floor(Math.random() * (1001 - 1) + 1)).toString();
-                console.log( typeof tombo, tombo)
+                console.log(typeof tombo, tombo)
                 this.body.tombo = tombo;
                 await this.tomboExistente();
-                }
-                if (this.errors.length > 0) {
-                    para = false;
-                }else{
-                    para = true;
+            }
+            if (this.errors.length > 0) {
+                para = false;
+            } else {
+                para = true;
 
-                }
+            }
         }
     }
-    async tomboExistente() {//busca tombo se existe e não deixa cadastra
+    async tomboExistente() { //busca tombo se existe e não deixa cadastra
         const tombos = await PcModel.findOne({ tombo: this.body.tombo });
         if (tombos) {
             this.errors.push('tombo já existe');
             return;
         }
     }
-    async create() {//cria o equipamento no banco
+    async create() { //cria o equipamento no banco
         if (this.errors.length > 0) {
             return;
         }
         this.equipamento = await PcModel.create(this.body);
     }
-    validacao() {// valida os dados
+    validacao() { // valida os dados
         if (!this.body.telefone) { this.errors.push('telefone é obrigatorio') };
         if (!this.body.unidade) { this.errors.push('unidade é obrigatorio') };
         if (!this.body.responsavel) { this.errors.push('responsavel é obrigatorio') };
         if (!this.body.tipo) { this.errors.push('tipo é obrigatorio') };
     }
-    async edit(id) {// edit o equipamento
+    async edit(id) { // edit o equipamento
+        console.log('entrou no edit model')
         if (typeof id !== "string") return;
+        console.log(typeof this.body)
         this.limpaBody();
         this.validacao();
         if (this.errors.length > 0) {
@@ -88,14 +90,14 @@ class Pc {
         };
         this.equipamento = await PcModel.findByIdAndUpdate(id, this.body, { new: true });
     }
-    static async buscaEquipamentos() {//busca todos
+    static async buscaEquipamentos() { //busca todos
         const equipamentos = await PcModel.find().sort({
             criadoEm: -1
         });
         return equipamentos;
     }
 
-    static async busca(tombo) {// busca pelo tombo
+    static async busca(tombo) { // busca pelo tombo
         if (typeof tombo !== "string") return;
         const equipamentos = await PcModel.find({
             tombo: tombo
@@ -110,14 +112,14 @@ class Pc {
         const equipamento = await PcModel.findById(id);
         return equipamento;
     }
-    static async buscaListagem(tombo) {//busca um equipamento para lista
+    static async buscaListagem(tombo) { //busca um equipamento para lista
         if (typeof tombo !== "string") return;
         const equipamento = await PcModel.findOne({
             tombo: tombo
         });
         return equipamento;
     }
-    static async delete(id) {// deleta equipamento
+    static async delete(id) { // deleta equipamento
         if (typeof id !== "string") return;
         const equipamento = PcModel.findByIdAndDelete(id);
         return equipamento;
@@ -133,7 +135,7 @@ class Pc {
             unidade: this.body.unidade.toUpperCase(),
             responsavel: this.body.responsavel.toUpperCase(),
             tombo: this.body.tombo,
-            tipo: this.body.tipo,
+            tipo: this.body.tipo.toUpperCase(),
             observacao: this.body.observacao.toUpperCase()
         }
 
