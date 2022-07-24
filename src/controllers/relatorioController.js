@@ -1,20 +1,24 @@
-
 const { async } = require('regenerator-runtime');
 const ServicoComEquipamento = require('../models/ServicoComEquipamentoModel');
 const ServicoSemEquipamento = require('../models/ServicoSemEquipamentoModel');
 
-exports.relatorio =(req, res) => {// inicio do relatorio
-    res.render('relatorio',{total:{}, totalDeServico:0, dataInicial:'', dataFinal:''});
+exports.relatorio = (req, res) => { // inicio do relatorio
+    res.render('relatorio', { total: {}, totalDeServico: 0, dataInicial: '', dataFinal: '' });
 }
 
-exports.relatorioBanco = async (req, res) => {//faz o relatorio
+function FormataData(data) { //formata data
+    let dataFormata = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
+    return dataFormata;
+
+}
+exports.relatorioBanco = async(req, res) => { //faz o relatorio
     try {
-        let dataInicial = ServicoSemEquipamento.FormataData(req.body.busca[0]);
-        let dataFinal = ServicoSemEquipamento.FormataData(req.body.busca[1]);
+        let dataInicial = FormataData(req.body.busca[0]);
+        let dataFinal = FormataData(req.body.busca[1]);
         let servicoComEquipamento = await ServicoComEquipamento.buscaPorData(dataInicial, dataFinal);
         let servicoSemEquipamento = await ServicoSemEquipamento.buscaPorData(dataInicial, dataFinal);
         let servicoTotal = servicoComEquipamento.concat(servicoSemEquipamento);
-              
+
         let totalDeServico = servicoTotal.length;
         let total = [];
         for (let i = 0; i < servicoTotal.length; i++) {
@@ -32,16 +36,13 @@ exports.relatorioBanco = async (req, res) => {//faz o relatorio
                 if (servicoTotal[i].tipo === "Formatação") {
                     total[i].formatacao++;
                     total[i].total++;
-                }
-                else if (servicoTotal[i].tipo === "Ponto De Rede") {
+                } else if (servicoTotal[i].tipo === "Ponto De Rede") {
                     total[i].pontoDeRede++;
                     total[i].total++;
-                }
-                else if (servicoTotal[i].tipo === "Reparos\\Configuração") {
+                } else if (servicoTotal[i].tipo === "Reparos\\Configuração") {
                     total[i].reparos++;
                     total[i].total++;
-                }
-                else if (servicoTotal[i].tipo === "VisitaTecnica\\Reparos\\Configuração") {
+                } else if (servicoTotal[i].tipo === "VisitaTecnica\\Reparos\\Configuração") {
                     total[i].visitas++;
                     total[i].total++;
                 }
@@ -50,16 +51,13 @@ exports.relatorioBanco = async (req, res) => {//faz o relatorio
                         if (servicoTotal[j].tipo === "Formatação") {
                             total[i].formatacao++;
                             total[i].total++;
-                        }
-                        else if (servicoTotal[j].tipo === "Ponto De Rede") {
+                        } else if (servicoTotal[j].tipo === "Ponto De Rede") {
                             total[i].pontoDeRede++;
                             total[i].total++;
-                        }
-                        else if (servicoTotal[j].tipo === "Reparos\\Configuração") {
+                        } else if (servicoTotal[j].tipo === "Reparos\\Configuração") {
                             total[i].reparos++;
                             total[i].total++;
-                        }
-                        else if (servicoTotal[j].tipo === "VisitaTecnica\\Reparos\\Configuração") {
+                        } else if (servicoTotal[j].tipo === "VisitaTecnica\\Reparos\\Configuração") {
                             total[i].visitas++;
                             total[i].total++;
                         }
@@ -69,10 +67,9 @@ exports.relatorioBanco = async (req, res) => {//faz o relatorio
                     }
                 }
             }
-        } 
-        res.render('relatorio',{total, totalDeServico, dataInicial, dataFinal});
-    }
-    catch (e) {
+        }
+        res.render('relatorio', { total, totalDeServico, dataInicial, dataFinal });
+    } catch (e) {
         console.log(e)
     }
 }

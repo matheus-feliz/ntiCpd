@@ -11,29 +11,25 @@
                             <%}else{%>
                                 <form action="/registrounidade" method="POST">
                                     <%}%>
-                                    <input type="hidden" name="_csrf" value=<%=csrfToken%>>
-                                    <fieldset class="form-contact">
-                                        <div class="form-group">
-                                            <label class="label-form" for="telefone">Telefone</label>
-                                            <input class="input-form" id="telefone" name="telefone"
-                                                value="<%=unidade.telefone%>" type="tel" placeholder="(77) 3333-3333">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="label-form" for="unidade">Unidade</label>
-                                            <input class="input-form" id="unidade" name="unidade"
-                                                value="<%=unidade.unidade%>" type="text" placeholder="nome da unidade">
-                                        </div>
+                                        <input type="hidden" name="_csrf" value=<%=csrfToken%>>
+                                        <fieldset class="form-contact">
+                                            <div class="form-group">
+                                                <label class="label-form" for="telefone">Telefone</label>
+                                                <input class="input-form" id="telefone" name="telefone" value="<%=unidade.telefone%>" type="tel" placeholder="(77) 3333-3333" onkeypress="$(this).mask('(00) 0000-0000')">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="label-form" for="unidade">Unidade</label>
+                                                <input class="input-form" id="unidade" name="unidade" value="<%=unidade.unidade%>" type="text" placeholder="nome da unidade">
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label class="label-form" for="responsavel">Responsável</label>
-                                            <input class="input-form" id="responsavel" name="responsavel"
-                                                value="<%=unidade.responsavel%>" type="text"
-                                                placeholder="nome do Responsável">
-                                        </div>
+                                            <div class="form-group">
+                                                <label class="label-form" for="responsavel">Responsável</label>
+                                                <input class="input-form" id="responsavel" name="responsavel" value="<%=unidade.responsavel%>" type="text" placeholder="nome do Responsável">
+                                            </div>
 
-                                        <button class="button" type="submit"><img class="button-img"
+                                            <button class="button" type="submit"><img class="button-img"
                                                 src="./img/salvar.svg"></button>
-                                    </fieldset>
+                                        </fieldset>
                                 </form>
 
                 </div>

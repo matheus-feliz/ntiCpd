@@ -3,60 +3,60 @@
 
     <section>
         <%-include('./include/navBar')%>
-        <%-include('include/messages');%>
-            <div class="folha">
-                <h1 class="text-center "> Cadastro de serviços
-                </h1>
-                <div class="grid-form">
-                    <form action="/registro/servicoUnidade" method="POST">
-                        <input type="hidden" name="_csrf" value=<%=csrfToken%>>
-                        <fieldset class="form-contact">
-                            <div class="form-group">
-                                <label class="label-form" for="telefone">Telefone</label>
-                                <input class="input-form" id="telefone" name="telefone" type="tel" placeholder="(77) 3333-3333" value="<%=unidade.telefone%>">
-                            </div>
-                            <div class="form-group">
-                                <label class="label-form" for="unidade">Unidade</label>
-                                <input class="input-form" id="unidade" name="unidade" type="text" placeholder="nome da unidade" value="<%=unidade.unidade%>">
-                            </div>
-                            <div class="form-group">
-                                <label class="label-form" for="responsavel">Responsável</label>
-                                <input class="input-form" id="responsavel" name="responsavel" type="text" placeholder="nome do Responsável" value="<%=unidade.responsavel%>">
-                            </div>
+            <%-include('include/messages');%>
+                <div class="folha">
+                    <h1 class="text-center "> Cadastro de serviços
+                    </h1>
+                    <div class="grid-form">
+                        <form action="/registro/servicoUnidade" method="POST">
+                            <input type="hidden" name="_csrf" value=<%=csrfToken%>>
+                            <fieldset class="form-contact">
+                                <div class="form-group">
+                                    <label class="label-form" for="telefone">Telefone</label>
+                                    <input class="input-form" id="telefone" name="telefone" type="tel" placeholder="(77) 3333-3333" value="<%=unidade.telefone%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="label-form" for="unidade">Unidade</label>
+                                    <input class="input-form" id="unidade" name="unidade" type="text" placeholder="nome da unidade" value="<%=unidade.unidade%>">
+                                </div>
+                                <div class="form-group">
+                                    <label class="label-form" for="responsavel">Responsável</label>
+                                    <input class="input-form" id="responsavel" name="responsavel" type="text" placeholder="nome do Responsável" value="<%=unidade.responsavel%>">
+                                </div>
 
-                            <div class="form-group">
-                                <label class="label-form" for="tipo">Tipo de serviço</label>
-                                <select  class="input-form" name="tipo" id="tipo">
-                                    <option value="">serviço no equipamento</option>
+                                <div class="form-group">
+                                    <label class="label-form" for="tipo">Tipo de serviço</label>
+                                    <select class="input-form" name="tipo" id="tipo">
+                                    <option value="" disabled>serviço no equipamento</option>
                                     <option value="Ponto De Rede">Ponto de Rede</option>
                                     <option value="Reparos\Configuração">Reparos/ Configuração</option>
                                     <option value="VisitaTecnica\Reparos\Configuração">Visita Técnica/ Reparos/ Configuração</option>
                                   </select>
-                                  
-                            </div>
-                            <div class="form-group">
-                                <label class="label-form" for="dataDeServico">data de serviços</label>
-                                <input class="input-form" id="dataDeServico" name="dataDeServico" type="date">
-                            </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="label-form" for="dataDeServico">data de serviços</label>
+                                    <input class="input-form" id="dataDeServico" name="dataDeServico" type="date">
+                                </div>
 
 
-                            <div class="form-espaco">
+                                <div class="form-espaco">
 
-                            </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label class="label-form" for="observacao">Observação</label>
-                                <textarea class="input-form" id="observacao" name="observacao" cols="30" rows="10"> </textarea>
-                            </div>
+                                <div class="form-group">
+                                    <label class="label-form" for="observacao">Observação</label>
+                                    <textarea class="input-form" id="observacao" name="observacao" cols="30" rows="10"> </textarea>
+                                </div>
 
 
-                            <button class="button" type="submit"><img class="button-img"  src="./img/salvar.svg"></button>
-                        </fieldset>
-                    </form>
+                                <button class="button" type="submit"><img class="button-img"  src="./img/salvar.svg"></button>
+                            </fieldset>
+                        </form>
 
+                    </div>
                 </div>
-            </div>
-            <%-include('./include/barraLateral')%>
+                <%-include('./include/barraLateral')%>
     </section>
 
     <%-include('./include/footer')%>

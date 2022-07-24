@@ -93,19 +93,10 @@ class servicoComEquipamento {
         }
 
     }
-    static FormataData(data) { //formata data
-        let dataAno = data.slice(0, 4);
-        let dataMes = data.slice(5, 7);
-        let dataDia = data.slice(8, 10);
-        let dataCompleta = [dataDia, "/", dataMes, "/", dataAno].join('');
-        return dataCompleta;
-    }
+
     FormataDataNoStatic(data) { //formata data static
-        let dataAno = data.slice(0, 4);
-        let dataMes = data.slice(5, 7);
-        let dataDia = data.slice(8, 10);
-        let dataCompleta = [dataDia, "/", dataMes, "/", dataAno].join('');
-        return dataCompleta;
+        let dataFormata = data.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
+        return dataFormata;
     }
     dateFormatacao() { //implementa a formata data 
         this.body.dataInicial = this.FormataDataNoStatic(this.body.dataInicial);

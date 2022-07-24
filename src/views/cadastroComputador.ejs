@@ -1,58 +1,53 @@
 <%-include('./include/head')%>
 
-    <link rel="stylesheet"  href="./css/styleCadastroPc.css" type="text/css">
-    
+    <link rel="stylesheet" href="./css/styleCadastroPc.css" type="text/css">
+
 
     <section>
         <%-include('./include/navBar')%>
-        <%-include('./include/messages')%>
+            <%-include('./include/messages')%>
                 <h1 class="text-center "> Cadastro do computador
                 </h1>
                 <div class="grid-form">
                     <%if(equipamento._id){%>
                         <form action="/register/edit/<%=equipamento._id%>" method="POST">
-                        <%}else{%>
-                            <form action="/registro" method="POST">
-                            <%}%>
-                            <input type="hidden" name="_csrf" value=<%=csrfToken%>>
-                            
-                                <fieldset class="form-contact">
-                                    <div class="form-group">
-                                        <label class="label-form" for="telefone">Telefone</label>
-                                        <input class="input-form" id="telefone" name="telefone" type="tel"
-                                            placeholder="(77) 3333-3333" value="<%=equipamento.telefone%>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="label-form" for="unidade">Unidade</label>
-                                        <input class="input-form" id="unidade" name="unidade" type="text"
-                                            placeholder="nome da unidade" value="<%=equipamento.unidade%>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="label-form" for="responsavel">Responsável</label>
-                                        <input class="input-form" id="responsavel" name="responsavel" type="text"
-                                            placeholder="nome do Responsável" value="<%=equipamento.responsavel%>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="label-form" for="tombo">Tombo</label>
-                                        <input class="input-form" id="tombo" name="tombo" type="text"
-                                            placeholder="13545357" value="<%=equipamento.tombo%>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="label-form" for="tipo">Tipo do equipamento</label>
-                                        <input class="input-form" id="tipo" name="tipo" type="text" placeholder="cpu" value="<%=equipamento.tipo%>">
-                                    </div>
+                            <%}else{%>
+                                <form action="/registro" method="POST">
+                                    <%}%>
+                                        <input type="hidden" name="_csrf" value=<%=csrfToken%>>
 
-                                    <div class="form-espaco">
+                                        <fieldset class="form-contact">
+                                            <div class="form-group">
+                                                <label class="label-form" for="telefone">Telefone</label>
+                                                <input class="input-form" id="telefone" name="telefone" type="tel" placeholder="(77) 3333-3333" value="<%=equipamento.telefone%>" onkeypress="$(this).mask('(00) 0000-0000')">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="label-form" for="unidade">Unidade</label>
+                                                <input class="input-form" id="unidade" name="unidade" type="text" placeholder="nome da unidade" value="<%=equipamento.unidade%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="label-form" for="responsavel">Responsável</label>
+                                                <input class="input-form" id="responsavel" name="responsavel" type="text" placeholder="nome do Responsável" value="<%=equipamento.responsavel%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="label-form" for="tombo">Tombo</label>
+                                                <input class="input-form" id="tombo" name="tombo" type="text" placeholder="13545357" value="<%=equipamento.tombo%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="label-form" for="tipo">Tipo do equipamento</label>
+                                                <input class="input-form" id="tipo" name="tipo" type="text" placeholder="cpu" value="<%=equipamento.tipo%>">
+                                            </div>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="label-form" for="observacao">Observação</label>
-                                        <textarea class="input-form" id="observacao" name="observacao" cols="30"
-                                            rows="10"> <%=equipamento.observacao%></textarea>
-                                    </div>
-                                    <button class="button" type="submit"><img class="button-img"
+                                            <div class="form-espaco">
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="label-form" for="observacao">Observação</label>
+                                                <textarea class="input-form" id="observacao" name="observacao" cols="30" rows="10"> <%=equipamento.observacao%></textarea>
+                                            </div>
+                                            <button class="button" type="submit"><img class="button-img"
                                             src="./img/salvar.svg"></button>
-                                </fieldset>
+                                        </fieldset>
                                 </form>
 
                 </div>

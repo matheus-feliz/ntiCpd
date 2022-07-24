@@ -33,12 +33,8 @@ exports.cadastro = async function(req, res) { // post cadastro de equipamento
 
 exports.indexEdit = async function(req, res) { // get edit de equipamento
     try {
-        console.log('entrou no model edit')
-        console.log(typeof req.params.id)
         if (!req.params.id) return res.render('404');
-        console.log('entrou busca')
         const equipamento = await Pc.buscaPorId(req.params.id);
-        console.log(equipamento, 'equipamento')
         if (!equipamento) return res.render('404');
         res.render('cadastroComputador', { equipamento });
     } catch (e) {
@@ -63,7 +59,6 @@ exports.editEquipamentoPost = async function(req, res) { // post edit de servico
             return;
         });
     } catch (e) {
-        console.log(e)
         res.render('404')
     }
 }
