@@ -1,6 +1,33 @@
+:root {
+    --light-gray: #EEEEEE;
+    --azul: rgb(0, 0, 170);
+}
+
 .img-button {
     width: 30px;
     height: 30px;
+}
+
+.pdf {
+    width: 100px;
+    height: 30px;
+    font-size: 15px;
+    font-family: sans-serif;
+    background-color: var(--azul);
+    padding: 0px;
+    border-radius: 5px;
+    border: none;
+    transition: all 300ms ease-in-out;
+    margin-left: 210px;
+    margin-top: 42%;
+    color: white;
+    z-index: 2;
+    position: absolute;
+}
+
+.pdf:hover {
+    background-color: blue;
+    transition: all 300ms ease-in-out;
 }
 
 .text-center {

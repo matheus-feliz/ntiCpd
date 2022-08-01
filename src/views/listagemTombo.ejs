@@ -1,26 +1,27 @@
 <%-include('./include/head')%>
-<link rel="stylesheet" type="text/css" href="./css/styleListagem.css">
+    <link rel="stylesheet" type="text/css" href="./css/styleListagem.css">
     <section>
         <%-include('./include/navBar')%>
-                <h1 class="text-center ">
-                    Tombo: <%=equipamento.tombo%>       
-                </h1>
-                <div>
-                    <form class="form-busca">
-                        <input type="text" name="busca" id="busca" placeholder="busca pelo tombo">
-                        <button class="button" type="submit"><img class="img-button"
+            <h1 class="text-center ">
+                Tombo:
+                <%=equipamento.tombo%>
+            </h1>
+            <div>
+                <form class="form-busca">
+                    <input type="text" name="busca" id="busca" placeholder="busca pelo tombo">
+                    <button class="button" type="submit"><img class="img-button"
                                 src="./img/pesquisa.svg"></button>
-                    </form>
-                </div>
-                <div class="traco-busca"></div>
-                <div class="ajust">
-                    <%-include('include/messages');%>
+                </form>
+            </div>
+            <div class="traco-busca"></div>
+            <div class="ajust">
+                <%-include('include/messages');%>
                     <%if(servicos.length>0){%>
                         <div class="resultado">
                             <div class="box2">
-                                <table class="tabela">                                    
-                                        <tbody>
-                                            <%servicos.forEach(servico=>{%>
+                                <table class="tabela">
+                                    <tbody>
+                                        <%servicos.forEach(servico=>{%>
                                             <tr>
                                                 <td>
                                                     <p>
@@ -50,33 +51,33 @@
                                                 </td>
                                             </tr>
                                             <%})%>
-                                        </tbody>                                        
-                                            <tfoot>
-                                                <tr>
-                                                    <%}else{%>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <%}else{%>
                                                 <tr>
                                                     <td>
                                                         <p class="text-nao-existe"> Não existe equipamento cadastrado</p>
                                                     </td>
-                                                <tr>
-                                                    <%}%>
+                                                    <tr>
+                                                        <%}%>
 
-                                                        <td>
-                                                            <div class="box">
-                                                                      <a href="/cadastrodeequipamento/<%=equipamento.id%>"><button
+                                                            <td colspan="3">
+                                                                <div class="box">
+                                                                    <a href="/cadastrodeequipamento/<%=equipamento.id%>"><button
                                                                         class="adicionar"> +Nova
                                                                         ordem</button></a>
-                                                                                                                                       
-                                                            </div>
-                                                        </td>
-                                                </tr>
-                                            </tfoot>
+
+                                                                </div>
+                                                            </td>
+                                                    </tr>
+                                    </tfoot>
                                 </table>
                             </div>
-                      </div>
-                </div>
+                        </div>
+            </div>
 
-                </div>
+            </div>
     </section>
     <%-include('./include/barraLateral')%>
 

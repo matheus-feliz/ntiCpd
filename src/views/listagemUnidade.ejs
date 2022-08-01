@@ -3,7 +3,8 @@
 
     <section>
         <%-include('./include/navBar')%>
-            <h1 class="text-center "> <%=unidade.unidade%>
+            <h1 class="text-center ">
+                <%=unidade.unidade%>
             </h1>
             <div>
                 <form class="form-busca">
@@ -14,69 +15,69 @@
             <div class="traco-busca"></div>
             <div class="ajust">
                 <%-include('include/messages');%>
-                <%if(servicos.length>0){%>
-                    <div class="resultado">
-                        <div class="box">
-                            <table class="tabela">                                
+                    <%if(servicos.length>0){%>
+                        <div class="resultado">
+                            <div class="box">
+                                <table class="tabela">
                                     <tbody>
                                         <%servicos.forEach(servico=>{%>
-                                        <tr>
-                                            <td>
-                                                <p>
-                                                    <%=servico.telefone%>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    <%=servico.responsavel%>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    <%=servico.dataDeServico%>
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <div class="box">
-                                                    <button class="cadastra"><a href="/listagemunidade/delete/<%=servico.id%>"><img class="button-img"
-                                                        src="./img/delete.png"></a></button>
-                                                    <button class="edit"><a
-                                                            href="/cadastrodeservico/edit/<%=servico.id%>"><img class="button-img"
-                                                                src="./img/escrever.svg"></a></button>
-                                                    <button class="cadastra"><a href="/impressaounidade/<%=servico.id%>"><img class="button-img"
-                                                        src="./img/impressora.svg"></a></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <%})%>
-                                    </tbody>                                        
-                                        <tfoot>
-                                            <tr>
-                                                <%}else{%>
                                             <tr>
                                                 <td>
-                                                    <p class="text-nao-existe"> Não existe equipamento cadastrado</p>
+                                                    <p>
+                                                        <%=servico.telefone%>
+                                                    </p>
                                                 </td>
-                                            <tr>
-                                                <%}%>
-
+                                                <td>
+                                                    <p>
+                                                        <%=servico.responsavel%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <%=servico.dataDeServico%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <div class="box">
+                                                        <button class="cadastra"><a href="/listagemunidade/delete/<%=servico.id%>"><img class="button-img"
+                                                        src="./img/delete.png"></a></button>
+                                                        <button class="edit"><a
+                                                            href="/cadastrodeservico/edit/<%=servico.id%>"><img class="button-img"
+                                                                src="./img/escrever.svg"></a></button>
+                                                        <button class="cadastra"><a href="/impressaounidade/<%=servico.id%>"><img class="button-img"
+                                                        src="./img/impressora.svg"></a></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <%})%>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <%}else{%>
+                                                <tr>
                                                     <td>
-                                                        <div class="box">
-                                                                  <a href="/cadastrodeservico/<%=unidade.id%>"><button
+                                                        <p class="text-nao-existe"> Não existe equipamento cadastrado</p>
+                                                    </td>
+                                                    <tr>
+                                                        <%}%>
+
+                                                            <td colspan="3">
+                                                                <div class="box">
+                                                                    <a href="/cadastrodeservico/<%=unidade.id%>"><button
                                                                     class="adicionar"> +Nova
                                                                     ordem</button></a>
-                                                                                                                                   
-                                                        </div>
-                                                    </td>
-                                            </tr>
-                                        </tfoot>
-                            </table>
+
+                                                                </div>
+                                                            </td>
+                                                    </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
 
                         </div>
-
-                    </div>
             </div>
-            </div>       
+            </div>
 
 
             <%-include('./include/barraLateral')%>

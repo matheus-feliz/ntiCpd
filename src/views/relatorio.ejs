@@ -1,6 +1,6 @@
 <%-include('./include/head')%>
     <link rel="stylesheet" type="text/css" href="./css/styleRelatorio.css">
-
+    <script type="text/javascript" src="../assets/pdf.js"></script>
     <section>
         <%-include('./include/navBar')%>
             <h1 class="text-center "> Busca de relatorio
@@ -16,60 +16,100 @@
                 </form>
             </div>
             <div class="traco"></div>
-            <div class="response">
-                <%if(total.length > 0){%>
-                <table class="tabela">
-                    <caption>relatorio geral</caption>
+            <%if(total.length > 0){%>
+                <div class="response" id="response">
+                    <table class="tabela" id="tabela">
+                        <caption>relatorio geral</caption>
 
-                    <thead>
-                        <tr>
-                            <th colspan="6">Relatorio de manutenção</th>
+                        <thead>
+                            <tr>
+                                <th colspan="6">Relatorio de manutenção</th>
 
-                        </tr>
-                    </thead>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>Setor</td>
-                            <td>Formatação</td>
-                            <td>Pontos de rede</td>
-                            <td>Reparos/configuração</td>
-                            <td>Visitas/reparos/configuração</td>
-                            <td>Total</td>
+                        <tbody>
+                            <tr>
+                                <td>Setor</td>
+                                <td>Formatação</td>
+                                <td>Pontos de rede</td>
+                                <td>Reparos/configuração</td>
+                                <td>Visitas/reparos/configuração</td>
+                                <td>Total</td>
 
 
-                        </tr>
-                        <%total.forEach(totalServico=>{%>
-                        <tr>
-                            <td><%=totalServico.nomeDaUnidade%></td>
-                            <td><%=totalServico.formatacao%></td>
-                            <td><%=totalServico.pontoDeRede%></td>
-                            <td><%=totalServico.reparos%></td>
-                            <td><%=totalServico.visitas%></td>
-                            <td><%=totalServico.total%></td>
-                        </tr>
-                     <%})%>
+                            </tr>
+                            <%total.forEach(totalServico=>{%>
+                                <tr>
+                                    <td>
+                                        <%=totalServico.nomeDaUnidade%>
+                                    </td>
+                                    <td>
+                                        <%=totalServico.formatacao%>
+                                    </td>
+                                    <td>
+                                        <%=totalServico.pontoDeRede%>
+                                    </td>
+                                    <td>
+                                        <%=totalServico.reparos%>
+                                    </td>
+                                    <td>
+                                        <%=totalServico.visitas%>
+                                    </td>
+                                    <td>
+                                        <%=totalServico.total%>
+                                    </td>
+                                </tr>
+                                <%})%>
 
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2">Total de serviços:</td>
-                            <td colspan="4"><%=totalDeServico%></td>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">Total de serviços:</td>
+                                <td colspan="4">
+                                    <%=totalDeServico%>
+                                </td>
 
-                        </tr>
-                    </tfoot>
-                </table>
+                            </tr>
+                        </tfoot>
+                    </table>
 
-                <div class="data-footer">
-                    <p>data inicial: <%=dataInicial%></p>
-                    <p>data final: <%=dataFinal%></p>
+                    <div class="data-footer">
+                        <p id="dataInicial">data inicial:
+                            <%=dataInicial%>
+                        </p>
+                        <p id="dataFinal">data final:
+                            <%=dataFinal%>
+                        </p>
+                    </div>
                 </div>
+                <button class="pdf" onclick="pdf()">Download</button>
                 <%}%>
-            </div>
-            
 
-            <%-include('./include/barraLateral')%>
+
+                    <%-include('./include/barraLateral')%>
 
     </section>
-
-    <%-include('./include/footer')%>
+    <script>
+        function pdf() {
+            var relatorio = document.getElementById('tabela');
+            var opt = {
+                margin: 0.2,
+                filename: 'relatorio.pdf',
+                image: {
+                    type: 'jpeg',
+                    quality: 0.98
+                },
+                html2canvas: {
+                    scale: 2
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'letter',
+                    orientation: 'portrait'
+                }
+            };
+            html2pdf().set(opt).from(relatorio).save();
+        }
+    </script>
+    <%-include( './include/footer')%>
