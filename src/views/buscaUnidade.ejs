@@ -13,10 +13,10 @@
                 </form>
             </div>
             <div class="traco"></div>
-                <div class="ajust">
-                    <%-include('include/messages');%>
+            <div class="ajust">
+                <%-include('include/messages');%>
                     <%if(unidades.length>0){%>
-                    <div class="resultado">                        
+                        <div class="resultado">
                             <div class="box">
                                 <table>
                                     <tbody>
@@ -53,28 +53,33 @@
                                                 </td>
                                             </tr>
                                             <%})%>
-                                            <%}else if(unidades.length === 0){%>
-                                                <tr>
-                                                    <td>
-                                                        <p class="p">Unidade não encontrado</p>
-                                                    </td>
-                                                </tr>
-                                            <%}else{%>
-                                                <tr>
-                                                    <td>
-                                                        <p class="p">Digite a unidade que deseja procurar</p>
-                                                    </td>
-                                                </tr>
-                                                <%}%>
+                                                <%}else if(unidades.length === 0){%>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="p">Unidade não encontrado</p>
+                                                        </td>
+                                                    </tr>
+                                                    <%}else{%>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="p">Digite a unidade que deseja procurar</p>
+                                                            </td>
+                                                        </tr>
+                                                        <%}%>
+                                                            <tr>
+                                                                <td colspan="3">
+                                                                    <div class="box">
+                                                                        <button class="adicionar"><a href="/cadastrounidade">+ Cadastro</a></button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                     </tbody>
                                 </table>
-                          </div>
-                     </div>
-                </div>  
-                <div class="box">
-                    <button class="adicionar"><a href="/cadastrounidade">+ Cadastro</a></button>
-                </div>
-                <%-include('./include/barraLateral')%>
+                            </div>
+                        </div>
+            </div>
+
+            <%-include('./include/barraLateral')%>
     </section>
 
     <%-include('./include/footer')%>

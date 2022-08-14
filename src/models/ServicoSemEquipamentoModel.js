@@ -99,8 +99,24 @@ class servicoSemEquipamento {
         }).sort({
             criadoEm: -1,
         });
+        let dataInicialMes = dataInicial.slice(3, 5);
+        let dataFinalMes = dataFinal.slice(3, 5);
+        for (let i = 0; i <= 1; i++) {
+            this.vericicarRelatorio(dataInicialMes, dataFinalMes, servicos)
+        }
         return servicos;
-
+    }
+    static vericicarRelatorio(dataInicialMes, dataFinalMes, servicos) {
+        for (let i = 0; i < servicos.length; i++) {
+            if (typeof servicos[i].dataDeServico === "string") {
+                if (servicos[i].dataDeServico.slice(3, 5) !== dataInicialMes && servicos[i].dataDeServico.slice(3, 5) !== dataFinalMes) {
+                    servicos.splice(i, 1);
+                    if (i > 0) {
+                        i--;
+                    }
+                }
+            }
+        }
     }
     static async buscaListagem(unidade) { // busca listagem
         if (typeof unidade !== "string") return;

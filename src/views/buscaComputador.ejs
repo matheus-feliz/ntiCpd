@@ -1,6 +1,6 @@
 <%-include('./include/head')%>
     <link rel="stylesheet" type="text/css" href="./css/styleBuscaPc.css">
-     <script src="./javascript/busca.js"></script>
+    <script src="./javascript/busca.js"></script>
     <section>
         <%-include('./include/navBar')%>
             <h1 class="text-center "> Busca de tombo
@@ -13,61 +13,71 @@
                 </form>
             </div>
             <div class="traco"></div>
-            
-            <div class="ajust">                  
-                <%-include('include/messages');%>           
-                <%if(equipamentos.length >0){%>
-                <div class="resultadoPC">                   
-                    <div class="box">  
-                        <table class="tabela">                            
-                            <tbody>
-                                <%equipamentos.forEach(equipamento=>{%>
-                                <tr>
-                                    <td>
-                                        <p><%=equipamento.tombo%></p>
-                                    </td>
-                                    <td>
-                                        <p><%=equipamento.unidade%></p>
-                                    </td>
-                                    <td>
-                                        <p><%=equipamento.responsavel%></p>
-                                    </td>
-                                    <td>
-                                        <div class="box">
-                                            <button class="cadastra"><a href="/cadastrocomputador/delete/<%=equipamento.id%>"><img class="button-img" src="./include/img/delete.png"></a></button>
-                                            <button class="edit"><a href="/cadastrocomputador/edit/<%=equipamento.id%>"><img class="button-img" src="./include/img/escrever.svg"></a></button>
-                                            <button class="cadastra"><a href="/cadastrodeequipamento/<%=equipamento.id%>"><img class="button-img" src="./include/img/registro.svg"></a></button>
-                                            <button class="listagem"><a href="/listagemcomputador/<%=equipamento.id%>"><img class="button-img" src="./include/img/lista-de-tarefas.svg"></a></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <%})%>
-                                <%}else if(equipamentos.length === 0){%>
-                                    <tr>
-                                        <td>
-                                            <p class="p">Tombo não encontrado</p>
-                                        </td>
-                                    </tr>
-                                <%}else{%>
-                                    <tr>
-                                        <td>
-                                            <p class="p">Digite o tombo que deseja procurar</p>
-                                        </td>
-                                    </tr>
-                                    <%}%>
-                                 
-                            </tbody>                       
-                        </table>  
-                                                                                
-                </div>
-               
+
+            <div class="ajust">
+                <%-include('include/messages');%>
+                    <%if(equipamentos.length >0){%>
+                        <div class="resultado">
+                            <div class="box">
+                                <table class="tabela">
+                                    <tbody>
+                                        <%equipamentos.forEach(equipamento=>{%>
+                                            <tr>
+                                                <td>
+                                                    <p>
+                                                        <%=equipamento.tombo%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <%=equipamento.unidade%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <%=equipamento.responsavel%>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <div class="box">
+                                                        <button class="cadastra"><a href="/cadastrocomputador/delete/<%=equipamento.id%>"><img class="button-img" src="./include/img/delete.png"></a></button>
+                                                        <button class="edit"><a href="/cadastrocomputador/edit/<%=equipamento.id%>"><img class="button-img" src="./include/img/escrever.svg"></a></button>
+                                                        <button class="cadastra"><a href="/cadastrodeequipamento/<%=equipamento.id%>"><img class="button-img" src="./include/img/registro.svg"></a></button>
+                                                        <button class="listagem"><a href="/listagemcomputador/<%=equipamento.id%>"><img class="button-img" src="./include/img/lista-de-tarefas.svg"></a></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <%})%>
+                                                <%}else if(equipamentos.length === 0){%>
+                                                    <tr>
+                                                        <td>
+                                                            <p class="p">Tombo não encontrado</p>
+                                                        </td>
+                                                    </tr>
+                                                    <%}else{%>
+                                                        <tr>
+                                                            <td>
+                                                                <p class="p">Digite o Tombo que deseja procurar</p>
+                                                            </td>
+                                                        </tr>
+                                                        <%}%>
+                                                            <tr>
+                                                                <td colspan="3">
+                                                                    <div class="box">
+                                                                        <button class="adicionar"><a href="/cadastrounidade">+ Cadastro</a></button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
             </div>
-        </div> 
-        <div class="box">
-            <button class="adicionar"><a href="/cadastrocomputador">+ Cadastro</a></button>
-        </div>
-            <%-include('./include/barraLateral')%> 
-            
+            <%-include('./include/barraLateral')%>
+
     </section>
 
     <%-include('./include/footer')%>
