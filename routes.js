@@ -54,8 +54,6 @@ route.get('/cadastrodeservico/edit/:id', loginReq, unidade.editServico);
 route.post('/registro/edit/servicoUnidade/:id', loginReq, unidade.editServicoCadastro);
 route.get('/listagemunidade/delete/:id', loginReq, unidade.deleteServicoUm);
 
-
-
 //pagina de relatorio
 route.get('/relatorio', loginReq, relatorio.relatorio);
 route.post('/relatorioBanco', loginReq, relatorio.relatorioBanco);

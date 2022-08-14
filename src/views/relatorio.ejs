@@ -1,6 +1,5 @@
 <%-include('./include/head')%>
     <link rel="stylesheet" type="text/css" href="./css/styleRelatorio.css">
-    <script type="text/javascript" src="../assets/pdf.js"></script>
     <section>
         <%-include('./include/navBar')%>
             <h1 class="text-center "> Busca de relatorio
@@ -90,26 +89,5 @@
                     <%-include('./include/barraLateral')%>
 
     </section>
-    <script>
-        function pdf() {
-            var relatorio = document.getElementById('tabela');
-            var opt = {
-                margin: 0.2,
-                filename: 'relatorio.pdf',
-                image: {
-                    type: 'jpeg',
-                    quality: 0.98
-                },
-                html2canvas: {
-                    scale: 2
-                },
-                jsPDF: {
-                    unit: 'in',
-                    format: 'letter',
-                    orientation: 'portrait'
-                }
-            };
-            html2pdf().set(opt).from(relatorio).save();
-        }
-    </script>
+    <!--<script src="./js/pdf.js"></script>-->
     <%-include( './include/footer')%>
